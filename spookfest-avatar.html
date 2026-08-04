@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spookfest Avatar Maker</title>
+<style>
+  :root {
+    --bg: #0b0420;
+    --bg2: #1a0a3a;
+    --neon-p: #ff4dff;
+    --neon-o: #ff8a00;
+    --neon-g: #7cff5a;
+    --neon-c: #4de3ff;
+    --neon-y: #ffe94d;
+    --ink: #f6f0ff;
+    --panel: #14093a;
+    --panel-edge: #3a1f7a;
+  }
+  @font-face {
+    font-family: "PixelStack";
+    src: local("Press Start 2P"), local("VT323"), local("Courier New");
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    font-family: "Courier New", ui-monospace, monospace;
+    color: var(--ink);
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255,77,255,0.25), transparent 60%),
+      radial-gradient(ellipse at 80% 90%, rgba(77,227,255,0.25), transparent 60%),
+      linear-gradient(180deg, #0b0420 0%, #1a0a3a 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 100;
+  }
+  h1, h2, h3, .pixel {
+    font-family: "Press Start 2P", "PixelStack", "Courier New", monospace;
+    letter-spacing: 1px;
+  }
+
+  header {
+    text-align: center;
+    padding: 24px 16px 8px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: clamp(20px, 4vw, 34px);
+    color: var(--neon-o);
+    text-shadow:
+      0 0 6px var(--neon-o),
+      0 0 20px rgba(255,138,0,0.6),
+      3px 3px 0 #7a2b00;
+  }
+  header .sub {
+    margin-top: 10px;
+    color: var(--neon-p);
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    text-shadow: 0 0 6px rgba(255,77,255,0.7);
+  }
+
+  #app { max-width: 1180px; margin: 0 auto; padding: 12px 16px 48px; }
+
+  /* ---------- CREATOR LAYOUT ---------- */
+  .creator {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(320px, 1.1fr);
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .creator { grid-template-columns: 1fr; }
+  }
+
+  .stage-wrap {
+    position: sticky;
+    top: 12px;
+  }
+  .crt {
+    background: #000;
+    border: 6px solid #221040;
+    border-radius: 22px;
+    box-shadow:
+      inset 0 0 60px rgba(255,77,255,0.25),
+      0 0 0 4px #4b1f9c,
+      0 0 30px rgba(255,77,255,0.35);
+    padding: 14px;
+    position: relative;
+  }
+  .crt::after {
+    content: "";
+    position: absolute; inset: 14px;
+    border-radius: 12px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px,
+      transparent 3px);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  #avatarSvg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    image-rendering: pixelated;
+    border-radius: 8px;
+    background: #000;
+  }
+  .stage-caption {
+    text-align: center;
+    margin-top: 10px;
+    color: var(--neon-c);
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    text-shadow: 0 0 6px rgba(77,227,255,0.6);
+  }
+
+  .go-btn {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 16px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 14px;
+    color: #1a0a00;
+    background: linear-gradient(180deg, #ffdb4d, #ff8a00);
+    border: 4px solid #7a2b00;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #4a1900, 0 0 30px rgba(255,138,0,0.6);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+  }
+  .go-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #4a1900, 0 0 40px rgba(255,138,0,0.8); }
+  .go-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 #4a1900; }
+
+  /* ---------- CONTROLS ---------- */
+  .controls {
+    background: rgba(20,9,58,0.6);
+    border: 3px solid var(--panel-edge);
+    border-radius: 16px;
+    padding: 14px;
+    backdrop-filter: blur(4px);
+  }
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .tab {
+    flex: 1 1 auto;
+    padding: 8px 6px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    color: var(--ink);
+    background: #221255;
+    border: 2px solid #3a1f7a;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .tab.active {
+    background: var(--neon-p);
+    color: #1a0a00;
+    box-shadow: 0 0 12px rgba(255,77,255,0.8);
+    border-color: #ffb0ff;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+  .section h3 {
+    margin: 6px 0 10px;
+    font-size: 11px;
+    color: var(--neon-y);
+    text-shadow: 0 0 6px rgba(255,233,77,0.6);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .swatch, .opt {
+    padding: 8px 6px;
+    background: #150a3a;
+    border: 2px solid #3a1f7a;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 10px;
+    font-family: "Press Start 2P", monospace;
+    color: var(--ink);
+    transition: transform 0.08s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .swatch:hover, .opt:hover { transform: translateY(-2px); }
+  .swatch.active, .opt.active {
+    border-color: var(--neon-c);
+    box-shadow: 0 0 12px rgba(77,227,255,0.6);
+    background: #22125a;
+  }
+  .swatch .chip {
+    width: 100%;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid #000;
+  }
+  .opt .icon {
+    width: 44px; height: 44px;
+    background: #050015;
+    border-radius: 4px;
+    display: block;
+  }
+
+  /* ---------- RESULT SCREEN ---------- */
+  #result { display: none; }
+  #result.show { display: block; }
+  .poster-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  #poster {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 4 / 5;
+    background: #0b0420;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(255,77,255,0.4);
+  }
+  #poster svg { width: 100%; height: 100%; display: block; }
+  .poster-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    padding: 12px 18px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn.primary {
+    background: var(--neon-g);
+    color: #052400;
+    border-color: #2c6a1a;
+    box-shadow: 0 4px 0 #2c6a1a, 0 0 20px rgba(124,255,90,0.5);
+  }
+  .btn.secondary {
+    background: #221255;
+    color: var(--ink);
+    border-color: #6a3fff;
+    box-shadow: 0 4px 0 #2a1466;
+  }
+  .btn:active { transform: translateY(3px); box-shadow: none !important; }
+
+  .footnote {
+    color: #aa96d8;
+    font-size: 11px;
+    text-align: center;
+    max-width: 520px;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SPOOKFEST AVATAR MAKER</h1>
+  <div class="sub">INSERT COIN &middot; PRESS START &middot; MAKE A FIT</div>
+</header>
+
+<main id="app">
+
+  <!-- CREATOR SCREEN -->
+  <section id="creator" class="creator">
+    <div class="stage-wrap">
+      <div class="crt">
+        <svg id="avatarSvg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="stage-caption">PLAYER 1 &middot; READY?</div>
+      <button class="go-btn" id="goBtn">I'M GOING! &nbsp;&#x2192;</button>
+    </div>
+
+    <div class="controls">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-tab="face">FACE</button>
+        <button class="tab" data-tab="hair">HAIR</button>
+        <button class="tab" data-tab="wear">WEAR</button>
+        <button class="tab" data-tab="extras">EXTRAS</button>
+        <button class="tab" data-tab="scene">SCENE</button>
+      </div>
+
+      <div class="section active" data-section="face">
+        <h3>SKIN TONE</h3>
+        <div class="grid" data-group="skin"></div>
+        <h3>EYES</h3>
+        <div class="grid" data-group="eyes"></div>
+        <h3>MOUTH</h3>
+        <div class="grid" data-group="mouth"></div>
+      </div>
+
+      <div class="section" data-section="hair">
+        <h3>HAIR STYLE</h3>
+        <div class="grid" data-group="hair"></div>
+        <h3>HAIR COLOR</h3>
+        <div class="grid" data-group="hairColor"></div>
+      </div>
+
+      <div class="section" data-section="wear">
+        <h3>OUTFIT</h3>
+        <div class="grid" data-group="outfit"></div>
+        <h3>OUTFIT COLOR</h3>
+        <div class="grid" data-group="outfitColor"></div>
+      </div>
+
+      <div class="section" data-section="extras">
+        <h3>HEADGEAR</h3>
+        <div class="grid" data-group="hat"></div>
+        <h3>SIDEKICK</h3>
+        <div class="grid" data-group="prop"></div>
+      </div>
+
+      <div class="section" data-section="scene">
+        <h3>BACKGROUND</h3>
+        <div class="grid" data-group="scene"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT SCREEN -->
+  <section id="result">
+    <div class="poster-wrap">
+      <div id="poster"></div>
+      <div class="poster-actions">
+        <button class="btn primary" id="downloadBtn">DOWNLOAD PNG</button>
+        <button class="btn secondary" id="editBtn">&#x2190; EDIT AVATAR</button>
+      </div>
+      <p class="footnote">Save the PNG and drop it in the shared marketing folder, or screenshot the poster to share on your socials.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   SPOOKFEST AVATAR MAKER
+   Pixel grid: 40x40 cells, 5px each -> 200x200 viewBox
+   ============================================================ */
+
+const CELL = 5;
+const GRID = 40;
+
+/* ---------- palettes ---------- */
+const SKIN_COLORS = {
+  peach:   "#f4c9a0",
+  tan:     "#d69b6b",
+  brown:   "#8a5230",
+  deep:    "#4a2a18",
+  zombie:  "#8ec86a",
+  vampire: "#c9b3e8",
+};
+const HAIR_COLORS = {
+  black:  "#1a1420",
+  brown:  "#5a3618",
+  blond:  "#f0d060",
+  red:    "#c94a2a",
+  pink:   "#ff6fd8",
+  cyan:   "#4de3ff",
+  white:  "#efeaff",
+};
+const OUTFIT_COLORS = {
+  orange: "#ff8a00",
+  purple: "#7a3fff",
+  black:  "#141026",
+  cyan:   "#00c8ff",
+  green:  "#38c25a",
+  pink:   "#ff4dff",
+};
+
+const SCENES = {
+  arcade:   { name: "ARCADE" },
+  cemetery: { name: "CEMETERY" },
+  denver:   { name: "DENVER" },
+  haunted:  { name: "HAUNT" },
+  neon:     { name: "NEON" },
+};
+
+const HAIR_STYLES = ["short","long","mohawk","bun","curly","bald"];
+const EYE_STYLES  = ["normal","shades","glasses","stare","wink"];
+const MOUTH_STYLES = ["smile","smirk","fangs","stache","tongue"];
+const OUTFIT_STYLES = ["tee","hoodie","suit","cape","tank"];
+const HAT_STYLES   = ["none","cap","witch","crown","horns","halo"];
+const PROP_STYLES  = ["none","coffee","laptop","ghost","pumpkin","sword"];
+
+/* ---------- state ---------- */
+const state = {
+  skin: "peach",
+  hair: "short",
+  hairColor: "brown",
+  eyes: "normal",
+  mouth: "smile",
+  outfit: "tee",
+  outfitColor: "orange",
+  hat: "none",
+  prop: "none",
+  scene: "arcade",
+};
+
+/* ---------- helpers ---------- */
+function rect(x, y, w, h, fill) {
+  return `<rect x="${x*CELL}" y="${y*CELL}" width="${w*CELL}" height="${h*CELL}" fill="${fill}" shape-rendering="crispEdges"/>`;
+}
+function px(x, y, fill) { return rect(x, y, 1, 1, fill); }
+
+/* Draw from a text grid: each char is a pixel, '.' = skip. */
+function drawGrid(ox, oy, gridStr, palette) {
+  const rows = gridStr.trim().split("\n").map(r => r.trim());
+  let out = "";
+  for (let y = 0; y < rows.length; y++) {
+    for (let x = 0; x < rows[y].length; x++) {
+      const c = rows[y][x];
+      if (c === "." || c === " ") continue;
+      const color = palette[c];
+      if (!color) continue;
+      out += px(ox + x, oy + y, color);
+    }
+  }
+  return out;
+}
+
+function darker(hex, amt = 0.7) {
+  const c = hex.replace("#", "");
+  const r = Math.round(parseInt(c.substr(0,2),16) * amt);
+  const g = Math.round(parseInt(c.substr(2,2),16) * amt);
+  const b = Math.round(parseInt(c.substr(4,2),16) * amt);
+  return "#" + [r,g,b].map(v => v.toString(16).padStart(2,"0")).join("");
+}
+
+/* ============================================================
+   SCENE BACKGROUNDS
+   ============================================================ */
+function drawScene(name) {
+  let out = "";
+  if (name === "arcade") {
+    out += rect(0, 0, GRID, GRID, "#1a0a3a");
+    // grid floor
+    for (let i = 0; i <= 10; i++) {
+      const y = 26 + i * 0.4;
+      out += `<line x1="0" y1="${y*CELL}" x2="${GRID*CELL}" y2="${y*CELL}" stroke="#ff4dff" stroke-width="0.5" opacity="${0.9 - i*0.08}"/>`;
+    }
+    for (let i = -6; i <= 6; i++) {
+      out += `<line x1="${(20+i*3)*CELL}" y1="${26*CELL}" x2="${(20+i*10)*CELL}" y2="${40*CELL}" stroke="#ff4dff" stroke-width="0.5"/>`;
+    }
+    // stars
+    for (let i = 0; i < 20; i++) {
+      const sx = (i * 7) % GRID;
+      const sy = (i * 3) % 22;
+      out += px(sx, sy, "#ffe94d");
+    }
+    // sun (up top so it doesn't peek through the character)
+    out += `<circle cx="${6*CELL}" cy="${10*CELL}" r="${4*CELL}" fill="#ff4dff"/>`;
+    out += `<rect x="0" y="${11.5*CELL}" width="${12*CELL}" height="${0.6*CELL}" fill="#1a0a3a"/>`;
+    out += `<rect x="0" y="${10*CELL}" width="${12*CELL}" height="${0.6*CELL}" fill="#1a0a3a"/>`;
+    out += `<circle cx="${34*CELL}" cy="${10*CELL}" r="${3*CELL}" fill="#4de3ff" opacity="0.7"/>`;
+  } else if (name === "cemetery") {
+    out += rect(0, 0, GRID, GRID, "#0a1830");
+    // moon
+    out += `<circle cx="${30*CELL}" cy="${9*CELL}" r="${5*CELL}" fill="#f6f0ff"/>`;
+    out += `<circle cx="${32*CELL}" cy="${8*CELL}" r="${4*CELL}" fill="#0a1830"/>`;
+    // stars
+    for (let i = 0; i < 14; i++) {
+      out += px((i*5)%GRID, (i*2)%18, "#ffe94d");
+    }
+    // ground
+    out += rect(0, 26, GRID, 14, "#1a2a1a");
+    // gravestones
+    const stones = [[4,22],[11,20],[24,21],[33,22]];
+    for (const [sx, sy] of stones) {
+      out += rect(sx, sy, 5, 6, "#6a6a80");
+      out += rect(sx+1, sy+1, 3, 1, "#4a4a60");
+      out += px(sx+2, sy+2, "#3a3a50");
+    }
+    // fog
+    out += rect(0, 32, GRID, 1, "#3a4a3a");
+  } else if (name === "denver") {
+    out += `<defs><linearGradient id="dvSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff8a00"/><stop offset="0.5" stop-color="#ff4dff"/><stop offset="1" stop-color="#4a1f7a"/>
+    </linearGradient></defs>`;
+    out += `<rect x="0" y="0" width="${GRID*CELL}" height="${GRID*CELL}" fill="url(#dvSky)"/>`;
+    // sun
+    out += `<circle cx="${20*CELL}" cy="${16*CELL}" r="${6*CELL}" fill="#ffe94d"/>`;
+    // mountains
+    out += `<polygon points="0,${28*CELL} ${8*CELL},${16*CELL} ${16*CELL},${26*CELL} ${24*CELL},${14*CELL} ${32*CELL},${24*CELL} ${40*CELL},${18*CELL} ${40*CELL},${40*CELL} 0,${40*CELL}" fill="#3a1f5a"/>`;
+    out += `<polygon points="${6*CELL},${18*CELL} ${8*CELL},${16*CELL} ${10*CELL},${19*CELL}" fill="#f6f0ff"/>`;
+    out += `<polygon points="${22*CELL},${16*CELL} ${24*CELL},${14*CELL} ${26*CELL},${17*CELL}" fill="#f6f0ff"/>`;
+    // ground
+    out += rect(0, 28, GRID, 12, "#1a0a2a");
+  } else if (name === "haunted") {
+    out += rect(0, 0, GRID, GRID, "#160822");
+    // moon
+    out += `<circle cx="${8*CELL}" cy="${8*CELL}" r="${4*CELL}" fill="#ffbd4d"/>`;
+    // house silhouette
+    out += `<polygon points="${18*CELL},${12*CELL} ${28*CELL},${6*CELL} ${38*CELL},${12*CELL} ${38*CELL},${28*CELL} ${18*CELL},${28*CELL}" fill="#0a0518"/>`;
+    out += rect(24, 14, 3, 3, "#ffe94d"); // window
+    out += rect(31, 14, 3, 3, "#ffe94d");
+    out += rect(27, 20, 4, 8, "#3a1f0a"); // door
+    // bats
+    out += `<path d="M${5*CELL},${16*CELL} l${1*CELL},${-1*CELL} l${1*CELL},${1*CELL} l${1*CELL},${-1*CELL} l${1*CELL},${1*CELL}" stroke="#000" fill="none" stroke-width="1.2"/>`;
+    out += `<path d="M${12*CELL},${13*CELL} l${1*CELL},${-1*CELL} l${1*CELL},${1*CELL} l${1*CELL},${-1*CELL} l${1*CELL},${1*CELL}" stroke="#000" fill="none" stroke-width="1.2"/>`;
+    // ground
+    out += rect(0, 28, GRID, 12, "#0a0518");
+  } else if (name === "neon") {
+    out += `<defs><linearGradient id="ne" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0428"/><stop offset="1" stop-color="#3a0a5a"/>
+    </linearGradient></defs>`;
+    out += `<rect x="0" y="0" width="${GRID*CELL}" height="${GRID*CELL}" fill="url(#ne)"/>`;
+    // buildings
+    const bldgs = [[2,14,4,14],[7,10,3,18],[11,16,5,12],[17,8,4,20],[22,14,3,14],[26,11,5,17],[32,16,4,12],[37,13,3,15]];
+    for (const [x,y,w,h] of bldgs) {
+      out += rect(x, y, w, h, "#0a0428");
+      // windows
+      for (let wy = y+1; wy < y+h-1; wy += 2) {
+        for (let wx = x+1; wx < x+w-1; wx += 2) {
+          if ((wx+wy) % 3 === 0) out += px(wx, wy, "#4de3ff");
+          else if ((wx+wy) % 4 === 0) out += px(wx, wy, "#ff4dff");
+        }
+      }
+    }
+  }
+  return out;
+}
+
+/* ============================================================
+   AVATAR PIECES
+   Character occupies roughly cols 12-27, rows 6-38.
+   Head: rows 6-18, cols 13-26 (14x13-ish oval-ish square)
+   ============================================================ */
+
+function drawBody(outfitStyle, outfitColor, skinColor) {
+  const c = OUTFIT_COLORS[outfitColor];
+  const cd = darker(c, 0.65);
+  const s = SKIN_COLORS[skinColor];
+  let out = "";
+
+  // neck
+  out += rect(18, 18, 4, 2, s);
+
+  // shoulders/torso base
+  // Row layout: 19..30 for shirt, then arms hanging
+  if (outfitStyle === "tee") {
+    out += rect(11, 19, 18, 4, c);   // shoulders
+    out += rect(13, 23, 14, 8, c);   // torso
+    // sleeves
+    out += rect(11, 20, 3, 5, c);
+    out += rect(26, 20, 3, 5, c);
+    // arm skin
+    out += rect(11, 25, 3, 4, s);
+    out += rect(26, 25, 3, 4, s);
+    // hands
+    out += rect(11, 29, 3, 2, s);
+    out += rect(26, 29, 3, 2, s);
+    // hem
+    out += rect(13, 31, 14, 1, cd);
+  } else if (outfitStyle === "hoodie") {
+    out += rect(10, 18, 20, 5, c);   // hood/shoulders
+    out += rect(13, 23, 14, 9, c);   // body
+    // sleeves long
+    out += rect(10, 20, 3, 10, c);
+    out += rect(27, 20, 3, 10, c);
+    // hood detail
+    out += rect(15, 18, 10, 2, cd);
+    // pocket
+    out += rect(16, 26, 8, 3, cd);
+    // hem
+    out += rect(13, 32, 14, 1, cd);
+  } else if (outfitStyle === "suit") {
+    // jacket dark
+    out += rect(11, 19, 18, 13, cd);
+    // shirt
+    out += rect(18, 20, 4, 12, "#f6f0ff");
+    // lapels
+    out += `<polygon points="${17*CELL},${20*CELL} ${20*CELL},${25*CELL} ${17*CELL},${25*CELL}" fill="${c}"/>`;
+    out += `<polygon points="${23*CELL},${20*CELL} ${20*CELL},${25*CELL} ${23*CELL},${25*CELL}" fill="${c}"/>`;
+    // tie
+    out += rect(19, 22, 2, 6, c);
+    // sleeves
+    out += rect(11, 20, 3, 10, cd);
+    out += rect(26, 20, 3, 10, cd);
+    // hands
+    out += rect(11, 30, 3, 2, s);
+    out += rect(26, 30, 3, 2, s);
+  } else if (outfitStyle === "cape") {
+    // cape behind
+    out += `<polygon points="${8*CELL},${19*CELL} ${32*CELL},${19*CELL} ${34*CELL},${34*CELL} ${6*CELL},${34*CELL}" fill="${c}"/>`;
+    out += `<polygon points="${8*CELL},${19*CELL} ${32*CELL},${19*CELL} ${20*CELL},${23*CELL}" fill="${cd}"/>`;
+    // inner tunic
+    out += rect(13, 20, 14, 12, "#141026");
+    out += rect(19, 20, 2, 12, c);
+    // hands
+    out += rect(13, 28, 2, 3, s);
+    out += rect(25, 28, 2, 3, s);
+  } else if (outfitStyle === "tank") {
+    out += rect(15, 19, 10, 13, c);
+    // shoulders exposed
+    out += rect(11, 19, 4, 9, s);
+    out += rect(25, 19, 4, 9, s);
+    // straps
+    out += rect(15, 20, 2, 3, cd);
+    out += rect(23, 20, 2, 3, cd);
+    // hands
+    out += rect(11, 28, 4, 3, s);
+    out += rect(25, 28, 4, 3, s);
+  }
+  return out;
+}
+
+function drawHead(skinColor) {
+  const s = SKIN_COLORS[skinColor];
+  const sd = darker(s, 0.85);
+  let out = "";
+  // head main
+  out += rect(14, 7, 12, 12, s);
+  // rounded corners
+  out += px(14, 7, "#00000000");
+  out += px(25, 7, "#00000000");
+  out += rect(14, 6, 12, 1, s);       // top
+  // subtle chin shadow
+  out += rect(14, 18, 12, 1, sd);
+  // ears
+  out += rect(13, 12, 1, 3, s);
+  out += rect(26, 12, 1, 3, s);
+  return out;
+}
+
+function drawHair(style, colorKey, skinKey) {
+  if (style === "bald") return "";
+  const c = HAIR_COLORS[colorKey];
+  const cd = darker(c, 0.7);
+  let out = "";
+  if (style === "short") {
+    out += rect(13, 5, 14, 4, c);
+    out += rect(13, 9, 3, 3, c);
+    out += rect(24, 9, 3, 3, c);
+    out += rect(15, 7, 10, 1, cd);
+  } else if (style === "long") {
+    out += rect(13, 5, 14, 4, c);
+    out += rect(12, 8, 3, 12, c);
+    out += rect(25, 8, 3, 12, c);
+    out += rect(12, 19, 4, 4, c);
+    out += rect(24, 19, 4, 4, c);
+    out += rect(15, 7, 10, 1, cd);
+  } else if (style === "mohawk") {
+    out += rect(19, 3, 2, 6, c);
+    out += rect(18, 4, 4, 4, c);
+    out += rect(17, 5, 6, 2, cd);
+    // side buzz
+    out += rect(14, 7, 5, 2, cd);
+    out += rect(21, 7, 5, 2, cd);
+  } else if (style === "bun") {
+    // bun on top
+    out += `<circle cx="${20*CELL}" cy="${5*CELL}" r="${3*CELL}" fill="${c}"/>`;
+    out += `<circle cx="${20*CELL}" cy="${5*CELL}" r="${2*CELL}" fill="${cd}"/>`;
+    // hairline
+    out += rect(14, 6, 12, 2, c);
+    out += rect(15, 8, 10, 1, cd);
+  } else if (style === "curly") {
+    // afro-like puff
+    const puffs = [[12,5],[15,3],[18,3],[21,3],[24,3],[27,5],[13,7],[27,7]];
+    for (const [px_,py_] of puffs) {
+      out += `<circle cx="${px_*CELL}" cy="${py_*CELL}" r="${2.4*CELL}" fill="${c}"/>`;
+    }
+    out += rect(14, 6, 12, 3, c);
+  }
+  return out;
+}
+
+function drawEyes(style) {
+  let out = "";
+  if (style === "normal") {
+    out += rect(16, 11, 2, 2, "#141026");
+    out += rect(22, 11, 2, 2, "#141026");
+    out += px(17, 11, "#ffffff");
+    out += px(23, 11, "#ffffff");
+  } else if (style === "shades") {
+    out += rect(15, 11, 4, 2, "#141026");
+    out += rect(21, 11, 4, 2, "#141026");
+    out += rect(19, 12, 2, 1, "#141026");
+    out += px(16, 11, "#4de3ff");
+    out += px(22, 11, "#4de3ff");
+  } else if (style === "glasses") {
+    out += rect(16, 11, 2, 2, "#141026"); // pupils
+    out += rect(22, 11, 2, 2, "#141026");
+    // frames
+    out += `<rect x="${15*CELL}" y="${10*CELL}" width="${4*CELL}" height="${4*CELL}" fill="none" stroke="#141026" stroke-width="1.2" shape-rendering="crispEdges"/>`;
+    out += `<rect x="${21*CELL}" y="${10*CELL}" width="${4*CELL}" height="${4*CELL}" fill="none" stroke="#141026" stroke-width="1.2" shape-rendering="crispEdges"/>`;
+    out += rect(19, 11, 2, 1, "#141026");
+  } else if (style === "stare") {
+    out += rect(15, 11, 4, 3, "#f6f0ff");
+    out += rect(21, 11, 4, 3, "#f6f0ff");
+    out += rect(17, 12, 2, 2, "#141026");
+    out += rect(23, 12, 2, 2, "#141026");
+  } else if (style === "wink") {
+    out += rect(16, 11, 2, 2, "#141026");
+    out += rect(21, 12, 3, 1, "#141026"); // wink line
+  }
+  return out;
+}
+
+function drawMouth(style) {
+  let out = "";
+  if (style === "smile") {
+    out += rect(17, 16, 6, 1, "#3a0a18");
+    out += px(16, 15, "#3a0a18");
+    out += px(23, 15, "#3a0a18");
+  } else if (style === "smirk") {
+    out += rect(19, 16, 4, 1, "#3a0a18");
+    out += px(23, 15, "#3a0a18");
+  } else if (style === "fangs") {
+    out += rect(17, 16, 6, 1, "#3a0a18");
+    out += px(18, 17, "#ffffff");
+    out += px(21, 17, "#ffffff");
+  } else if (style === "stache") {
+    out += rect(16, 15, 8, 2, "#3a1810"); // mustache
+    out += rect(19, 15, 2, 1, "#3a0a18"); // gap
+    out += rect(18, 17, 4, 1, "#3a0a18"); // mouth
+  } else if (style === "tongue") {
+    out += rect(17, 16, 6, 1, "#3a0a18");
+    out += rect(19, 17, 3, 1, "#ff4d8a");
+  }
+}
+
+/* fix: return out for mouth */
+function drawMouthFixed(style) {
+  let out = "";
+  if (style === "smile") {
+    out += rect(17, 16, 6, 1, "#3a0a18");
+    out += px(16, 15, "#3a0a18");
+    out += px(23, 15, "#3a0a18");
+  } else if (style === "smirk") {
+    out += rect(19, 16, 4, 1, "#3a0a18");
+    out += px(23, 15, "#3a0a18");
+  } else if (style === "fangs") {
+    out += rect(17, 16, 6, 1, "#3a0a18");
+    out += px(18, 17, "#ffffff");
+    out += px(21, 17, "#ffffff");
+  } else if (style === "stache") {
+    out += rect(16, 15, 8, 1, "#3a1810");
+    out += px(19, 15, "#3a1810");
+    out += rect(18, 17, 4, 1, "#3a0a18");
+  } else if (style === "tongue") {
+    out += rect(17, 16, 6, 1, "#3a0a18");
+    out += rect(19, 17, 3, 1, "#ff4d8a");
+  }
+  return out;
+}
+
+function drawHat(style) {
+  if (style === "none") return "";
+  let out = "";
+  if (style === "cap") {
+    out += rect(13, 4, 14, 3, "#ff4dff");
+    out += rect(12, 6, 16, 1, "#ff4dff");
+    out += rect(27, 6, 6, 2, "#ff4dff");  // brim
+    out += rect(18, 4, 4, 1, "#ffffff"); // logo box
+  } else if (style === "witch") {
+    // brim
+    out += rect(10, 6, 20, 2, "#141026");
+    // cone
+    out += `<polygon points="${20*CELL},${-1*CELL} ${14*CELL},${6*CELL} ${26*CELL},${6*CELL}" fill="#141026"/>`;
+    // band
+    out += rect(14, 5, 12, 1, "#ff8a00");
+    out += rect(18, 4, 2, 2, "#ffe94d");
+  } else if (style === "crown") {
+    out += rect(14, 4, 12, 3, "#ffe94d");
+    // spikes
+    out += `<polygon points="${14*CELL},${4*CELL} ${16*CELL},${1*CELL} ${18*CELL},${4*CELL}" fill="#ffe94d"/>`;
+    out += `<polygon points="${19*CELL},${4*CELL} ${20*CELL},${0*CELL} ${21*CELL},${4*CELL}" fill="#ffe94d"/>`;
+    out += `<polygon points="${22*CELL},${4*CELL} ${24*CELL},${1*CELL} ${26*CELL},${4*CELL}" fill="#ffe94d"/>`;
+    // jewels
+    out += px(16, 2, "#ff4dff");
+    out += px(20, 1, "#4de3ff");
+    out += px(24, 2, "#38c25a");
+  } else if (style === "horns") {
+    out += `<polygon points="${14*CELL},${7*CELL} ${13*CELL},${3*CELL} ${16*CELL},${6*CELL}" fill="#7a1a1a"/>`;
+    out += `<polygon points="${26*CELL},${7*CELL} ${27*CELL},${3*CELL} ${24*CELL},${6*CELL}" fill="#7a1a1a"/>`;
+  } else if (style === "halo") {
+    out += `<ellipse cx="${20*CELL}" cy="${3*CELL}" rx="${6*CELL}" ry="${1.2*CELL}" fill="none" stroke="#ffe94d" stroke-width="1.6"/>`;
+  }
+  return out;
+}
+
+function drawProp(style) {
+  if (style === "none") return "";
+  let out = "";
+  if (style === "coffee") {
+    // cup
+    out += rect(29, 26, 5, 5, "#f6f0ff");
+    out += rect(29, 26, 5, 1, "#8a5230"); // coffee top
+    // handle
+    out += rect(34, 27, 1, 3, "#f6f0ff");
+    // steam
+    out += `<path d="M${30.5*CELL},${25*CELL} q${1*CELL},${-2*CELL} ${2*CELL},0" stroke="#f6f0ff" fill="none" stroke-width="1"/>`;
+    out += `<path d="M${32.5*CELL},${25*CELL} q${1*CELL},${-2*CELL} ${2*CELL},0" stroke="#f6f0ff" fill="none" stroke-width="1"/>`;
+  } else if (style === "laptop") {
+    out += rect(28, 28, 8, 4, "#4a4a60"); // base
+    out += rect(28, 24, 8, 5, "#141026"); // screen
+    out += rect(29, 25, 6, 3, "#4de3ff");
+    out += rect(30, 26, 4, 1, "#ffffff");
+  } else if (style === "ghost") {
+    out += `<ellipse cx="${34*CELL}" cy="${18*CELL}" rx="${3*CELL}" ry="${4*CELL}" fill="#f6f0ff"/>`;
+    out += rect(31, 20, 6, 3, "#f6f0ff");
+    // wavy bottom
+    out += px(31, 23, "#f6f0ff");
+    out += px(33, 23, "#f6f0ff");
+    out += px(35, 23, "#f6f0ff");
+    // eyes
+    out += px(33, 17, "#141026");
+    out += px(35, 17, "#141026");
+    // mouth
+    out += rect(33, 19, 3, 1, "#141026");
+  } else if (style === "pumpkin") {
+    out += `<ellipse cx="${33*CELL}" cy="${29*CELL}" rx="${4*CELL}" ry="${3*CELL}" fill="#ff8a00"/>`;
+    out += rect(32, 26, 2, 1, "#38c25a"); // stem
+    // face
+    out += `<polygon points="${31*CELL},${28*CELL} ${32*CELL},${29*CELL} ${30*CELL},${29*CELL}" fill="#141026"/>`;
+    out += `<polygon points="${35*CELL},${28*CELL} ${36*CELL},${29*CELL} ${34*CELL},${29*CELL}" fill="#141026"/>`;
+    out += rect(31, 30, 5, 1, "#141026");
+  } else if (style === "sword") {
+    out += rect(31, 20, 1, 10, "#c9c9d8"); // blade
+    out += rect(30, 19, 3, 1, "#c9c9d8"); // tip
+    out += rect(30, 30, 3, 1, "#7a3fff"); // guard
+    out += rect(31, 31, 1, 3, "#5a2a18"); // handle
+    // sparkle
+    out += px(33, 22, "#ffffff");
+  }
+  return out;
+}
+
+/* ============================================================
+   Compose avatar SVG string
+   ============================================================ */
+function buildAvatarInner(includeScene = true) {
+  const s = state;
+  let out = "";
+  if (includeScene) out += drawScene(s.scene);
+  // prop that goes behind body (ghost)
+  if (s.prop === "ghost") out += drawProp("ghost");
+  out += drawBody(s.outfit, s.outfitColor, s.skin);
+  // hair back (for long)
+  out += drawHair(s.hair, s.hairColor, s.skin);
+  out += drawHead(s.skin);
+  // redraw hair front for styles that sit over head
+  if (s.hair === "short" || s.hair === "mohawk" || s.hair === "bun" || s.hair === "curly" || s.hair === "long") {
+    // already drawn; ok
+  }
+  out += drawEyes(s.eyes);
+  out += drawMouthFixed(s.mouth);
+  out += drawHat(s.hat);
+  // props in front of body (except ghost drawn earlier)
+  if (s.prop !== "none" && s.prop !== "ghost") out += drawProp(s.prop);
+  return out;
+}
+
+function render() {
+  const svg = document.getElementById("avatarSvg");
+  svg.innerHTML = buildAvatarInner(true);
+}
+
+/* ============================================================
+   Build controls
+   ============================================================ */
+function makeSwatches(group, entries, isColor) {
+  const container = document.querySelector(`.grid[data-group="${group}"]`);
+  container.innerHTML = "";
+  entries.forEach(([key, label, previewColor]) => {
+    const el = document.createElement("button");
+    el.className = "swatch";
+    el.dataset.key = key;
+    if (isColor) {
+      el.innerHTML = `<div class="chip" style="background:${previewColor}"></div><div>${label}</div>`;
+    } else {
+      el.innerHTML = `<div>${label}</div>`;
+    }
+    if (state[group] === key) el.classList.add("active");
+    el.addEventListener("click", () => {
+      state[group] = key;
+      container.querySelectorAll(".swatch").forEach(s => s.classList.remove("active"));
+      el.classList.add("active");
+      render();
+    });
+    container.appendChild(el);
+  });
+}
+
+function initControls() {
+  makeSwatches("skin", Object.entries(SKIN_COLORS).map(([k,v]) => [k, k.toUpperCase(), v]), true);
+  makeSwatches("hairColor", Object.entries(HAIR_COLORS).map(([k,v]) => [k, k.toUpperCase(), v]), true);
+  makeSwatches("outfitColor", Object.entries(OUTFIT_COLORS).map(([k,v]) => [k, k.toUpperCase(), v]), true);
+
+  makeSwatches("hair", HAIR_STYLES.map(s => [s, s.toUpperCase()]));
+  makeSwatches("eyes", EYE_STYLES.map(s => [s, s.toUpperCase()]));
+  makeSwatches("mouth", MOUTH_STYLES.map(s => [s, s.toUpperCase()]));
+  makeSwatches("outfit", OUTFIT_STYLES.map(s => [s, s.toUpperCase()]));
+  makeSwatches("hat", HAT_STYLES.map(s => [s, s.toUpperCase()]));
+  makeSwatches("prop", PROP_STYLES.map(s => [s, s.toUpperCase()]));
+
+  makeSwatches("scene", Object.entries(SCENES).map(([k,v]) => [k, v.name]));
+}
+
+/* tabs */
+document.getElementById("tabs").addEventListener("click", (e) => {
+  const btn = e.target.closest(".tab");
+  if (!btn) return;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelector(`.section[data-section="${btn.dataset.tab}"]`).classList.add("active");
+});
+
+/* ============================================================
+   RESULT POSTER
+   ============================================================ */
+function buildPoster() {
+  // 800 x 1000 viewbox
+  const W = 800, H = 1000;
+  const inner = buildAvatarInner(true);
+  // Center avatar (scaled from 200x200 to 480x480 -> centered horizontally)
+  const avatarSize = 500;
+  const avatarX = (W - avatarSize) / 2;
+  const avatarY = 260;
+
+  const svg =
+`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" id="posterSvg">
+  <defs>
+    <linearGradient id="posterBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a0a3a"/>
+      <stop offset="0.5" stop-color="#3a0a5a"/>
+      <stop offset="1" stop-color="#0b0420"/>
+    </linearGradient>
+    <linearGradient id="titleG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe94d"/>
+      <stop offset="1" stop-color="#ff8a00"/>
+    </linearGradient>
+    <pattern id="stars" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect x="8" y="12" width="3" height="3" fill="#ffe94d" opacity="0.6"/>
+      <rect x="38" y="42" width="2" height="2" fill="#ff4dff" opacity="0.7"/>
+      <rect x="20" y="48" width="2" height="2" fill="#4de3ff" opacity="0.7"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="${W}" height="${H}" fill="url(#posterBg)"/>
+  <rect x="0" y="0" width="${W}" height="${H}" fill="url(#stars)" opacity="0.5"/>
+
+  <!-- neon border -->
+  <rect x="20" y="20" width="${W-40}" height="${H-40}" fill="none" stroke="#ff4dff" stroke-width="6" rx="16"/>
+  <rect x="34" y="34" width="${W-68}" height="${H-68}" fill="none" stroke="#4de3ff" stroke-width="2" rx="10"/>
+
+  <!-- top text -->
+  <text x="${W/2}" y="120" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="30" fill="url(#titleG)"
+    style="filter: drop-shadow(0 0 12px rgba(255,138,0,0.8));">I AM GOING TO THE</text>
+
+  <text x="${W/2}" y="185" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="46" fill="#ff4dff"
+    style="filter: drop-shadow(0 0 16px rgba(255,77,255,0.9));">DENVER GRC</text>
+  <text x="${W/2}" y="240" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="46" fill="#ff4dff"
+    style="filter: drop-shadow(0 0 16px rgba(255,77,255,0.9));">SPOOKFEST</text>
+
+  <!-- avatar frame -->
+  <rect x="${avatarX - 20}" y="${avatarY - 20}" width="${avatarSize + 40}" height="${avatarSize + 40}"
+    fill="#000" stroke="#4de3ff" stroke-width="4" rx="12"
+    style="filter: drop-shadow(0 0 24px rgba(77,227,255,0.7));"/>
+  <svg x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" viewBox="0 0 200 200"
+    style="image-rendering: pixelated;">
+    ${inner}
+  </svg>
+
+  <!-- date -->
+  <text x="${W/2}" y="820" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="24" fill="#ffe94d"
+    style="filter: drop-shadow(0 0 8px rgba(255,233,77,0.8));">OCTOBER 7TH</text>
+
+  <!-- call to action -->
+  <text x="${W/2}" y="890" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="34" fill="#7cff5a"
+    style="filter: drop-shadow(0 0 10px rgba(124,255,90,0.8));">JOIN ME.</text>
+
+  <!-- footer -->
+  <text x="${W/2}" y="955" text-anchor="middle" font-family="'Press Start 2P', monospace" font-size="10" fill="#c9b3e8">
+    &lt;&lt; ANECDOTES x GRC COMMUNITY &gt;&gt;
+  </text>
+</svg>`;
+
+  return svg;
+}
+
+function showResult() {
+  document.getElementById("creator").style.display = "none";
+  document.getElementById("result").classList.add("show");
+  document.getElementById("poster").innerHTML = buildPoster();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function showCreator() {
+  document.getElementById("creator").style.display = "";
+  document.getElementById("result").classList.remove("show");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("goBtn").addEventListener("click", showResult);
+document.getElementById("editBtn").addEventListener("click", showCreator);
+
+/* ============================================================
+   DOWNLOAD PNG
+   ============================================================ */
+function downloadPoster() {
+  const posterSvg = document.getElementById("posterSvg");
+  if (!posterSvg) return;
+  const clone = posterSvg.cloneNode(true);
+  clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  const svgStr = new XMLSerializer().serializeToString(clone);
+  const svgBlob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
+
+  const img = new Image();
+  img.onload = function () {
+    const scale = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = 800 * scale;
+    canvas.height = 1000 * scale;
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    URL.revokeObjectURL(url);
+    canvas.toBlob((blob) => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "spookfest-avatar.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    }, "image/png");
+  };
+  img.onerror = function () {
+    alert("Couldn't render the PNG in this browser. Screenshot the poster instead.");
+  };
+  img.src = url;
+}
+document.getElementById("downloadBtn").addEventListener("click", downloadPoster);
+
+/* ---------- init ---------- */
+initControls();
+render();
+</script>
+</body>
+</html>
