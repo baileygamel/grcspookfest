@@ -851,7 +851,7 @@ function drawBody(style, colorKey, skinKey) {
   const sd = darker(s, 0.82);
   let out = "";
 
-  const gid = `bodyGrad_${colorKey}`;
+  const gid = `bodyGrad_${colorKey}_${__RENDER_ID}`;
   out += `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="0.3">
     <stop offset="0" stop-color="${cd}"/>
     <stop offset="0.35" stop-color="${c}"/>
@@ -937,7 +937,7 @@ function drawHead(skinKey, faceShape) {
   const s = PAL.skin[skinKey];
   const sd = darker(s, 0.78);
   const sl = lighter(s, 0.15);
-  const gid = `skinGrad_${skinKey}`;
+  const gid = `skinGrad_${skinKey}_${__RENDER_ID}`;
 
   let out = "";
   out += `<defs><radialGradient id="${gid}" cx="0.4" cy="0.35" r="0.75">
@@ -1094,7 +1094,7 @@ function drawEyes(style, eyeshadowKey) {
   const iris = PAL.iris[state.iris] || "#5a3a1a";
   const irisD = darker(iris, 0.6);
   const irisL = lighter(iris, 0.3);
-  const irisId = `iris_${state.iris}`;
+  const irisId = `iris_${state.iris}_${__RENDER_ID}`;
   out += `<defs><radialGradient id="${irisId}" cx="0.5" cy="0.5" r="0.5">
     <stop offset="0" stop-color="${irisL}"/>
     <stop offset="0.65" stop-color="${iris}"/>
@@ -1368,7 +1368,9 @@ function drawProp(key, layer) {
 /* =========================================================
    COMPOSE — character wrapped in soft-shadow filter for pop
    ========================================================= */
+let __RENDER_ID = 0;
 function buildAvatarInner(includeScene = true) {
+  __RENDER_ID++;
   const s = state;
   let out = "";
   if (includeScene) out += drawScene(s.scene);
@@ -1474,12 +1476,16 @@ document.getElementById("eventPicker").addEventListener("click", (e) => {
   // auto-swap background to the event's city
   const sceneKey = EVENTS[state.event].scene;
   state.scene = sceneKey;
-  // update scene swatches
   const sceneGrid = document.querySelector('.grid[data-group="scene"]');
   if (sceneGrid) {
     sceneGrid.querySelectorAll(".swatch").forEach(sw => sw.classList.toggle("active", sw.dataset.key === sceneKey));
   }
   render();
+  // if the poster is currently visible, rebuild it so it reflects the new event
+  const resultEl = document.getElementById("result");
+  if (resultEl && resultEl.classList.contains("show")) {
+    document.getElementById("poster").innerHTML = buildPoster();
+  }
 });
 
 /* =========================================================
