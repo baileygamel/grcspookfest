@@ -116,70 +116,85 @@
   .view { display: none; }
   .view.active { display: block; }
 
-  /* ========== PRESET GALLERY ========== */
+  /* ========== PRESET GALLERY — rectangular panel style ========== */
   .preset-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 18px;
-    max-width: 1000px; margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 1100px; margin: 0 auto;
   }
   .preset-card {
-    background: var(--navy-panel);
-    border: 2px solid var(--navy-border);
+    background: transparent;
+    border: 3px solid transparent;
     border-radius: 16px;
-    padding: 12px;
-    cursor: pointer; text-align: center;
+    padding: 6px;
+    cursor: pointer;
     transition: all 0.15s ease;
   }
-  .preset-card:hover { transform: translateY(-3px); border-color: var(--cyan); }
+  .preset-card:hover { transform: translateY(-3px); }
   .preset-card.selected {
-    border-color: var(--cyan);
-    box-shadow: 0 0 24px var(--cyan-glow), inset 0 0 12px rgba(0,220,233,0.15);
-    background: rgba(0,220,233,0.08);
+    border-color: var(--neon, var(--cyan));
+    box-shadow: 0 0 24px var(--neon-glow, var(--cyan-glow));
   }
   .preset-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 1;
-    border-radius: 50%;
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
     overflow: hidden;
-    border: 4px solid var(--neon, var(--cyan));
-    box-shadow: 0 0 18px var(--neon-glow, var(--cyan-glow));
-    background: radial-gradient(ellipse at 50% 40%, #12283f 0%, #050c1a 90%);
+    background: var(--panel-gradient, linear-gradient(135deg, #00dce9, #00a0aa));
+    display: flex; flex-direction: column;
+    align-items: stretch; justify-content: flex-end;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  }
+  .preset-frame .img-wrap {
+    flex: 1;
     display: flex; align-items: center; justify-content: center;
+    padding: 12px 8px 4px;
+    position: relative;
   }
   .preset-frame img {
     display: block;
-    width: 100%; height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
-  .preset-frame.missing::after {
+  .preset-frame.missing::before {
     content: "Drop " attr(data-src) " into /presets/";
-    position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    color: var(--ink-dim);
+    color: rgba(10,21,38,0.7);
     font-family: "Mulish", sans-serif;
     font-size: 11px;
+    font-weight: 700;
     padding: 12px;
     text-align: center;
+    flex: 1;
   }
   .preset-frame.missing img { display: none; }
-  .preset-card .name {
-    margin-top: 10px;
+  .preset-frame .label {
+    background: #050c1a;
+    padding: 8px 6px 6px;
+    text-align: center;
+    border-top: 2px solid var(--neon, var(--cyan));
+  }
+  .preset-frame .label .name {
     font-family: "Merriweather", Georgia, serif;
-    font-weight: 900; font-size: 13px;
+    font-weight: 900;
+    font-size: 12px;
     color: var(--neon, var(--cyan));
     text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px var(--neon-glow, var(--cyan-glow));
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 6px var(--neon-glow, var(--cyan-glow));
+    display: block;
   }
-  .preset-card .tag {
-    margin-top: 3px;
-    font-size: 11px;
-    color: var(--ink-dim);
+  .preset-frame .label .tag {
+    margin-top: 2px;
     font-family: "Mulish", sans-serif;
     font-weight: 600;
+    font-size: 10px;
+    color: var(--ink-dim);
     line-height: 1.3;
+    display: block;
   }
 
   /* ========== OVERLAYS ========== */
@@ -325,7 +340,7 @@
   <div class="mode-card active" data-mode="preset">
     <span class="mode-emoji">🎮</span>
     <div class="mode-title">Pick a Character</div>
-    <div class="mode-sub">10 GRC crew avatars</div>
+    <div class="mode-sub">15 GRC crew avatars</div>
   </div>
   <div class="mode-card" data-mode="photo">
     <span class="mode-emoji">📸</span>
@@ -403,18 +418,38 @@ const EVENTS = {
 
 /* -----------------------------------------------------------
    PRESETS — drop matching PNG into presets/{key}.png
+   Each has a panel gradient (background of the card) + neon
+   accent color (border + label text).
 ----------------------------------------------------------- */
+const PANEL = {
+  magenta: "linear-gradient(135deg, #ff3499, #c81a70)",
+  cyan:    "linear-gradient(135deg, #00dce9, #00a0aa)",
+  orange:  "linear-gradient(135deg, #ffa84f, #d47a20)",
+  purple:  "linear-gradient(135deg, #a94dff, #6a2fbf)",
+};
+const NEON = {
+  magenta: { c: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
+  cyan:    { c: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
+  orange:  { c: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
+  purple:  { c: "#a94dff",     glow: "rgba(169,77,255,0.6)" },
+};
+
 const PRESETS = [
-  { key: "trusty",        name: "Trusty",        tag: "Keeps things on track",           neon: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
-  { key: "risky",         name: "Risky",         tag: "Spots issues before they spawn",  neon: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
-  { key: "compli",        name: "Compli",        tag: "Always up for a high score",      neon: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
-  { key: "audit-ace",     name: "Audit Ace",     tag: "Checks. Levels. Clears.",         neon: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
-  { key: "control-freak", name: "Control Freak", tag: "Process protects progress",       neon: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
-  { key: "people-champ",  name: "People Champ",  tag: "Stronger together",               neon: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
-  { key: "builder",       name: "Builder",       tag: "Turns ideas into impact",         neon: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
-  { key: "strategist",    name: "Strategist",    tag: "Big picture. Bigger possibilities.", neon: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
-  { key: "future-proof",  name: "Future Proof",  tag: "Explores what's next",            neon: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
-  { key: "arcade-bot",    name: "Arcade Bot",    tag: "Play. Connect. Repeat.",          neon: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
+  { key: "trusty",        name: "Trusty",        tag: "Keeps things on track",           panel: "magenta", neon: "magenta" },
+  { key: "audit-ace",     name: "Audit Ace",     tag: "Checks. Clears. Celebrates.",     panel: "cyan",    neon: "cyan"    },
+  { key: "risky",         name: "Risky",         tag: "Spots issues before they spawn",  panel: "orange",  neon: "orange"  },
+  { key: "compli-bot",    name: "Compli Bot",    tag: "Always up for a high score",      panel: "cyan",    neon: "cyan"    },
+  { key: "control-freak", name: "Control Freak", tag: "Process protects progress",       panel: "magenta", neon: "magenta" },
+  { key: "the-strategist",name: "The Strategist",tag: "Big picture. Bigger possibilities.", panel: "purple",  neon: "purple" },
+  { key: "the-builder",   name: "The Builder",   tag: "Turns ideas into impact",         panel: "magenta", neon: "magenta" },
+  { key: "the-guardian",  name: "The Guardian",  tag: "Protects what matters",           panel: "orange",  neon: "orange"  },
+  { key: "the-explorer",  name: "The Explorer",  tag: "Discovers what's next",           panel: "purple",  neon: "purple"  },
+  { key: "the-analyst",   name: "The Analyst",   tag: "Finds the signal",                panel: "cyan",    neon: "cyan"    },
+  { key: "the-maverick",  name: "The Maverick",  tag: "Challenges the status quo",       panel: "orange",  neon: "orange"  },
+  { key: "the-auditor",   name: "The Auditor",   tag: "Asks the tough questions",        panel: "cyan",    neon: "cyan"    },
+  { key: "the-champ",     name: "The Champ",     tag: "Brings people together",          panel: "magenta", neon: "magenta" },
+  { key: "the-innovator", name: "The Innovator", tag: "Turns complexity into opportunity", panel: "orange",  neon: "orange" },
+  { key: "the-oracle",    name: "The Oracle",    tag: "Sees ahead",                      panel: "purple",  neon: "purple"  },
 ];
 const presetSrc = (p) => `presets/${p.key}.png`;
 
@@ -566,9 +601,9 @@ const OVERLAYS = [
 const state = {
   mode: "preset",
   event: "denver",
-  presetKey: "trusty",
+  presetKey: PRESETS[0].key,
   photoDataUrl: null,
-  overlays: new Set(),   // toggled overlay keys
+  overlays: new Set(),
 };
 
 /* -----------------------------------------------------------
@@ -582,15 +617,22 @@ function renderPresetCards() {
     const card = document.createElement("div");
     card.className = "preset-card" + (state.presetKey === p.key ? " selected" : "");
     card.dataset.key = p.key;
-    card.style.setProperty("--neon", p.neon);
-    card.style.setProperty("--neon-glow", p.glow);
+    const neon = NEON[p.neon] || NEON.cyan;
+    const panel = PANEL[p.panel] || PANEL.cyan;
+    card.style.setProperty("--neon", neon.c);
+    card.style.setProperty("--neon-glow", neon.glow);
+    card.style.setProperty("--panel-gradient", panel);
     card.innerHTML = `
       <div class="preset-frame" data-src="${p.key}.png">
-        <img src="${src}" alt="${p.name}"
-             onerror="this.parentElement.classList.add('missing')">
+        <div class="img-wrap">
+          <img src="${src}" alt="${p.name}"
+               onerror="this.parentElement.parentElement.classList.add('missing')">
+        </div>
+        <div class="label">
+          <span class="name">${p.name}</span>
+          <span class="tag">${p.tag}</span>
+        </div>
       </div>
-      <div class="name">${p.name}</div>
-      <div class="tag">${p.tag}</div>
     `;
     card.addEventListener("click", () => {
       state.presetKey = p.key;
@@ -676,29 +718,39 @@ dropZone.addEventListener("drop", (e) => { e.preventDefault(); dropZone.classLis
 function buildPoster() {
   const W = 800, H = 1000;
   const evt = EVENTS[state.event];
-  const avatarSize = 500;
-  const avatarX = (W - avatarSize) / 2;
-  const avatarY = 300;
+  const preset = PRESETS.find(x => x.key === state.presetKey) || PRESETS[0];
+  const isPhoto = state.mode === "photo";
+
+  // avatar panel dimensions
+  const avatarW = 520, avatarH = 560;
+  const avatarX = (W - avatarW) / 2;
+  const avatarY = 320;
 
   // Build avatar image source
-  let avatarHref = "";
-  if (state.mode === "preset") {
-    const p = PRESETS.find(x => x.key === state.presetKey) || PRESETS[0];
-    avatarHref = presetSrc(p);
-  } else {
-    avatarHref = state.photoDataUrl || "";
-  }
+  let avatarHref = isPhoto ? (state.photoDataUrl || "") : presetSrc(preset);
+
+  // Panel gradient stops for the character card background
+  const panelStops = {
+    magenta: ["#ff3499", "#c81a70"],
+    cyan:    ["#00dce9", "#00a0aa"],
+    orange:  ["#ffa84f", "#d47a20"],
+    purple:  ["#a94dff", "#6a2fbf"],
+  };
+  const panelColors = isPhoto ? ["#12283f", "#050c1a"] : (panelStops[preset.panel] || panelStops.cyan);
+  const neonColors = { magenta: BRAND.magenta, cyan: BRAND.cyan, orange: BRAND.orange, purple: "#a94dff" };
+  const neon = isPhoto ? BRAND.cyan : (neonColors[preset.neon] || BRAND.cyan);
 
   // Overlays (only in preset mode)
   let overlayLayer = "";
-  if (state.mode === "preset") {
+  if (!isPhoto) {
     for (const key of state.overlays) {
       const o = OVERLAYS.find(x => x.key === key);
-      if (o) overlayLayer += o.poster(avatarX, avatarY, avatarSize);
+      if (o) overlayLayer += o.poster(avatarX + (avatarW - avatarW*0.9) / 2, avatarY + 20, avatarW * 0.9);
     }
   }
 
   const clipId = `clip_${Date.now()}`;
+  const panelId = `panel_${Date.now()}`;
 
   return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" id="posterSvg">
     <defs>
@@ -712,8 +764,12 @@ function buildPoster() {
         <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
         <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
       </radialGradient>
+      <linearGradient id="${panelId}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="${panelColors[0]}"/>
+        <stop offset="1" stop-color="${panelColors[1]}"/>
+      </linearGradient>
       <clipPath id="${clipId}">
-        <circle cx="${avatarX + avatarSize/2}" cy="${avatarY + avatarSize/2}" r="${avatarSize/2}"/>
+        <rect x="${avatarX}" y="${avatarY}" width="${avatarW}" height="${avatarH - 90}" rx="18"/>
       </clipPath>
     </defs>
 
@@ -736,18 +792,23 @@ function buildPoster() {
     <text x="${W/2}" y="220" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="58" fill="${BRAND.magenta}" style="filter: drop-shadow(0 0 20px rgba(255,52,153,0.55));">${evt.city} GRC</text>
     <text x="${W/2}" y="280" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="58" fill="${BRAND.magenta}" style="filter: drop-shadow(0 0 20px rgba(255,52,153,0.55));">BARCADE</text>
 
-    <!-- Avatar circular frame -->
-    <circle cx="${avatarX + avatarSize/2}" cy="${avatarY + avatarSize/2}" r="${avatarSize/2 + 8}" fill="${BRAND.navy2}" stroke="${BRAND.cyan}" stroke-width="6" style="filter: drop-shadow(0 0 26px rgba(0,220,233,0.7));"/>
-    <!-- Avatar image (UNMODIFIED — no filters, no recoloring) -->
-    <image href="${avatarHref}" x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${clipId})"/>
-    <!-- Overlays sit on top -->
+    <!-- Avatar panel card -->
+    <rect x="${avatarX - 6}" y="${avatarY - 6}" width="${avatarW + 12}" height="${avatarH + 12}" rx="24" fill="none" stroke="${neon}" stroke-width="4" style="filter: drop-shadow(0 0 26px ${neon}88);"/>
+    <rect x="${avatarX}" y="${avatarY}" width="${avatarW}" height="${avatarH - 90}" rx="18" fill="url(#${panelId})"/>
+    <!-- Avatar image (UNMODIFIED) -->
+    <image href="${avatarHref}" x="${avatarX + 20}" y="${avatarY + 20}" width="${avatarW - 40}" height="${avatarH - 130}" preserveAspectRatio="xMidYMid ${isPhoto ? 'slice' : 'meet'}" clip-path="url(#${clipId})"/>
+    <!-- Overlays layered on top -->
     <g clip-path="url(#${clipId})">${overlayLayer}</g>
+    <!-- Label plate at bottom of card -->
+    <rect x="${avatarX}" y="${avatarY + avatarH - 90}" width="${avatarW}" height="90" fill="#050c1a"/>
+    <rect x="${avatarX}" y="${avatarY + avatarH - 90}" width="${avatarW}" height="4" fill="${neon}"/>
+    <text x="${W/2}" y="${avatarY + avatarH - 50}" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="26" fill="${neon}" letter-spacing="3" style="filter: drop-shadow(0 0 8px ${neon}aa);">${(isPhoto ? "YOU" : preset.name).toUpperCase()}</text>
+    <text x="${W/2}" y="${avatarY + avatarH - 22}" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="600" font-size="14" fill="#a0c0d8">${isPhoto ? "The real you" : preset.tag}</text>
 
     <!-- Date -->
-    <text x="${W/2}" y="855" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="800" font-size="26" fill="${BRAND.orange}" letter-spacing="4">${evt.date}</text>
-    <!-- CTA -->
-    <text x="${W/2}" y="915" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="42" fill="${BRAND.cyan}" style="filter: drop-shadow(0 0 12px rgba(0,220,233,0.7));">Join me.</text>
-    <text x="${W/2}" y="975" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="700" font-size="12" fill="#a0c0d8" letter-spacing="3">ANECDOTES &middot; GRC BARCADE</text>
+    <text x="${W/2}" y="925" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="800" font-size="24" fill="${BRAND.orange}" letter-spacing="4">${evt.date}</text>
+    <text x="${W/2}" y="960" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="30" fill="${BRAND.cyan}" style="filter: drop-shadow(0 0 12px rgba(0,220,233,0.7));">Join me.</text>
+    <text x="${W/2}" y="988" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="700" font-size="11" fill="#a0c0d8" letter-spacing="3">ANECDOTES &middot; GRC BARCADE</text>
   </svg>`;
 }
 
