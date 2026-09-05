@@ -197,55 +197,74 @@
     display: block;
   }
 
-  /* ========== OVERLAYS ========== */
-  .overlay-panel {
-    max-width: 720px;
+  /* ========== VARIANT PANEL ========== */
+  .variant-panel {
+    max-width: 1100px;
     margin: 22px auto 0;
     padding: 18px;
     background: var(--navy-panel);
     border: 2px solid var(--navy-border);
     border-radius: 16px;
   }
-  .overlay-panel h3 {
-    margin: 0 0 12px;
-    font-family: "Mulish", sans-serif;
+  .variant-panel h3 {
+    margin: 0 0 14px;
+    font-family: "Merriweather", Georgia, serif;
     font-weight: 700;
-    font-size: 13px;
-    color: var(--magenta);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-size: 15px;
+    color: var(--neon, var(--cyan));
+    letter-spacing: 1px;
     text-align: center;
+    text-shadow: 0 0 8px var(--neon-glow, var(--cyan-glow));
   }
-  .overlay-grid {
+  .variant-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
     gap: 10px;
   }
-  .overlay-swatch {
-    padding: 10px 6px;
-    background: rgba(30,74,112,0.3);
+  .variant-swatch {
+    padding: 8px 4px 6px;
+    background: rgba(30,74,112,0.35);
     border: 2px solid var(--navy-border);
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: var(--ink);
     transition: all 0.08s ease;
     display: flex; flex-direction: column; align-items: center; gap: 6px;
     position: relative;
   }
-  .overlay-swatch:hover { transform: translateY(-2px); border-color: var(--cyan); }
-  .overlay-swatch.active {
-    border-color: var(--cyan);
+  .variant-swatch:hover { transform: translateY(-2px); border-color: var(--neon, var(--cyan)); }
+  .variant-swatch.active {
+    border-color: var(--neon, var(--cyan));
     background: rgba(0,220,233,0.14);
-    box-shadow: 0 0 14px var(--cyan-glow);
+    box-shadow: 0 0 12px var(--neon-glow, var(--cyan-glow));
   }
-  .overlay-swatch svg { width: 40px; height: 40px; }
-  .overlay-swatch.active::after {
+  .variant-thumb {
+    position: relative;
+    width: 68px; height: 68px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #12283f, #050c1a);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .variant-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .variant-thumb.missing::after {
+    content: "—";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-dim);
+    font-size: 20px;
+  }
+  .variant-thumb.missing img { display: none; }
+  .variant-swatch.active::after {
     content: "✓";
-    position: absolute; top: 4px; right: 6px;
-    font-size: 12px; color: var(--cyan);
+    position: absolute; top: 3px; right: 5px;
+    font-size: 11px; color: var(--neon, var(--cyan));
   }
 
   .photo-upload { max-width: 500px; margin: 0 auto; text-align: center; }
@@ -353,9 +372,9 @@
   <section id="view-preset" class="view active">
     <div class="preset-gallery" id="presetGallery"></div>
 
-    <div class="overlay-panel">
-      <h3>Add Overlays (optional)</h3>
-      <div class="overlay-grid" id="overlayGrid"></div>
+    <div class="variant-panel" id="variantPanel">
+      <h3 id="variantHeading">Choose your look</h3>
+      <div class="variant-grid" id="variantGrid"></div>
     </div>
 
     <button class="go-btn" id="presetGoBtn">I'M GOING! &nbsp;→</button>
@@ -417,9 +436,43 @@ const EVENTS = {
 };
 
 /* -----------------------------------------------------------
-   PRESETS — drop matching PNG into presets/{key}.png
+   VARIANT SETS — the app looks for files at
+     presets/{characterKey}/{variantKey}.png
+   Full variant set for people characters:
+----------------------------------------------------------- */
+const VARIANT_SETS = {
+  human: [
+    { key: "base",       label: "Base"        },
+    { key: "fair",       label: "Fair"        },
+    { key: "light",      label: "Light"       },
+    { key: "medium",     label: "Medium"      },
+    { key: "olive",      label: "Olive"       },
+    { key: "tan",        label: "Tan"         },
+    { key: "deep",       label: "Deep"        },
+    { key: "ebony",      label: "Ebony"       },
+    { key: "red",        label: "Red Hair"    },
+    { key: "blue",       label: "Blue Hair"   },
+    { key: "purple",     label: "Purple Hair" },
+    { key: "pink-ombre", label: "Pink Ombré"  },
+    { key: "curly",      label: "Curly"       },
+    { key: "locs",       label: "Locs"        },
+    { key: "space-buns", label: "Space Buns"  },
+    { key: "half-up",    label: "Half Up"     },
+    { key: "short",      label: "Short"       },
+    { key: "sleek",      label: "Sleek"       },
+    { key: "braids",     label: "Braids"      },
+    { key: "natural",    label: "Natural"     },
+  ],
+  mascot: [
+    { key: "base",   label: "Base"  },
+  ],
+};
+
+/* -----------------------------------------------------------
+   PRESETS — drop matching PNG into presets/{key}/{variant}.png
+   The card in the gallery shows presets/{key}/base.png.
    Each has a panel gradient (background of the card) + neon
-   accent color (border + label text).
+   accent color (border + label text) + a variantSet.
 ----------------------------------------------------------- */
 const PANEL = {
   magenta: "linear-gradient(135deg, #ff3499, #c81a70)",
@@ -435,23 +488,24 @@ const NEON = {
 };
 
 const PRESETS = [
-  { key: "trusty",        name: "Trusty",        tag: "Keeps things on track",           panel: "magenta", neon: "magenta" },
-  { key: "audit-ace",     name: "Audit Ace",     tag: "Checks. Clears. Celebrates.",     panel: "cyan",    neon: "cyan"    },
-  { key: "risky",         name: "Risky",         tag: "Spots issues before they spawn",  panel: "orange",  neon: "orange"  },
-  { key: "compli-bot",    name: "Compli Bot",    tag: "Always up for a high score",      panel: "cyan",    neon: "cyan"    },
-  { key: "control-freak", name: "Control Freak", tag: "Process protects progress",       panel: "magenta", neon: "magenta" },
-  { key: "the-strategist",name: "The Strategist",tag: "Big picture. Bigger possibilities.", panel: "purple",  neon: "purple" },
-  { key: "the-builder",   name: "The Builder",   tag: "Turns ideas into impact",         panel: "magenta", neon: "magenta" },
-  { key: "the-guardian",  name: "The Guardian",  tag: "Protects what matters",           panel: "orange",  neon: "orange"  },
-  { key: "the-explorer",  name: "The Explorer",  tag: "Discovers what's next",           panel: "purple",  neon: "purple"  },
-  { key: "the-analyst",   name: "The Analyst",   tag: "Finds the signal",                panel: "cyan",    neon: "cyan"    },
-  { key: "the-maverick",  name: "The Maverick",  tag: "Challenges the status quo",       panel: "orange",  neon: "orange"  },
-  { key: "the-auditor",   name: "The Auditor",   tag: "Asks the tough questions",        panel: "cyan",    neon: "cyan"    },
-  { key: "the-champ",     name: "The Champ",     tag: "Brings people together",          panel: "magenta", neon: "magenta" },
-  { key: "the-innovator", name: "The Innovator", tag: "Turns complexity into opportunity", panel: "orange",  neon: "orange" },
-  { key: "the-oracle",    name: "The Oracle",    tag: "Sees ahead",                      panel: "purple",  neon: "purple"  },
+  { key: "trusty",        name: "Trusty",        tag: "Keeps things on track",              panel: "magenta", neon: "magenta", variantSet: "human"  },
+  { key: "audit-ace",     name: "Audit Ace",     tag: "Checks. Clears. Celebrates.",        panel: "cyan",    neon: "cyan",    variantSet: "human"  },
+  { key: "risky",         name: "Risky",         tag: "Spots issues before they spawn",     panel: "orange",  neon: "orange",  variantSet: "human"  },
+  { key: "compli-bot",    name: "Compli Bot",    tag: "Always up for a high score",         panel: "cyan",    neon: "cyan",    variantSet: "mascot" },
+  { key: "control-freak", name: "Control Freak", tag: "Process protects progress",          panel: "magenta", neon: "magenta", variantSet: "mascot" },
+  { key: "the-strategist",name: "The Strategist",tag: "Big picture. Bigger possibilities.", panel: "purple",  neon: "purple",  variantSet: "human"  },
+  { key: "the-builder",   name: "The Builder",   tag: "Turns ideas into impact",            panel: "magenta", neon: "magenta", variantSet: "human"  },
+  { key: "the-guardian",  name: "The Guardian",  tag: "Protects what matters",              panel: "orange",  neon: "orange",  variantSet: "mascot" },
+  { key: "the-explorer",  name: "The Explorer",  tag: "Discovers what's next",              panel: "purple",  neon: "purple",  variantSet: "mascot" },
+  { key: "the-analyst",   name: "The Analyst",   tag: "Finds the signal",                   panel: "cyan",    neon: "cyan",    variantSet: "human"  },
+  { key: "the-maverick",  name: "The Maverick",  tag: "Challenges the status quo",          panel: "orange",  neon: "orange",  variantSet: "human"  },
+  { key: "the-auditor",   name: "The Auditor",   tag: "Asks the tough questions",           panel: "cyan",    neon: "cyan",    variantSet: "human"  },
+  { key: "the-champ",     name: "The Champ",     tag: "Brings people together",             panel: "magenta", neon: "magenta", variantSet: "human"  },
+  { key: "the-innovator", name: "The Innovator", tag: "Turns complexity into opportunity",  panel: "orange",  neon: "orange",  variantSet: "human"  },
+  { key: "the-oracle",    name: "The Oracle",    tag: "Sees ahead",                         panel: "purple",  neon: "purple",  variantSet: "mascot" },
 ];
-const presetSrc = (p) => `presets/${p.key}.png`;
+const presetSrc = (p, variantKey = "base") => `presets/${p.key}/${variantKey}.png`;
+const variantsFor = (p) => VARIANT_SETS[p.variantSet] || VARIANT_SETS.mascot;
 
 /* -----------------------------------------------------------
    OVERLAYS — sit ON TOP of the preset image, never modify it.
@@ -602,6 +656,7 @@ const state = {
   mode: "preset",
   event: "denver",
   presetKey: PRESETS[0].key,
+  presetVariant: "base",
   photoDataUrl: null,
   overlays: new Set(),
 };
@@ -613,7 +668,7 @@ function renderPresetCards() {
   const gallery = document.getElementById("presetGallery");
   gallery.innerHTML = "";
   for (const p of PRESETS) {
-    const src = presetSrc(p);
+    const src = presetSrc(p, "base");
     const card = document.createElement("div");
     card.className = "preset-card" + (state.presetKey === p.key ? " selected" : "");
     card.dataset.key = p.key;
@@ -623,7 +678,7 @@ function renderPresetCards() {
     card.style.setProperty("--neon-glow", neon.glow);
     card.style.setProperty("--panel-gradient", panel);
     card.innerHTML = `
-      <div class="preset-frame" data-src="${p.key}.png">
+      <div class="preset-frame" data-src="${p.key}/base.png">
         <div class="img-wrap">
           <img src="${src}" alt="${p.name}"
                onerror="this.parentElement.parentElement.classList.add('missing')">
@@ -636,10 +691,45 @@ function renderPresetCards() {
     `;
     card.addEventListener("click", () => {
       state.presetKey = p.key;
+      state.presetVariant = "base";
       gallery.querySelectorAll(".preset-card").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
+      renderVariantPicker();
     });
     gallery.appendChild(card);
+  }
+  renderVariantPicker();
+}
+
+function renderVariantPicker() {
+  const panel = document.getElementById("variantPanel");
+  if (!panel) return;
+  const preset = PRESETS.find(x => x.key === state.presetKey) || PRESETS[0];
+  const variants = variantsFor(preset);
+  const neon = NEON[preset.neon] || NEON.cyan;
+  panel.style.setProperty("--neon", neon.c);
+  panel.style.setProperty("--neon-glow", neon.glow);
+  const heading = document.getElementById("variantHeading");
+  if (heading) heading.textContent = `${preset.name} — Choose your look`;
+  const grid = document.getElementById("variantGrid");
+  grid.innerHTML = "";
+  for (const v of variants) {
+    const btn = document.createElement("button");
+    btn.className = "variant-swatch" + (state.presetVariant === v.key ? " active" : "");
+    btn.dataset.key = v.key;
+    btn.innerHTML = `
+      <div class="variant-thumb">
+        <img src="${presetSrc(preset, v.key)}" alt="${v.label}"
+             onerror="this.parentElement.classList.add('missing')">
+      </div>
+      <span>${v.label}</span>
+    `;
+    btn.addEventListener("click", () => {
+      state.presetVariant = v.key;
+      grid.querySelectorAll(".variant-swatch").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+    grid.appendChild(btn);
   }
 }
 
@@ -727,7 +817,7 @@ function buildPoster() {
   const avatarY = 320;
 
   // Build avatar image source
-  let avatarHref = isPhoto ? (state.photoDataUrl || "") : presetSrc(preset);
+  let avatarHref = isPhoto ? (state.photoDataUrl || "") : presetSrc(preset, state.presetVariant);
 
   // Panel gradient stops for the character card background
   const panelStops = {
@@ -866,7 +956,6 @@ function downloadPoster() {
 document.getElementById("downloadBtn").addEventListener("click", downloadPoster);
 
 renderPresetCards();
-renderOverlayPicker();
 </script>
 </body>
 </html>
