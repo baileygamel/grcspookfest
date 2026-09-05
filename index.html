@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Mulish:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Anecdotes brand */
     --cyan: #00dce9;
     --cyan-dark: #00a0aa;
     --cyan-glow: rgba(0, 220, 233, 0.5);
@@ -19,9 +18,10 @@
     --orange: #ffa84f;
     --orange-dark: #d47a20;
     --orange-glow: rgba(255, 168, 79, 0.5);
-    --navy: #0a1526;
-    --navy-2: #12283f;
-    --navy-3: #1e4a70;
+    --navy: #050c1a;
+    --navy-2: #0a1526;
+    --navy-3: #12283f;
+    --navy-4: #1e4a70;
     --navy-panel: rgba(10, 21, 38, 0.85);
     --navy-border: #1e4a70;
     --ink: #eef4fa;
@@ -37,16 +37,12 @@
     background:
       radial-gradient(ellipse at 20% 5%, rgba(0,220,233,0.14), transparent 55%),
       radial-gradient(ellipse at 85% 95%, rgba(255,52,153,0.10), transparent 55%),
-      linear-gradient(180deg, #0a1526 0%, #12283f 45%, #1e4a70 75%, #0a1526 100%);
+      linear-gradient(180deg, #050c1a 0%, #0a1526 40%, #12283f 75%, #050c1a 100%);
     background-attachment: fixed;
   }
   h1, h2, h3 { font-family: "Merriweather", Georgia, serif; letter-spacing: 0; }
 
-  /* ========== HEADER ========== */
-  header {
-    text-align: center;
-    padding: 32px 16px 6px;
-  }
+  header { text-align: center; padding: 32px 16px 6px; }
   header h1 {
     margin: 0;
     font-size: clamp(24px, 4vw, 42px);
@@ -58,28 +54,21 @@
   header .sub {
     margin-top: 10px;
     color: var(--ink-dim);
-    font-family: "Mulish", sans-serif;
     font-weight: 600;
     font-size: 13px;
     letter-spacing: 4px;
     text-transform: uppercase;
   }
 
-  /* ========== EVENT PICKER ========== */
   .event-picker {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    max-width: 900px;
-    margin: 18px auto 8px;
-    padding: 0 16px;
+    display: flex; justify-content: center; gap: 10px;
+    max-width: 900px; margin: 18px auto 8px; padding: 0 16px;
     flex-wrap: wrap;
   }
   .event-btn {
     padding: 10px 18px;
     font-family: "Mulish", sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 13px; font-weight: 700;
     color: var(--ink);
     background: rgba(10,21,38,0.7);
     border: 2px solid var(--navy-border);
@@ -90,28 +79,23 @@
   }
   .event-btn:hover { border-color: var(--cyan); transform: translateY(-1px); }
   .event-btn.active {
-    background: var(--cyan);
-    color: var(--navy);
+    background: var(--cyan); color: var(--navy);
     border-color: var(--cyan);
     box-shadow: 0 0 20px var(--cyan-glow);
   }
 
-  /* ========== MODE PICKER ========== */
   .mode-picker {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 14px;
-    max-width: 900px;
-    margin: 18px auto 12px;
-    padding: 0 16px;
+    max-width: 900px; margin: 18px auto 12px; padding: 0 16px;
   }
   .mode-card {
     padding: 18px 14px;
     background: rgba(10,21,38,0.7);
     border: 2px solid var(--navy-border);
     border-radius: 16px;
-    cursor: pointer;
-    text-align: center;
+    cursor: pointer; text-align: center;
     transition: all 0.15s ease;
   }
   .mode-card:hover { transform: translateY(-2px); border-color: var(--cyan); }
@@ -120,44 +104,28 @@
     background: rgba(0,220,233,0.12);
     box-shadow: 0 6px 24px rgba(0,220,233,0.25);
   }
-  .mode-card .mode-emoji {
-    font-size: 32px;
-    display: block;
-    margin-bottom: 6px;
-  }
+  .mode-card .mode-emoji { font-size: 32px; display: block; margin-bottom: 6px; }
   .mode-card .mode-title {
     font-family: "Merriweather", Georgia, serif;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--ink);
+    font-weight: 700; font-size: 15px; color: var(--ink);
     margin-bottom: 4px;
   }
-  .mode-card .mode-sub {
-    font-size: 12px;
-    color: var(--ink-dim);
-  }
+  .mode-card .mode-sub { font-size: 12px; color: var(--ink-dim); }
 
-  /* ========== MAIN APP ========== */
   #app { max-width: 1180px; margin: 0 auto; padding: 10px 16px 48px; }
-
   .view { display: none; }
   .view.active { display: block; }
 
-  /* ========== PRESET GALLERY ========== */
   .preset-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 14px;
-    max-width: 900px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px; max-width: 900px; margin: 0 auto;
   }
   .preset-card {
     background: var(--navy-panel);
     border: 2px solid var(--navy-border);
     border-radius: 16px;
-    padding: 12px;
-    cursor: pointer;
-    text-align: center;
+    padding: 10px; cursor: pointer; text-align: center;
     transition: all 0.15s ease;
   }
   .preset-card:hover { transform: translateY(-3px); border-color: var(--cyan); }
@@ -167,74 +135,45 @@
     background: rgba(0,220,233,0.08);
   }
   .preset-card svg {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
-    background: linear-gradient(180deg, #12283f, #0a1526);
-    border-radius: 10px;
+    display: block; width: 100%; aspect-ratio: 1;
+    border-radius: 12px;
   }
   .preset-card .name {
     margin-top: 8px;
     font-family: "Merriweather", Georgia, serif;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--ink);
+    font-weight: 700; font-size: 14px; color: var(--ink);
   }
-  .preset-card .tag {
-    font-size: 11px;
-    color: var(--ink-dim);
-  }
+  .preset-card .tag { font-size: 11px; color: var(--ink-dim); }
 
-  /* ========== PHOTO UPLOAD ========== */
-  .photo-upload {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-  }
+  .photo-upload { max-width: 500px; margin: 0 auto; text-align: center; }
   .drop-zone {
     padding: 40px 20px;
     border: 3px dashed var(--navy-border);
     border-radius: 20px;
     background: var(--navy-panel);
-    cursor: pointer;
-    transition: all 0.15s ease;
+    cursor: pointer; transition: all 0.15s ease;
   }
   .drop-zone:hover, .drop-zone.dragover {
     border-color: var(--cyan);
     background: rgba(0,220,233,0.08);
   }
   .drop-zone .icon { font-size: 48px; display: block; margin-bottom: 12px; }
-  .drop-zone p {
-    margin: 4px 0;
-    font-family: "Mulish", sans-serif;
-    color: var(--ink);
-  }
-  .drop-zone p.sub {
-    font-size: 13px;
-    color: var(--ink-dim);
-  }
+  .drop-zone p { margin: 4px 0; color: var(--ink); }
+  .drop-zone p.sub { font-size: 13px; color: var(--ink-dim); }
   #photoInput { display: none; }
-  .photo-preview {
-    margin-top: 20px;
-    display: none;
-  }
+  .photo-preview { margin-top: 20px; display: none; }
   .photo-preview.show { display: block; }
   .photo-preview img {
-    width: 100%;
-    max-width: 320px;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 20px;
+    width: 100%; max-width: 320px; aspect-ratio: 1;
+    object-fit: cover; border-radius: 20px;
     border: 3px solid var(--cyan);
     box-shadow: 0 0 30px var(--cyan-glow);
   }
 
-  /* ========== CUSTOM DESIGNER ========== */
   .creator {
     display: grid;
     grid-template-columns: minmax(320px, 1fr) minmax(320px, 1.1fr);
-    gap: 22px;
-    align-items: start;
+    gap: 22px; align-items: start;
   }
   @media (max-width: 820px) { .creator { grid-template-columns: 1fr; } }
   .stage-wrap { position: sticky; top: 12px; }
@@ -242,44 +181,30 @@
     background: linear-gradient(180deg, #12283f, #0a1526);
     border: 4px solid var(--navy-border);
     border-radius: 22px;
-    box-shadow:
-      0 0 0 3px rgba(0,220,233,0.2),
-      0 12px 40px rgba(0,0,0,0.6),
-      0 0 30px rgba(0,220,233,0.15);
-    padding: 14px;
-    position: relative;
+    box-shadow: 0 0 0 3px rgba(0,220,233,0.2), 0 12px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,220,233,0.15);
+    padding: 14px; position: relative;
   }
   #avatarSvg {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    border-radius: 12px;
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 1 / 1; border-radius: 12px;
   }
   .stage-caption {
-    text-align: center;
-    margin-top: 12px;
+    text-align: center; margin-top: 12px;
     color: var(--cyan);
-    font-family: "Mulish", sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
   }
 
   .go-btn {
     display: block; width: 100%; margin-top: 16px; padding: 18px;
     font-family: "Merriweather", Georgia, serif;
-    font-weight: 900;
-    font-size: 16px;
+    font-weight: 900; font-size: 16px;
     color: var(--navy);
     background: linear-gradient(135deg, var(--cyan), var(--magenta));
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    letter-spacing: 1px;
+    border: none; border-radius: 14px;
+    cursor: pointer; letter-spacing: 1px;
     box-shadow: 0 6px 24px rgba(0,220,233,0.4), 0 0 40px rgba(255,52,153,0.25);
-    transition: transform 0.08s ease, box-shadow 0.15s ease;
+    transition: all 0.15s ease;
   }
   .go-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,220,233,0.55), 0 0 50px rgba(255,52,153,0.4); }
   .go-btn:active { transform: translateY(2px); }
@@ -287,42 +212,33 @@
   .controls {
     background: var(--navy-panel);
     border: 2px solid var(--navy-border);
-    border-radius: 20px;
-    padding: 16px;
+    border-radius: 20px; padding: 16px;
     backdrop-filter: blur(8px);
   }
-  .tabs {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
-  }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
   .tab {
     flex: 1 1 auto; padding: 9px 8px;
-    font-family: "Mulish", sans-serif;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 12px; font-weight: 700;
     color: var(--ink);
     background: rgba(30,74,112,0.4);
     border: 2px solid var(--navy-border);
-    border-radius: 999px;
-    cursor: pointer;
+    border-radius: 999px; cursor: pointer;
     letter-spacing: 0.5px;
     transition: all 0.15s ease;
   }
   .tab:hover { border-color: var(--cyan); }
   .tab.active {
-    background: var(--cyan);
-    color: var(--navy);
+    background: var(--cyan); color: var(--navy);
     border-color: var(--cyan);
     box-shadow: 0 0 16px var(--cyan-glow);
   }
   .section { display: none; }
   .section.active { display: block; }
   .section h3 {
-    margin: 8px 0 10px;
-    font-size: 13px;
+    margin: 8px 0 10px; font-size: 13px;
     color: var(--magenta);
     text-shadow: 0 0 8px var(--magenta-glow);
-    letter-spacing: 1px;
-    font-weight: 700;
+    letter-spacing: 1px; font-weight: 700;
     font-family: "Mulish", sans-serif;
     text-transform: uppercase;
   }
@@ -335,16 +251,11 @@
     padding: 8px 6px;
     background: rgba(30,74,112,0.3);
     border: 2px solid var(--navy-border);
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 11px;
-    font-family: "Mulish", sans-serif;
-    font-weight: 600;
+    border-radius: 10px; cursor: pointer;
+    text-align: center; font-size: 11px; font-weight: 600;
     color: var(--ink);
-    transition: transform 0.08s ease;
+    transition: all 0.08s ease;
     display: flex; flex-direction: column; align-items: center; gap: 6px;
-    position: relative;
   }
   .swatch:hover { transform: translateY(-2px); border-color: var(--cyan); }
   .swatch.active {
@@ -357,14 +268,12 @@
     border: 2px solid rgba(0,0,0,0.4);
   }
 
-  /* ========== RESULT / POSTER ========== */
   #result { display: none; }
   #result.show { display: block; }
   .poster-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
   #poster {
     width: 100%; max-width: 720px; aspect-ratio: 4 / 5;
-    background: var(--navy);
-    border-radius: 20px; overflow: hidden;
+    background: var(--navy); border-radius: 20px; overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(0,220,233,0.3);
   }
   #poster svg { width: 100%; height: 100%; display: block; }
@@ -372,13 +281,9 @@
   .btn {
     padding: 14px 22px;
     font-family: "Merriweather", Georgia, serif;
-    font-weight: 700;
-    font-size: 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    border: 2px solid;
-    text-decoration: none;
-    display: inline-block;
+    font-weight: 700; font-size: 14px;
+    border-radius: 12px; cursor: pointer;
+    border: 2px solid; text-decoration: none; display: inline-block;
     letter-spacing: 0.5px;
     transition: all 0.15s ease;
   }
@@ -390,8 +295,7 @@
   }
   .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,220,233,0.55); }
   .btn.secondary {
-    background: transparent;
-    color: var(--ink);
+    background: transparent; color: var(--ink);
     border-color: var(--navy-border);
   }
   .btn.secondary:hover { border-color: var(--cyan); }
@@ -431,7 +335,6 @@
 </div>
 
 <main id="app">
-  <!-- PRESET MODE -->
   <section id="view-preset" class="view active">
     <div class="preset-gallery" id="presetGallery"></div>
     <div style="text-align:center; margin-top: 22px;">
@@ -439,7 +342,6 @@
     </div>
   </section>
 
-  <!-- PHOTO MODE -->
   <section id="view-photo" class="view">
     <div class="photo-upload">
       <label class="drop-zone" id="dropZone" for="photoInput">
@@ -457,7 +359,6 @@
     </div>
   </section>
 
-  <!-- CUSTOM MODE -->
   <section id="view-custom" class="view creator">
     <div class="stage-wrap">
       <div class="crt">
@@ -474,8 +375,11 @@
         <button class="tab" data-tab="extras">Extras</button>
       </div>
       <div class="section active" data-section="face">
+        <h3>Face Shape</h3><div class="grid" data-group="faceShape"></div>
         <h3>Skin Tone</h3><div class="grid" data-group="skin"></div>
+        <h3>Eyebrows</h3><div class="grid" data-group="brows"></div>
         <h3>Eyes</h3><div class="grid" data-group="eyes"></div>
+        <h3>Nose</h3><div class="grid" data-group="nose"></div>
         <h3>Mouth</h3><div class="grid" data-group="mouth"></div>
       </div>
       <div class="section" data-section="hair">
@@ -483,8 +387,7 @@
         <h3>Hair Color</h3><div class="grid" data-group="hairColor"></div>
       </div>
       <div class="section" data-section="wear">
-        <h3>Outfit</h3><div class="grid" data-group="outfit"></div>
-        <h3>Outfit Color</h3><div class="grid" data-group="outfitColor"></div>
+        <h3>Top Color</h3><div class="grid" data-group="outfitColor"></div>
       </div>
       <div class="section" data-section="extras">
         <h3>Headgear</h3><div class="grid" data-group="hat"></div>
@@ -493,7 +396,6 @@
     </div>
   </section>
 
-  <!-- RESULT SCREEN -->
   <section id="result">
     <div class="poster-wrap">
       <div id="poster"></div>
@@ -508,22 +410,18 @@
 
 <script>
 /* =========================================================
-   GRC Barcade Avatar Maker — Anecdotes brand edition
+   GRC Barcade Avatar Maker — anatomically cohesive edition
    ========================================================= */
 
 const BRAND = {
-  cyan: "#00dce9",
-  cyanDeep: "#00a0aa",
-  magenta: "#ff3499",
-  magentaDeep: "#c81a70",
-  orange: "#ffa84f",
-  orangeDeep: "#d47a20",
-  navy: "#0a1526",
-  navy2: "#12283f",
-  navy3: "#1e4a70",
-  ink: "#0a1526",
-  cream: "#f5efe6",
+  cyan: "#00dce9", cyanDeep: "#00a0aa",
+  magenta: "#ff3499", magentaDeep: "#c81a70",
+  orange: "#ffa84f", orangeDeep: "#d47a20",
+  navy: "#050c1a", navy2: "#0a1526", navy3: "#12283f", navy4: "#1e4a70",
+  ink: "#28083a", cream: "#f5efe6",
 };
+const INK = "#28083a";
+const WHITE = "#faf3ff";
 
 const EVENTS = {
   denver:  { city: "DENVER",  date: "OCTOBER 21ST" },
@@ -538,362 +436,866 @@ const state = {
   presetKey: "ana",
   photoDataUrl: null,
   custom: {
-    skin: "peach", eyes: "normal", mouth: "smile",
+    faceShape: "round",
+    skin: "peach",
+    eyes: "normal", brows: "natural", nose: "small", mouth: "smile",
     hair: "bob", hairColor: "brown",
     outfit: "tee", outfitColor: "cyan",
     hat: "none", accessory: "none",
   },
 };
 
-/* =========================================================
-   Cute chibi helpers (shared by presets + custom)
-   ========================================================= */
-const INK = "#28083a";
-const WHITE = "#faf3ff";
+let __CTX = 0;
+function ctxId() { return ++__CTX; }
+function shade(hex, amt) {
+  const c = hex.replace("#","");
+  const r = Math.round(parseInt(c.substr(0,2),16) * amt);
+  const g = Math.round(parseInt(c.substr(2,2),16) * amt);
+  const b = Math.round(parseInt(c.substr(4,2),16) * amt);
+  return "#" + [r,g,b].map(v => Math.max(0,Math.min(255,v)).toString(16).padStart(2,"0")).join("");
+}
+function tint(hex, amt) {
+  const c = hex.replace("#","");
+  const r = Math.min(255, parseInt(c.substr(0,2),16) + Math.round(255 * amt));
+  const g = Math.min(255, parseInt(c.substr(2,2),16) + Math.round(255 * amt));
+  const b = Math.min(255, parseInt(c.substr(4,2),16) + Math.round(255 * amt));
+  return "#" + [r,g,b].map(v => v.toString(16).padStart(2,"0")).join("");
+}
 
-function eyes(cx, y, iris = "#28083a", eyeStyle = "normal") {
-  const L = cx - 16, R = cx + 16;
-  const s = INK;
-  if (eyeStyle === "wink") {
-    return `
-      <ellipse cx="${L}" cy="${y}" rx="9" ry="12" fill="${WHITE}" stroke="${s}" stroke-width="1.6"/>
-      <ellipse cx="${L}" cy="${y+3}" rx="6" ry="8" fill="${iris}"/>
-      <ellipse cx="${L}" cy="${y+4}" rx="3" ry="4" fill="#0a0018"/>
-      <circle cx="${L-3}" cy="${y-3}" r="2.6" fill="${WHITE}"/>
-      <circle cx="${L+3}" cy="${y+5}" r="1.2" fill="${WHITE}"/>
-      <path d="M ${R-8} ${y+1} Q ${R} ${y-4} ${R+8} ${y+1}" fill="none" stroke="${s}" stroke-width="2.4" stroke-linecap="round"/>
-    `;
+/* =========================================================
+   BACKGROUND SCENE — blue ombre + neon GRC BARCADE sign + bokeh
+   Reused by every avatar for cohesion.
+   ========================================================= */
+function avatarBackground(id) {
+  const oid = `bg_${id}`;
+  const bokeh = [
+    [22, 60, 4, BRAND.cyan, 0.5],
+    [176, 68, 5, BRAND.magenta, 0.45],
+    [30, 150, 3, BRAND.cyan, 0.6],
+    [170, 160, 4, BRAND.magenta, 0.5],
+    [100, 175, 3, BRAND.orange, 0.55],
+    [55, 90, 2, BRAND.cyan, 0.4],
+    [150, 100, 2, BRAND.magenta, 0.4],
+  ];
+  let dots = "";
+  for (const [x,y,r,c,o] of bokeh) {
+    dots += `<circle cx="${x}" cy="${y}" r="${r*3}" fill="${c}" opacity="${o*0.3}"/>`;
+    dots += `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity="${o}"/>`;
   }
-  if (eyeStyle === "closed") {
-    return `
-      <path d="M ${L-8} ${y+1} Q ${L} ${y+5} ${L+8} ${y+1}" fill="none" stroke="${s}" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M ${R-8} ${y+1} Q ${R} ${y+5} ${R+8} ${y+1}" fill="none" stroke="${s}" stroke-width="2.4" stroke-linecap="round"/>
-    `;
-  }
-  if (eyeStyle === "sparkle") {
-    return `
-      <ellipse cx="${L}" cy="${y}" rx="10" ry="13" fill="${WHITE}" stroke="${s}" stroke-width="1.6"/>
-      <ellipse cx="${R}" cy="${y}" rx="10" ry="13" fill="${WHITE}" stroke="${s}" stroke-width="1.6"/>
-      <ellipse cx="${L}" cy="${y+3}" rx="7" ry="9" fill="${iris}"/>
-      <ellipse cx="${R}" cy="${y+3}" rx="7" ry="9" fill="${iris}"/>
-      <ellipse cx="${L}" cy="${y+4}" rx="3" ry="4" fill="#0a0018"/>
-      <ellipse cx="${R}" cy="${y+4}" rx="3" ry="4" fill="#0a0018"/>
-      <circle cx="${L-3}" cy="${y-4}" r="3" fill="${WHITE}"/>
-      <circle cx="${R-3}" cy="${y-4}" r="3" fill="${WHITE}"/>
-      <circle cx="${L+3}" cy="${y+6}" r="1.4" fill="${WHITE}"/>
-      <circle cx="${R+3}" cy="${y+6}" r="1.4" fill="${WHITE}"/>
-    `;
-  }
-  // normal
   return `
-    <ellipse cx="${L}" cy="${y}" rx="9" ry="12" fill="${WHITE}" stroke="${s}" stroke-width="1.6"/>
-    <ellipse cx="${R}" cy="${y}" rx="9" ry="12" fill="${WHITE}" stroke="${s}" stroke-width="1.6"/>
-    <ellipse cx="${L}" cy="${y+3}" rx="6" ry="8" fill="${iris}"/>
-    <ellipse cx="${R}" cy="${y+3}" rx="6" ry="8" fill="${iris}"/>
-    <ellipse cx="${L}" cy="${y+4}" rx="3" ry="4" fill="#0a0018"/>
-    <ellipse cx="${R}" cy="${y+4}" rx="3" ry="4" fill="#0a0018"/>
-    <circle cx="${L-3}" cy="${y-3}" r="2.6" fill="${WHITE}"/>
-    <circle cx="${R-3}" cy="${y-3}" r="2.6" fill="${WHITE}"/>
-    <circle cx="${L+3}" cy="${y+5}" r="1.2" fill="${WHITE}"/>
-    <circle cx="${R+3}" cy="${y+5}" r="1.2" fill="${WHITE}"/>
+    <defs>
+      <linearGradient id="${oid}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#040a18"/>
+        <stop offset="0.25" stop-color="#0a1a34"/>
+        <stop offset="0.55" stop-color="#173a68"/>
+        <stop offset="0.85" stop-color="#2670b0"/>
+        <stop offset="1" stop-color="#3ea0d8"/>
+      </linearGradient>
+      <radialGradient id="${oid}_vig" cx="0.5" cy="0.5" r="0.75">
+        <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
+      </radialGradient>
+    </defs>
+    <rect width="200" height="200" fill="url(#${oid})"/>
+    ${dots}
+    <!-- floor line reflection -->
+    <rect x="0" y="146" width="200" height="1" fill="${BRAND.cyan}" opacity="0.4"/>
+    <!-- vignette -->
+    <rect width="200" height="200" fill="url(#${oid}_vig)"/>
+    ${neonSign()}
   `;
 }
-function mouth(cx, y, style = "smile", color = INK) {
-  if (style === "smile")
-    return `<path d="M ${cx-7} ${y} Q ${cx} ${y+7} ${cx+7} ${y}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linecap="round"/>`;
-  if (style === "openSmile")
-    return `<path d="M ${cx-8} ${y-1} Q ${cx} ${y+8} ${cx+8} ${y-1} Q ${cx} ${y+3} ${cx-8} ${y-1} Z" fill="#c94a5a" stroke="${color}" stroke-width="1.4"/>`;
-  if (style === "smirk")
-    return `<path d="M ${cx-6} ${y+2} Q ${cx+2} ${y+5} ${cx+7} ${y-2}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linecap="round"/>`;
-  if (style === "cat")
-    return `<path d="M ${cx-6} ${y-1} Q ${cx-3} ${y+3} ${cx} ${y} Q ${cx+3} ${y+3} ${cx+6} ${y-1}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linecap="round"/>`;
-  if (style === "dot")
-    return `<circle cx="${cx}" cy="${y+2}" r="1.6" fill="${color}"/>`;
-  if (style === "fangs")
+function neonSign() {
+  // "GRC" magenta neon on top, "BARCADE" cyan neon below, both with layered glow
+  return `
+    <g>
+      <!-- sign back mounting plate -->
+      <rect x="52" y="16" width="96" height="34" rx="6" fill="#040a18" stroke="#173a68" stroke-width="0.8"/>
+      <!-- inner border strip -->
+      <rect x="55" y="19" width="90" height="28" rx="4" fill="none" stroke="#0a1a34" stroke-width="0.6"/>
+      <!-- GRC magenta -->
+      <text x="100" y="32" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="12" fill="${BRAND.magenta}"
+        style="filter: drop-shadow(0 0 3px ${BRAND.magenta}) drop-shadow(0 0 6px ${BRAND.magenta});">GRC</text>
+      <!-- BARCADE cyan -->
+      <text x="100" y="45" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="10" fill="${BRAND.cyan}" letter-spacing="1"
+        style="filter: drop-shadow(0 0 3px ${BRAND.cyan}) drop-shadow(0 0 6px ${BRAND.cyan});">BARCADE</text>
+      <!-- bulb corners -->
+      <circle cx="56" cy="20" r="1" fill="${BRAND.orange}"/>
+      <circle cx="144" cy="20" r="1" fill="${BRAND.orange}"/>
+      <circle cx="56" cy="46" r="1" fill="${BRAND.orange}"/>
+      <circle cx="144" cy="46" r="1" fill="${BRAND.orange}"/>
+    </g>
+  `;
+}
+
+/* =========================================================
+   ANATOMY — one cohesive person silhouette
+   Coordinates (200x200 viewBox):
+     Head:  cx=100, cy=98, rx=40, ry=46  → face y=52..144
+     Neck:  x=87..113, y=140..156
+     Torso: x=32..168, y=156..200 (extends off bottom, bust portrait)
+     Ears:  cx=58/142, cy=105, rx=5, ry=9
+   ========================================================= */
+
+const FACE = {
+  cx: 100, cy: 98,
+  rx: 40, ry: 46,
+  chinY: 143,
+  eyeY: 100,
+  browY: 84,
+  mouthY: 122,
+  earY: 106,
+  neckTop: 140,
+  neckBot: 156,
+  shoulderY: 156,
+  bottomY: 200,
+};
+
+function drawTorso(outfitColor) {
+  const c = outfitColor;
+  const cd = shade(c, 0.72);
+  const cl = tint(c, 0.15);
+  const id = `torso_${ctxId()}`;
+  return `
+    <defs>
+      <linearGradient id="${id}" x1="0" y1="0" x2="1" y2="0.3">
+        <stop offset="0" stop-color="${cd}"/>
+        <stop offset="0.5" stop-color="${c}"/>
+        <stop offset="1" stop-color="${cd}"/>
+      </linearGradient>
+    </defs>
+    <!-- torso + rounded shoulders, extends off bottom -->
+    <path d="M 32 200
+             L 32 178
+             Q 32 164 44 158
+             Q 60 152 78 152
+             L 122 152
+             Q 140 152 156 158
+             Q 168 164 168 178
+             L 168 200 Z"
+      fill="url(#${id})" stroke="${INK}" stroke-width="1.8"/>
+    <!-- neckline curve (V-neck hint) -->
+    <path d="M 84 154 Q 100 164 116 154" fill="none" stroke="${cd}" stroke-width="1.6" stroke-linecap="round"/>
+    <!-- shoulder highlight -->
+    <path d="M 46 162 Q 62 156 78 156" fill="none" stroke="${cl}" stroke-width="1.4" opacity="0.7"/>
+    <path d="M 154 162 Q 138 156 122 156" fill="none" stroke="${cl}" stroke-width="1.4" opacity="0.7"/>
+  `;
+}
+
+function drawNeck(skin) {
+  const sd = shade(skin, 0.78);
+  return `
+    <path d="M 87 138
+             Q 87 152 92 156
+             L 108 156
+             Q 113 152 113 138 Z"
+      fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
+    <!-- jaw-cast shadow at top of neck -->
+    <path d="M 87 138 Q 100 146 113 138 L 113 142 Q 100 148 87 142 Z" fill="${sd}" opacity="0.55"/>
+  `;
+}
+
+function drawHeadAndEars(skin, faceShape = "round") {
+  const sd = shade(skin, 0.78);
+  const sl = tint(skin, 0.15);
+  const id = `head_${ctxId()}`;
+  let headShape;
+  if (faceShape === "oval") {
+    headShape = `<ellipse cx="100" cy="98" rx="37" ry="48" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+  } else if (faceShape === "heart") {
+    headShape = `<path d="M 60 82 Q 58 60 82 54 Q 100 50 118 54 Q 142 60 140 82 Q 140 118 124 134 Q 112 144 100 144 Q 88 144 76 134 Q 60 118 60 82 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+  } else if (faceShape === "square") {
+    headShape = `<path d="M 60 72 Q 60 54 78 54 L 122 54 Q 140 54 140 72 L 140 124 Q 140 144 122 144 L 78 144 Q 60 144 60 124 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+  } else if (faceShape === "long") {
+    headShape = `<ellipse cx="100" cy="98" rx="34" ry="52" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+  } else {
+    headShape = `<ellipse cx="${FACE.cx}" cy="${FACE.cy}" rx="${FACE.rx}" ry="${FACE.ry}" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+  }
+  return `
+    <defs>
+      <radialGradient id="${id}" cx="0.42" cy="0.35" r="0.75">
+        <stop offset="0" stop-color="${sl}"/>
+        <stop offset="0.7" stop-color="${skin}"/>
+        <stop offset="1" stop-color="${sd}"/>
+      </radialGradient>
+    </defs>
+    <!-- ears -->
+    <ellipse cx="58" cy="${FACE.earY}" rx="5" ry="9" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
+    <ellipse cx="142" cy="${FACE.earY}" rx="5" ry="9" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 57 ${FACE.earY-3} q 2 6 0 10" fill="none" stroke="${sd}" stroke-width="0.9"/>
+    <path d="M 143 ${FACE.earY-3} q -2 6 0 10" fill="none" stroke="${sd}" stroke-width="0.9"/>
+    ${headShape}
+    <!-- soft chin shading -->
+    <path d="M 78 134 Q 100 142 122 134" fill="none" stroke="${sd}" stroke-width="1" opacity="0.5"/>
+  `;
+}
+
+/* Noses — sit at (100, 108-118) */
+function drawNose(style = "small", skin) {
+  const sd = shade(skin, 0.7);
+  if (style === "small")
+    return `<path d="M 100 110 Q 97 116 99 119 Q 100 120 101 119 Q 103 116 100 110 Z" fill="none" stroke="${sd}" stroke-width="1"/>`;
+  if (style === "button")
+    return `<ellipse cx="100" cy="116" rx="3" ry="2.4" fill="${skin}" stroke="${sd}" stroke-width="1"/>
+            <ellipse cx="99" cy="116" rx="0.8" ry="0.4" fill="${sd}" opacity="0.6"/>
+            <ellipse cx="101" cy="116" rx="0.8" ry="0.4" fill="${sd}" opacity="0.6"/>`;
+  if (style === "long")
+    return `<path d="M 100 106 L 100 118 Q 100 120 102 121 L 98 121 Q 100 120 100 118 Z" fill="none" stroke="${sd}" stroke-width="1"/>`;
+  if (style === "wide")
+    return `<path d="M 96 116 Q 100 120 104 116" fill="none" stroke="${sd}" stroke-width="1.2"/>
+            <ellipse cx="97" cy="117" rx="0.9" ry="0.6" fill="${sd}"/>
+            <ellipse cx="103" cy="117" rx="0.9" ry="0.6" fill="${sd}"/>`;
+  return "";
+}
+
+/* =========================================================
+   HAIR — designed to WRAP the head with bangs + back layer
+   ========================================================= */
+function drawHairBack(style, hairColor) {
+  if (!["long","bob","pigtails"].includes(style)) return "";
+  const c = hairColor;
+  const cd = shade(c, 0.7);
+  if (style === "long") {
     return `
-      <path d="M ${cx-7} ${y} Q ${cx} ${y+6} ${cx+7} ${y}" fill="none" stroke="${color}" stroke-width="2"/>
-      <path d="M ${cx-3} ${y+1} L ${cx-2} ${y+5} L ${cx-1} ${y+1} Z" fill="${WHITE}" stroke="${color}" stroke-width="0.8"/>
-      <path d="M ${cx+1} ${y+1} L ${cx+2} ${y+5} L ${cx+3} ${y+1} Z" fill="${WHITE}" stroke="${color}" stroke-width="0.8"/>
+      <path d="M 56 92 Q 46 130 44 170 L 60 172 L 66 96 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+      <path d="M 144 92 Q 154 130 156 170 L 140 172 L 134 96 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+    `;
+  }
+  if (style === "bob") {
+    return `
+      <path d="M 58 96 Q 55 128 62 138 L 70 138 L 70 96 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+      <path d="M 142 96 Q 145 128 138 138 L 130 138 L 130 96 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+    `;
+  }
+  if (style === "pigtails") {
+    return `
+      <ellipse cx="50" cy="130" rx="14" ry="22" fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+      <ellipse cx="150" cy="130" rx="14" ry="22" fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+      <ellipse cx="50" cy="128" rx="6" ry="4" fill="${cd}"/>
+      <ellipse cx="150" cy="128" rx="6" ry="4" fill="${cd}"/>
+    `;
+  }
+  return "";
+}
+
+function drawHairFront(style, hairColor) {
+  const c = hairColor;
+  const cd = shade(c, 0.7);
+  const cl = tint(c, 0.25);
+  if (style === "bald") return "";
+
+  // Every front-hair wraps the top of the head down to eyebrow height, with bangs.
+  if (style === "short") {
+    return `
+      <path d="M 60 92
+               Q 56 60 76 52
+               Q 100 44 124 52
+               Q 144 60 140 92
+               L 138 96
+               Q 130 82 100 82
+               Q 70 82 62 96 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <!-- side-sweep bang -->
+      <path d="M 68 76 Q 100 92 132 76" fill="none" stroke="${cd}" stroke-width="1.6"/>
+      <path d="M 78 60 Q 100 58 116 62" fill="none" stroke="${cl}" stroke-width="1.4" opacity="0.8"/>
+    `;
+  }
+  if (style === "bob") {
+    return `
+      <path d="M 58 96
+               Q 54 56 100 50
+               Q 146 56 142 96
+               L 140 108
+               Q 132 90 100 88
+               Q 68 90 60 108 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <path d="M 68 82 Q 100 96 132 82" fill="none" stroke="${cd}" stroke-width="1.4"/>
+      <path d="M 78 60 Q 100 56 122 60" fill="none" stroke="${cl}" stroke-width="1.4" opacity="0.7"/>
+    `;
+  }
+  if (style === "long") {
+    return `
+      <path d="M 58 94
+               Q 54 54 100 48
+               Q 146 54 142 94
+               L 140 106
+               Q 132 88 100 86
+               Q 68 88 60 106 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <path d="M 70 82 Q 100 96 130 82" fill="none" stroke="${cd}" stroke-width="1.6"/>
+      <!-- side wisps -->
+      <path d="M 62 86 Q 56 108 62 130" fill="none" stroke="${cd}" stroke-width="1.4"/>
+      <path d="M 138 86 Q 144 108 138 130" fill="none" stroke="${cd}" stroke-width="1.4"/>
+    `;
+  }
+  if (style === "curly") {
+    // puff cloud that hugs the top + sides of head, comes down to just above eyebrows
+    const puffs = [[64,78,13],[76,60,13],[92,52,13],[108,52,13],[124,60,13],[136,78,13],[58,94,10],[142,94,10]];
+    let s = "";
+    for (const [x,y,r] of puffs) s += `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="${INK}" stroke-width="1.4"/>`;
+    // small forehead puffs to soften hairline (no straight line)
+    s += `<circle cx="82" cy="86" r="8" fill="${c}" stroke="${INK}" stroke-width="1.2"/>`;
+    s += `<circle cx="100" cy="82" r="9" fill="${c}" stroke="${INK}" stroke-width="1.2"/>`;
+    s += `<circle cx="118" cy="86" r="8" fill="${c}" stroke="${INK}" stroke-width="1.2"/>`;
+    // highlights
+    s += `<circle cx="86" cy="56" r="3" fill="${cl}"/>`;
+    s += `<circle cx="118" cy="56" r="3" fill="${cl}"/>`;
+    return s;
+  }
+  if (style === "bun") {
+    return `
+      <!-- bun on top -->
+      <circle cx="100" cy="34" r="14" fill="${c}" stroke="${INK}" stroke-width="1.4"/>
+      <circle cx="96" cy="30" r="3" fill="${cl}"/>
+      <!-- pulled-back hair covering top of head -->
+      <path d="M 60 94
+               Q 56 60 100 50
+               Q 144 60 140 94
+               L 138 100
+               Q 130 82 100 80
+               Q 70 82 62 100 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <!-- tie -->
+      <rect x="93" y="44" width="14" height="4" rx="1.5" fill="${cd}" stroke="${INK}" stroke-width="1"/>
+    `;
+  }
+  if (style === "pigtails") {
+    return `
+      <path d="M 60 94
+               Q 56 58 100 50
+               Q 144 58 140 94
+               L 138 100
+               Q 130 84 100 82
+               Q 70 84 62 100 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <!-- part -->
+      <line x1="100" y1="52" x2="100" y2="82" stroke="${cd}" stroke-width="1.2"/>
+      <path d="M 78 66 Q 90 78 100 82" fill="none" stroke="${cl}" stroke-width="1.2"/>
+      <path d="M 122 66 Q 110 78 100 82" fill="none" stroke="${cl}" stroke-width="1.2"/>
+    `;
+  }
+  if (style === "mohawk") {
+    return `
+      <!-- shaved sides visible as skin -->
+      <path d="M 60 96 Q 60 82 74 78 L 74 100 Z" fill="${cd}" stroke="${INK}" stroke-width="1.2"/>
+      <path d="M 140 96 Q 140 82 126 78 L 126 100 Z" fill="${cd}" stroke="${INK}" stroke-width="1.2"/>
+      <!-- center strip -->
+      <path d="M 84 88 Q 90 32 96 62 Q 100 24 104 62 Q 110 32 116 88 Z"
+        fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <path d="M 90 62 Q 100 52 110 62" fill="none" stroke="${cl}" stroke-width="1.2"/>
+    `;
+  }
+  return "";
+}
+
+/* =========================================================
+   FACE FEATURES
+   ========================================================= */
+function drawBrows(style, hairColor) {
+  const c = shade(hairColor || "#3a2418", 0.75);
+  const y = FACE.browY;
+  const L = 82, R = 118;
+  if (style === "natural")
+    return `
+      <path d="M ${L-9} ${y+1} Q ${L} ${y-3} ${L+9} ${y+1}" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M ${R-9} ${y+1} Q ${R} ${y-3} ${R+9} ${y+1}" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/>
+    `;
+  if (style === "arched")
+    return `
+      <path d="M ${L-9} ${y+3} Q ${L-2} ${y-6} ${L+9} ${y+1}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M ${R-9} ${y+1} Q ${R+2} ${y-6} ${R+9} ${y+3}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/>
+    `;
+  if (style === "thin")
+    return `
+      <path d="M ${L-8} ${y+1} Q ${L} ${y-1} ${L+8} ${y+1}" fill="none" stroke="${c}" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M ${R-8} ${y+1} Q ${R} ${y-1} ${R+8} ${y+1}" fill="none" stroke="${c}" stroke-width="1.2" stroke-linecap="round"/>
+    `;
+  if (style === "bold")
+    return `
+      <path d="M ${L-10} ${y+1} Q ${L} ${y-4} ${L+10} ${y+1}" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round"/>
+      <path d="M ${R-10} ${y+1} Q ${R} ${y-4} ${R+10} ${y+1}" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round"/>
     `;
   return "";
 }
-function blush(cx, y, tint = "#ff8ab0") {
+
+function drawEyes(style, iris = "#4a2a18") {
+  const y = FACE.eyeY;
+  const L = 82, R = 118;
+  if (style === "closed")
+    return `
+      <path d="M ${L-8} ${y} Q ${L} ${y+5} ${L+8} ${y}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M ${R-8} ${y} Q ${R} ${y+5} ${R+8} ${y}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>
+    `;
+  if (style === "wink")
+    return `
+      ${drawSingleEye(L, y, iris)}
+      <path d="M ${R-8} ${y+1} Q ${R} ${y-4} ${R+8} ${y+1}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>
+    `;
+  if (style === "sparkle")
+    return `${drawSingleEye(L, y, iris, true)}${drawSingleEye(R, y, iris, true)}`;
+  if (style === "sleepy") {
+    const irisD = shade(iris, 0.6);
+    return `
+      <path d="M ${L-9} ${y-2} Q ${L} ${y+3} ${L+9} ${y-2}" fill="${WHITE}" stroke="${INK}" stroke-width="1.6"/>
+      <path d="M ${R-9} ${y-2} Q ${R} ${y+3} ${R+9} ${y-2}" fill="${WHITE}" stroke="${INK}" stroke-width="1.6"/>
+      <ellipse cx="${L}" cy="${y+1}" rx="4" ry="2" fill="${iris}"/>
+      <ellipse cx="${R}" cy="${y+1}" rx="4" ry="2" fill="${iris}"/>
+      <ellipse cx="${L}" cy="${y+1}" rx="1.6" ry="1" fill="#0a0018"/>
+      <ellipse cx="${R}" cy="${y+1}" rx="1.6" ry="1" fill="#0a0018"/>
+    `;
+  }
+  return `${drawSingleEye(L, y, iris)}${drawSingleEye(R, y, iris)}`;
+}
+function drawSingleEye(cx, cy, iris, big = false) {
+  const rx = big ? 10 : 8.5;
+  const ry = big ? 12 : 11;
+  const ir = big ? 6 : 5.5;
+  const pr = big ? 3 : 2.6;
+  const irisD = shade(iris, 0.6);
+  const irisL = tint(iris, 0.35);
+  const id = `iris_${ctxId()}`;
   return `
-    <ellipse cx="${cx-22}" cy="${y}" rx="7" ry="3.5" fill="${tint}" opacity="0.75"/>
-    <ellipse cx="${cx+22}" cy="${y}" rx="7" ry="3.5" fill="${tint}" opacity="0.75"/>
+    <defs>
+      <radialGradient id="${id}" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="${irisL}"/>
+        <stop offset="0.7" stop-color="${iris}"/>
+        <stop offset="1" stop-color="${irisD}"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${WHITE}" stroke="${INK}" stroke-width="1.6"/>
+    <ellipse cx="${cx}" cy="${cy+1}" rx="${ir}" ry="${ir+0.5}" fill="url(#${id})"/>
+    <ellipse cx="${cx}" cy="${cy+1}" rx="${pr}" ry="${pr+0.4}" fill="#0a0018"/>
+    <circle cx="${cx-2.6}" cy="${cy-3}" r="${big?3:2.4}" fill="${WHITE}"/>
+    <circle cx="${cx+3}" cy="${cy+4}" r="${big?1.4:1.1}" fill="${WHITE}"/>
+    <!-- upper lash -->
+    <path d="M ${cx-rx-0.5} ${cy-ry+2} Q ${cx} ${cy-ry-1.5} ${cx+rx+0.5} ${cy-ry+2}" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/>
   `;
 }
-function sparkle(x, y, r = 4, color = BRAND.cyan) {
-  return `<path d="M ${x} ${y-r} L ${x+r*0.35} ${y-r*0.35} L ${x+r} ${y} L ${x+r*0.35} ${y+r*0.35} L ${x} ${y+r} L ${x-r*0.35} ${y+r*0.35} L ${x-r} ${y} L ${x-r*0.35} ${y-r*0.35} Z" fill="${color}"/>`;
+
+function drawMouth(style, lipTint) {
+  const cx = 100, cy = FACE.mouthY;
+  if (style === "smile")
+    return `<path d="M ${cx-8} ${cy} Q ${cx} ${cy+8} ${cx+8} ${cy}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+  if (style === "openSmile")
+    return `
+      <path d="M ${cx-9} ${cy-1} Q ${cx} ${cy+10} ${cx+9} ${cy-1} Q ${cx} ${cy+3} ${cx-9} ${cy-1} Z" fill="#c94a5a" stroke="${INK}" stroke-width="1.4"/>
+      <path d="M ${cx-6} ${cy} L ${cx+6} ${cy}" stroke="${WHITE}" stroke-width="2.4"/>
+    `;
+  if (style === "smirk")
+    return `<path d="M ${cx-7} ${cy+2} Q ${cx+2} ${cy+5} ${cx+8} ${cy-2}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+  if (style === "cat")
+    return `<path d="M ${cx-6} ${cy-1} Q ${cx-3} ${cy+3} ${cx} ${cy} Q ${cx+3} ${cy+3} ${cx+6} ${cy-1}" fill="none" stroke="${INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+  if (style === "dot")
+    return `<circle cx="${cx}" cy="${cy+2}" r="1.6" fill="${INK}"/>`;
+  if (style === "fangs")
+    return `
+      <path d="M ${cx-8} ${cy} Q ${cx} ${cy+7} ${cx+8} ${cy}" fill="#4a0018" stroke="${INK}" stroke-width="1.4"/>
+      <path d="M ${cx-4} ${cy+1} L ${cx-3} ${cy+6} L ${cx-2} ${cy+1} Z" fill="${WHITE}" stroke="${INK}" stroke-width="0.6"/>
+      <path d="M ${cx+2} ${cy+1} L ${cx+3} ${cy+6} L ${cx+4} ${cy+1} Z" fill="${WHITE}" stroke="${INK}" stroke-width="0.6"/>
+    `;
+  if (style === "lipstick") {
+    const lip = lipTint || BRAND.magenta;
+    return `
+      <path d="M ${cx-9} ${cy-1} Q ${cx} ${cy-4} ${cx+9} ${cy-1} Q ${cx} ${cy+7} ${cx-9} ${cy-1} Z" fill="${lip}" stroke="${INK}" stroke-width="1"/>
+      <path d="M ${cx-4} ${cy+2} Q ${cx} ${cy+4} ${cx+4} ${cy+2}" fill="none" stroke="${tint(lip, 0.4)}" stroke-width="1.2"/>
+    `;
+  }
+  return "";
 }
-function chibiHead(cx, cy, rx, ry, skin, stroke = INK) {
-  return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${skin}" stroke="${stroke}" stroke-width="1.6"/>`;
-}
-function chibiEars(cx, cy, rx, ry, skin) {
+
+function drawBlush() {
   return `
-    <ellipse cx="${cx - rx - 2}" cy="${cy}" rx="5" ry="8" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
-    <ellipse cx="${cx + rx + 2}" cy="${cy}" rx="5" ry="8" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
-  `;
-}
-function chibiBody(cx, y, w, h, color, colorDark) {
-  return `
-    <path d="M ${cx - w/2} ${y}
-             Q ${cx - w/2 - 6} ${y + h*0.4} ${cx - w/2 - 4} ${y + h}
-             L ${cx + w/2 + 4} ${y + h}
-             Q ${cx + w/2 + 6} ${y + h*0.4} ${cx + w/2} ${y}
-             Z" fill="${color}" stroke="${INK}" stroke-width="1.6"/>
-    <path d="M ${cx - w/2} ${y} Q ${cx} ${y + 6} ${cx + w/2} ${y}" fill="none" stroke="${colorDark}" stroke-width="1.2"/>
-  `;
-}
-function chibiArms(cx, y, w, skin) {
-  return `
-    <ellipse cx="${cx - w/2 - 4}" cy="${y + 14}" rx="6" ry="7" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
-    <ellipse cx="${cx + w/2 + 4}" cy="${y + 14}" rx="6" ry="7" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
+    <ellipse cx="76" cy="115" rx="7.5" ry="4" fill="#ff8ab0" opacity="0.55"/>
+    <ellipse cx="124" cy="115" rx="7.5" ry="4" fill="#ff8ab0" opacity="0.55"/>
   `;
 }
 
 /* =========================================================
-   PRESET AVATARS — 8 cute characters
-   Each returns SVG innerHTML for a 200x200 viewBox
+   HATS + ACCESSORIES
+   ========================================================= */
+function drawHat(style) {
+  if (style === "none") return "";
+  if (style === "cap") return `
+    <path d="M 60 60 Q 60 40 100 38 Q 140 40 140 60 Q 140 68 140 70 Q 100 62 60 70 Q 60 68 60 60 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 140 66 Q 172 70 172 76 Q 172 78 162 78 Q 140 74 140 72 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>
+    <rect x="90" y="48" width="20" height="10" rx="2" fill="${WHITE}" stroke="${INK}" stroke-width="0.8"/>
+    <text x="100" y="55" text-anchor="middle" font-family="Mulish" font-weight="800" font-size="6" fill="${INK}">GRC</text>
+  `;
+  if (style === "witchHat") return `
+    <ellipse cx="100" cy="60" rx="52" ry="6" fill="#141026" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 76 60 Q 100 -2 124 60 Z" fill="#141026" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 82 54 Q 100 56 118 54 L 120 58 Q 100 60 80 58 Z" fill="${BRAND.magenta}"/>
+    <rect x="96" y="52" width="8" height="8" rx="1" fill="${BRAND.orange}" stroke="${INK}" stroke-width="0.8"/>
+  `;
+  if (style === "beanie") return `
+    <path d="M 60 78 Q 60 42 100 40 Q 140 42 140 78 Q 100 72 60 78 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 60 78 Q 100 82 140 78 L 140 86 Q 100 90 60 86 Z" fill="${shade(BRAND.magenta, 0.7)}" stroke="${INK}" stroke-width="1.2"/>
+    <circle cx="100" cy="32" r="6" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.2"/>
+  `;
+  if (style === "cowboyHat") return `
+    <path d="M 36 68 Q 100 54 164 68 Q 168 74 158 76 Q 100 68 42 76 Q 32 74 36 68 Z" fill="#6a4020" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 68 68 Q 62 42 100 40 Q 138 42 132 68 Q 100 60 68 68 Z" fill="#8a5a30" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 78 68 Q 100 62 122 68" fill="none" stroke="#5a3018" stroke-width="1.2"/>
+    <rect x="94" y="60" width="12" height="6" rx="1" fill="${BRAND.orange}" stroke="${INK}" stroke-width="0.8"/>
+  `;
+  if (style === "ninjaBand") return `
+    <path d="M 58 92 Q 60 84 74 82 L 126 82 Q 140 84 142 92 L 142 98 Q 100 92 58 98 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>
+    <rect x="96" y="86" width="8" height="8" rx="1" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="0.8"/>
+    <text x="100" y="92" text-anchor="middle" font-family="Mulish" font-weight="900" font-size="5" fill="${INK}">II</text>
+    <!-- tail -->
+    <path d="M 58 92 Q 44 100 40 114 L 44 118 L 50 100 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.2"/>
+  `;
+  if (style === "hoodUp") return `
+    <!-- hood over head + shoulders -->
+    <path d="M 46 130 Q 40 90 68 62 Q 100 40 132 62 Q 160 90 154 130 L 148 138 Q 140 96 100 84 Q 60 96 52 138 Z"
+      fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.6"/>
+    <!-- hood inner shadow -->
+    <path d="M 62 96 Q 60 76 100 74 Q 140 76 138 96" fill="none" stroke="${BRAND.navy}" stroke-width="1.4"/>
+    <!-- drawstrings -->
+    <path d="M 92 132 Q 92 144 88 156" fill="none" stroke="${INK}" stroke-width="1"/>
+    <path d="M 108 132 Q 108 144 112 156" fill="none" stroke="${INK}" stroke-width="1"/>
+  `;
+  if (style === "detective") return `
+    <!-- fedora -->
+    <ellipse cx="100" cy="68" rx="50" ry="6" fill="#3a2418" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 68 68 Q 68 44 100 42 Q 132 44 132 68 Q 100 60 68 68 Z" fill="#5a3418" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 68 62 Q 100 56 132 62" fill="none" stroke="${INK}" stroke-width="1.2"/>
+    <path d="M 70 66 L 130 66" stroke="${BRAND.magenta}" stroke-width="2"/>
+  `;
+  if (style === "crown") return `
+    <path d="M 60 58 Q 60 46 100 44 Q 140 46 140 58 L 140 62 Q 100 56 60 62 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 60 46 Q 68 26 74 44 Q 84 16 90 44 Q 100 8 110 44 Q 118 16 126 44 Q 132 26 140 46 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>
+    <circle cx="100" cy="26" r="3" fill="${BRAND.magenta}"/>
+    <circle cx="78" cy="30" r="2.5" fill="${BRAND.cyan}"/>
+    <circle cx="122" cy="30" r="2.5" fill="${BRAND.cyan}"/>
+  `;
+  if (style === "halo") return `
+    <ellipse cx="100" cy="36" rx="30" ry="5" fill="none" stroke="${BRAND.cyan}" stroke-width="3"/>
+    <ellipse cx="100" cy="36" rx="30" ry="5" fill="none" stroke="${WHITE}" stroke-width="1"/>
+  `;
+  return "";
+}
+
+/* Extras drawn as decorative overlays (cape, shield, ninja mask, etc.) */
+function extraCape(color) {
+  const cd = shade(color, 0.7);
+  return `<path d="M 46 156 Q 100 148 154 156 Q 172 200 150 200 L 50 200 Q 28 200 46 156 Z" fill="${color}" stroke="${INK}" stroke-width="1.6" opacity="0.95"/>
+          <path d="M 60 158 Q 100 170 140 158" fill="none" stroke="${cd}" stroke-width="1.4"/>`;
+}
+function extraShield() {
+  // small badge on chest
+  return `<path d="M 100 168 L 88 172 L 88 184 Q 88 194 100 198 Q 112 194 112 184 L 112 172 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.4"/>
+          <path d="M 92 184 L 98 190 L 108 178" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round"/>`;
+}
+function extraNinjaMask() {
+  // wrap across lower half of face (below eyes)
+  return `<path d="M 58 108 Q 60 106 66 106 L 134 106 Q 140 106 142 108 L 142 130 Q 140 148 100 148 Q 60 148 58 130 Z"
+    fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.6"/>
+    <path d="M 68 118 Q 100 112 132 118" fill="none" stroke="${BRAND.magenta}" stroke-width="1.4"/>
+    <!-- side tie -->
+    <path d="M 58 118 Q 40 122 36 132 L 42 132 L 52 124 Z" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.2"/>`;
+}
+function extraClipboard() {
+  return `<rect x="140" y="150" width="26" height="34" rx="2" fill="${WHITE}" stroke="${INK}" stroke-width="1.4"/>
+    <rect x="148" y="146" width="10" height="6" rx="1" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1"/>
+    <line x1="144" y1="160" x2="162" y2="160" stroke="${INK}" stroke-width="0.8"/>
+    <line x1="144" y1="166" x2="162" y2="166" stroke="${INK}" stroke-width="0.8"/>
+    <line x1="144" y1="172" x2="158" y2="172" stroke="${INK}" stroke-width="0.8"/>
+    <path d="M 146 178 L 149 181 L 156 174" fill="none" stroke="${BRAND.cyan}" stroke-width="1.6" stroke-linecap="round"/>`;
+}
+function extraLock() {
+  // padlock chest badge
+  return `<rect x="90" y="172" width="20" height="16" rx="2" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>
+    <path d="M 94 172 L 94 168 Q 94 162 100 162 Q 106 162 106 168 L 106 172" fill="none" stroke="${INK}" stroke-width="1.6"/>
+    <circle cx="100" cy="180" r="2" fill="${INK}"/>`;
+}
+function extraScroll() {
+  return `<rect x="30" y="150" width="36" height="30" rx="2" fill="${BRAND.cream}" stroke="${INK}" stroke-width="1.4"/>
+    <circle cx="30" cy="165" r="4" fill="${BRAND.cream}" stroke="${INK}" stroke-width="1.4"/>
+    <circle cx="66" cy="165" r="4" fill="${BRAND.cream}" stroke="${INK}" stroke-width="1.4"/>
+    <line x1="34" y1="160" x2="62" y2="160" stroke="${INK}" stroke-width="0.7"/>
+    <line x1="34" y1="166" x2="62" y2="166" stroke="${INK}" stroke-width="0.7"/>
+    <line x1="34" y1="172" x2="56" y2="172" stroke="${INK}" stroke-width="0.7"/>`;
+}
+function extraCodeBrackets() {
+  return `<text x="34" y="180" font-family="Menlo, monospace" font-weight="900" font-size="22" fill="${BRAND.cyan}" opacity="0.85">&lt;/&gt;</text>`;
+}
+function extraDice() {
+  return `<rect x="34" y="160" width="22" height="22" rx="3" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4" transform="rotate(-12 45 171)"/>
+    <circle cx="41" cy="167" r="1.4" fill="${WHITE}" transform="rotate(-12 45 171)"/>
+    <circle cx="49" cy="171" r="1.4" fill="${WHITE}" transform="rotate(-12 45 171)"/>
+    <circle cx="41" cy="175" r="1.4" fill="${WHITE}" transform="rotate(-12 45 171)"/>
+    <circle cx="49" cy="167" r="1.4" fill="${WHITE}" transform="rotate(-12 45 171)"/>
+    <circle cx="41" cy="171" r="1.4" fill="${WHITE}" transform="rotate(-12 45 171)"/>`;
+}
+
+function drawAcc(style) {
+  if (style === "none") return "";
+  if (style === "glasses") return `
+    <circle cx="82" cy="100" r="13" fill="none" stroke="${INK}" stroke-width="1.6"/>
+    <circle cx="118" cy="100" r="13" fill="none" stroke="${INK}" stroke-width="1.6"/>
+    <line x1="95" y1="100" x2="105" y2="100" stroke="${INK}" stroke-width="1.6"/>
+    <circle cx="82" cy="100" r="13" fill="none" stroke="${BRAND.magenta}" stroke-width="0.8"/>
+    <circle cx="118" cy="100" r="13" fill="none" stroke="${BRAND.magenta}" stroke-width="0.8"/>
+  `;
+  if (style === "hoops") return `
+    <circle cx="55" cy="112" r="5" fill="none" stroke="${BRAND.orange}" stroke-width="1.8"/>
+    <circle cx="145" cy="112" r="5" fill="none" stroke="${BRAND.orange}" stroke-width="1.8"/>
+  `;
+  if (style === "studs") return `
+    <circle cx="56" cy="108" r="1.6" fill="${BRAND.orange}" stroke="${INK}" stroke-width="0.6"/>
+    <circle cx="144" cy="108" r="1.6" fill="${BRAND.orange}" stroke="${INK}" stroke-width="0.6"/>
+  `;
+  if (style === "choker") return `
+    <path d="M 82 148 Q 100 152 118 148 L 118 152 Q 100 156 82 152 Z" fill="${INK}"/>
+    <circle cx="100" cy="152" r="2" fill="${BRAND.magenta}"/>
+  `;
+  if (style === "freckles") {
+    const dots = [[88,112],[94,114],[100,111],[106,114],[112,112],[90,118],[110,118]];
+    let s = "";
+    for (const [x,y] of dots) s += `<circle cx="${x}" cy="${y}" r="0.9" fill="#8a5a3a"/>`;
+    return s;
+  }
+  return "";
+}
+
+/* =========================================================
+   FULL HUMAN CHARACTER — cohesive silhouette
+   ========================================================= */
+function drawHuman(opts) {
+  const {
+    skin = "#f6d3b0",
+    faceShape = "round",
+    outfitColor = BRAND.cyan,
+    hair = "bob",
+    hairColor = "#4a2a18",
+    eyes = "normal",
+    brows = "natural",
+    nose = "small",
+    mouth = "smile",
+    hat = "none",
+    accessory = "none",
+    iris = "#4a2a18",
+    lipTint = null,
+    extras = "",
+  } = opts;
+
+  let s = "";
+  s += drawHairBack(hair, hairColor);
+  s += drawTorso(outfitColor);
+  s += drawNeck(skin);
+  s += drawHeadAndEars(skin, faceShape);
+  s += drawHairFront(hair, hairColor);
+  s += drawBrows(brows, hairColor);
+  s += drawEyes(eyes, iris);
+  s += drawNose(nose, skin);
+  s += drawBlush();
+  s += drawMouth(mouth, lipTint);
+  s += drawAcc(accessory);
+  s += drawHat(hat);
+  s += extras;
+  return s;
+}
+
+/* =========================================================
+   PRESET AVATARS
    ========================================================= */
 const PRESETS = {
   ana: {
-    name: "Ana",
-    tag: "The Analyst",
-    render: () => {
-      const skin = "#f6d3b0";
-      let s = "";
-      // body: orange tee
-      s += chibiBody(100, 148, 62, 46, BRAND.orange, BRAND.orangeDeep);
-      s += chibiArms(100, 148, 62, skin);
-      // shirt collar detail
-      s += `<path d="M 92 148 Q 100 156 108 148" fill="none" stroke="${BRAND.orangeDeep}" stroke-width="1.6"/>`;
-      // head
-      s += chibiEars(100, 96, 40, 44, skin);
-      s += chibiHead(100, 90, 40, 44, skin);
-      // hair: cyan bob
-      s += `<path d="M 60 92 Q 55 40 100 34 Q 145 40 140 92 Q 140 108 135 110 L 135 78 Q 100 66 65 78 L 65 110 Q 60 108 60 92 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.6"/>`;
-      s += `<path d="M 74 56 Q 100 72 126 56" fill="none" stroke="#008a95" stroke-width="1.6"/>`;
-      // eyes with cyan iris
-      s += eyes(100, 96, "#1e4a70", "normal");
-      // magenta glasses
-      s += `<circle cx="84" cy="96" r="12" fill="none" stroke="${BRAND.magenta}" stroke-width="1.6"/>`;
-      s += `<circle cx="116" cy="96" r="12" fill="none" stroke="${BRAND.magenta}" stroke-width="1.6"/>`;
-      s += `<line x1="96" y1="96" x2="104" y2="96" stroke="${BRAND.magenta}" stroke-width="1.6"/>`;
-      // blush
-      s += blush(100, 110);
-      // smile
-      s += mouth(100, 118, "smile");
-      return s;
-    },
+    name: "The Auditor", tag: "",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#f6d3b0",
+      hair: "bob", hairColor: BRAND.cyan,
+      iris: "#1e4a70", brows: "natural",
+      mouth: "smile",
+      outfitColor: BRAND.orange,
+      accessory: "glasses",
+      extras: extraClipboard(),
+    }),
   },
-  sunny: {
-    name: "Sunny",
-    tag: "The Cheerful One",
-    render: () => {
-      const skin = "#e9b58c";
-      let s = "";
-      s += chibiBody(100, 148, 62, 46, BRAND.magenta, BRAND.magentaDeep);
-      s += chibiArms(100, 148, 62, skin);
-      s += chibiEars(100, 96, 40, 44, skin);
-      s += chibiHead(100, 90, 40, 44, skin);
-      // orange curly hair
-      const puffs = [[64,60,16],[80,44,16],[100,38,17],[120,44,16],[136,60,16],[56,80,13],[144,80,13]];
-      for (const [x,y,r] of puffs) s += `<circle cx="${x}" cy="${y}" r="${r}" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="80" cy="46" r="4" fill="#ffcf8f"/>`;
-      s += `<circle cx="120" cy="46" r="4" fill="#ffcf8f"/>`;
-      s += eyes(100, 96, "#4a2a18", "sparkle");
-      s += blush(100, 110, "#ff6a90");
-      s += mouth(100, 118, "openSmile");
-      // hoop earrings
-      s += `<circle cx="58" cy="102" r="4" fill="none" stroke="${BRAND.orange}" stroke-width="1.6"/>`;
-      s += `<circle cx="142" cy="102" r="4" fill="none" stroke="${BRAND.orange}" stroke-width="1.6"/>`;
-      return s;
-    },
+  cassie: {
+    name: "The Compliance Champ", tag: "",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#e9b58c",
+      hair: "long", hairColor: "#e8c860",
+      iris: "#3a7ac4", brows: "arched",
+      mouth: "openSmile",
+      outfitColor: BRAND.cyan,
+      accessory: "hoops",
+      extras: extraCape(BRAND.magenta) + extraShield(),
+    }),
   },
-  nova: {
-    name: "Nova",
-    tag: "The Night Owl",
-    render: () => {
-      const skin = "#efd8c1";
-      let s = "";
-      s += chibiBody(100, 148, 62, 46, "#1a1024", "#0a0018");
-      s += chibiArms(100, 148, 62, skin);
-      // cyan trim on shirt
-      s += `<path d="M 78 156 Q 100 162 122 156" fill="none" stroke="${BRAND.cyan}" stroke-width="2"/>`;
-      s += chibiEars(100, 96, 40, 44, skin);
-      s += chibiHead(100, 90, 40, 44, skin);
-      // dark hair with cyan streak
-      s += `<path d="M 58 90 Q 54 40 100 34 Q 146 40 142 90 L 142 118 Q 130 122 128 116 L 128 78 Q 100 68 72 78 L 72 116 Q 70 122 58 118 Z" fill="#141026" stroke="${INK}" stroke-width="1.6"/>`;
-      // streak
-      s += `<path d="M 70 60 Q 75 80 78 100" fill="none" stroke="${BRAND.cyan}" stroke-width="4" stroke-linecap="round"/>`;
-      s += eyes(100, 96, "#c8a8ec", "normal");
-      // subtle eyeliner
-      s += `<path d="M 74 90 Q 82 88 92 90" fill="none" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<path d="M 108 90 Q 118 88 126 90" fill="none" stroke="${INK}" stroke-width="1.4"/>`;
-      s += blush(100, 110, "#c8a8ec");
-      s += mouth(100, 118, "smirk", "#7a1a5a");
-      return s;
-    },
+  ryan: {
+    name: "The Risk Ranger", tag: "",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#c99168",
+      hair: "short", hairColor: "#4a2a18",
+      iris: "#4a2a18", brows: "bold",
+      mouth: "smirk",
+      outfitColor: BRAND.orange,
+      hat: "cowboyHat",
+      accessory: "none",
+      extras: extraDice(),
+    }),
   },
-  vlad: {
-    name: "Vlad",
-    tag: "Little Vampire",
-    render: () => {
-      const skin = "#e8d0d8";
-      let s = "";
-      s += chibiBody(100, 148, 62, 46, "#1a1024", "#0a0018");
-      // magenta bat wing collar
-      s += `<path d="M 76 148 L 68 138 L 78 146 L 88 138 L 90 148 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<path d="M 124 148 L 132 138 L 122 146 L 112 138 L 110 148 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += chibiArms(100, 148, 62, skin);
-      s += chibiEars(100, 96, 40, 44, skin);
-      s += chibiHead(100, 90, 40, 44, skin);
-      // widow's peak dark hair
-      s += `<path d="M 62 82 Q 60 42 100 36 Q 140 42 138 82 L 136 90 Q 128 76 100 82 Q 72 76 64 90 Z" fill="#141026" stroke="${INK}" stroke-width="1.6"/>`;
-      s += `<path d="M 96 40 L 100 56 L 104 40 Z" fill="#141026"/>`;
-      s += eyes(100, 96, BRAND.magenta, "normal");
-      s += blush(100, 110, "#ff8ac4");
-      s += mouth(100, 118, "fangs", "#7a1a5a");
-      // cape edge
-      s += `<path d="M 100 130 L 68 138 L 100 148 L 132 138 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4" opacity="0.6"/>`;
-      return s;
-    },
+  sam: {
+    name: "The SOC 2 Ninja", tag: "",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#efd8c1",
+      hair: "bald", hairColor: "#141026",
+      iris: BRAND.cyan, brows: "bold",
+      mouth: "smirk",
+      outfitColor: BRAND.navy2,
+      hat: "ninjaBand",
+      accessory: "none",
+      extras: extraNinjaMask(),
+    }),
   },
-  boo: {
-    name: "Boo",
-    tag: "The Friendly Ghost",
-    render: () => {
-      let s = "";
-      // floating ghost body
-      s += `<path d="M 60 130
-                    Q 55 130 55 120
-                    L 55 80
-                    Q 55 30 100 30
-                    Q 145 30 145 80
-                    L 145 120
-                    Q 145 130 140 130
-                    Q 132 120 124 130
-                    Q 116 120 108 130
-                    Q 100 120 92 130
-                    Q 84 120 76 130
-                    Q 68 120 60 130 Z"
-              fill="${WHITE}" stroke="${INK}" stroke-width="1.8"/>`;
-      // cyan blush
-      s += blush(100, 96, BRAND.cyan);
-      // eyes
-      s += eyes(100, 84, "#0a0018", "sparkle");
-      // little smile
-      s += mouth(100, 104, "smile", INK);
-      // little arms as wisps
-      s += `<path d="M 55 100 Q 40 106 46 118" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/>`;
-      s += `<path d="M 145 100 Q 160 106 154 118" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/>`;
-      // sparkles
-      s += sparkle(30, 40, 5, BRAND.magenta);
-      s += sparkle(170, 50, 5, BRAND.cyan);
-      s += sparkle(22, 140, 4, BRAND.orange);
-      s += sparkle(178, 140, 4, BRAND.magenta);
-      return s;
-    },
+  devon: {
+    name: "The Pentester", tag: "",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#8a5230",
+      hair: "bald", hairColor: "#141026",
+      iris: BRAND.cyan, brows: "natural",
+      mouth: "smirk",
+      outfitColor: BRAND.navy2,
+      hat: "hoodUp",
+      accessory: "glasses",
+      extras: extraCodeBrackets(),
+    }),
   },
-  jack: {
-    name: "Jack",
-    tag: "Pumpkin Pal",
-    render: () => {
-      let s = "";
-      // pumpkin body
-      s += `<ellipse cx="100" cy="128" rx="52" ry="48" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.8"/>`;
-      // ridges
-      s += `<path d="M 70 90 Q 60 128 70 168" fill="none" stroke="${BRAND.orangeDeep}" stroke-width="1.6"/>`;
-      s += `<path d="M 130 90 Q 140 128 130 168" fill="none" stroke="${BRAND.orangeDeep}" stroke-width="1.6"/>`;
-      s += `<path d="M 100 82 Q 96 128 100 176" fill="none" stroke="${BRAND.orangeDeep}" stroke-width="1.6"/>`;
-      // stem
-      s += `<path d="M 94 82 Q 92 62 100 60 Q 108 62 106 82 Z" fill="#4a6a2a" stroke="${INK}" stroke-width="1.4"/>`;
-      // leaf
-      s += `<path d="M 106 68 Q 122 60 118 76 Q 110 76 106 74 Z" fill="#5aaa4a" stroke="${INK}" stroke-width="1.2"/>`;
-      // triangle jack-o-lantern eyes
-      s += `<path d="M 74 115 L 88 106 L 88 122 Z" fill="${INK}"/>`;
-      s += `<path d="M 126 115 L 112 106 L 112 122 Z" fill="${INK}"/>`;
-      // glowing pupils
-      s += `<circle cx="82" cy="114" r="1.6" fill="${BRAND.cyan}"/>`;
-      s += `<circle cx="118" cy="114" r="1.6" fill="${BRAND.cyan}"/>`;
-      // smile with teeth
-      s += `<path d="M 80 138 Q 100 156 120 138 Q 100 148 80 138 Z" fill="${INK}"/>`;
-      s += `<path d="M 86 140 L 90 148 L 94 140 Z" fill="${BRAND.orange}"/>`;
-      s += `<path d="M 106 140 L 110 148 L 114 140 Z" fill="${BRAND.orange}"/>`;
-      // cheek highlight
-      s += `<ellipse cx="76" cy="130" rx="8" ry="4" fill="${WHITE}" opacity="0.3"/>`;
-      return s;
-    },
+  poppy: {
+    name: "The Policy Wizard", tag: "",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#f0d8b8",
+      hair: "long", hairColor: "#8a2be2",
+      iris: "#4a8a5a", brows: "arched",
+      mouth: "smirk",
+      outfitColor: BRAND.magenta,
+      hat: "witchHat",
+      accessory: "none",
+      extras: extraScroll(),
+    }),
   },
   cyanbot: {
-    name: "Cyan-Bot",
-    tag: "Anecdotes Mascot",
+    name: "The AI Auditor", tag: "",
     render: () => {
-      let s = "";
-      // body — rounded chibi bot torso
-      s += `<path d="M 68 138 Q 60 142 60 156 L 60 176 Q 60 184 68 184 L 132 184 Q 140 184 140 176 L 140 156 Q 140 142 132 138 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.8"/>`;
-      // chest panel
-      s += `<rect x="82" y="152" width="36" height="20" rx="4" fill="${BRAND.navy}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="92" cy="162" r="2" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="100" cy="162" r="2" fill="${BRAND.orange}"/>`;
-      s += `<circle cx="108" cy="162" r="2" fill="${BRAND.cyan}"/>`;
-      // arms
-      s += `<circle cx="52" cy="162" r="8" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.6"/>`;
-      s += `<circle cx="148" cy="162" r="8" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.6"/>`;
-      // head — rounded rectangle
-      s += `<path d="M 68 46 Q 60 46 60 58 L 60 118 Q 60 130 68 130 L 132 130 Q 140 130 140 118 L 140 58 Q 140 46 132 46 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.8"/>`;
-      // screen face plate
-      s += `<rect x="72" y="70" width="56" height="40" rx="8" fill="${BRAND.navy}" stroke="${INK}" stroke-width="1.4"/>`;
-      // eyes (glowing)
-      s += `<circle cx="88" cy="90" r="6" fill="${WHITE}"/>`;
-      s += `<circle cx="112" cy="90" r="6" fill="${WHITE}"/>`;
-      s += `<circle cx="88" cy="90" r="3" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="112" cy="90" r="3" fill="${BRAND.magenta}"/>`;
-      // smile line on screen
-      s += `<path d="M 88 102 Q 100 108 112 102" fill="none" stroke="${BRAND.cyan}" stroke-width="1.6" stroke-linecap="round"/>`;
-      // antenna
-      s += `<line x1="100" y1="46" x2="100" y2="30" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="100" cy="26" r="5" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>`;
-      // side ears
-      s += `<rect x="54" y="80" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="140" y="80" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      let s = avatarBackground(ctxId());
+      s += drawTorso(BRAND.cyan);
+      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.magenta}"/>`;
+      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
+      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.cyan}"/>`;
+      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<path d="M 62 54 Q 54 54 54 66 L 54 122 Q 54 134 62 134 L 138 134 Q 146 134 146 122 L 146 66 Q 146 54 138 54 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.8"/>`;
+      s += `<rect x="70" y="76" width="60" height="42" rx="8" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<circle cx="86" cy="96" r="6" fill="${WHITE}"/>`;
+      s += `<circle cx="114" cy="96" r="6" fill="${WHITE}"/>`;
+      s += `<circle cx="86" cy="96" r="3" fill="${BRAND.magenta}"/>`;
+      s += `<circle cx="114" cy="96" r="3" fill="${BRAND.magenta}"/>`;
+      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
+      s += `<line x1="100" y1="54" x2="100" y2="34" stroke="${INK}" stroke-width="1.8"/>`;
+      s += `<circle cx="100" cy="30" r="5" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<rect x="48" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<rect x="146" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      // audit checkmark badge
+      s += `<circle cx="130" cy="112" r="6" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1"/>`;
+      s += `<path d="M 127 112 L 129 114 L 133 110" fill="none" stroke="${INK}" stroke-width="1.4" stroke-linecap="round"/>`;
       return s;
     },
   },
   magenbot: {
-    name: "Magenta-Bot",
-    tag: "Anecdotes Mascot",
+    name: "The Trust Bot", tag: "",
     render: () => {
-      let s = "";
-      s += `<path d="M 68 138 Q 60 142 60 156 L 60 176 Q 60 184 68 184 L 132 184 Q 140 184 140 176 L 140 156 Q 140 142 132 138 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<rect x="82" y="152" width="36" height="20" rx="4" fill="${BRAND.navy}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="92" cy="162" r="2" fill="${BRAND.cyan}"/>`;
-      s += `<circle cx="100" cy="162" r="2" fill="${BRAND.orange}"/>`;
-      s += `<circle cx="108" cy="162" r="2" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="52" cy="162" r="8" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.6"/>`;
-      s += `<circle cx="148" cy="162" r="8" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.6"/>`;
-      // head - round
-      s += `<circle cx="100" cy="86" r="42" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.8"/>`;
+      let s = avatarBackground(ctxId());
+      s += drawTorso(BRAND.magenta);
+      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.cyan}"/>`;
+      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
+      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.magenta}"/>`;
+      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<circle cx="100" cy="92" r="44" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.8"/>`;
+      s += `<circle cx="100" cy="96" r="30" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<path d="M 82 88 L 86 84 L 90 88 L 86 96 Z" fill="${BRAND.cyan}"/>`;
+      s += `<path d="M 110 88 L 114 84 L 118 88 L 114 96 Z" fill="${BRAND.cyan}"/>`;
+      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
+      s += `<path d="M 100 48 Q 108 38 116 44" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
+      s += `<circle cx="116" cy="44" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<rect x="52" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<rect x="142" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      // lock badge for trust
+      s += extraLock();
+      return s;
+    },
+  },
+  cyanbot: {
+    name: "Cyan-Bot", tag: "Anecdotes Mascot",
+    render: () => {
+      let s = avatarBackground(ctxId());
+      // torso as cyan panel
+      s += drawTorso(BRAND.cyan);
+      // chest badge
+      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.magenta}"/>`;
+      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
+      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.cyan}"/>`;
+      // neck (small cyan strip)
+      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.4"/>`;
+      // head (rounded rect)
+      s += `<path d="M 62 54 Q 54 54 54 66 L 54 122 Q 54 134 62 134 L 138 134 Q 146 134 146 122 L 146 66 Q 146 54 138 54 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.8"/>`;
       // screen face
-      s += `<circle cx="100" cy="90" r="28" fill="${BRAND.navy}" stroke="${INK}" stroke-width="1.4"/>`;
-      // heart eyes
-      s += `<path d="M 84 82 L 88 78 L 92 82 L 88 90 Z" fill="${BRAND.cyan}"/>`;
-      s += `<path d="M 108 82 L 112 78 L 116 82 L 112 90 Z" fill="${BRAND.cyan}"/>`;
+      s += `<rect x="70" y="76" width="60" height="42" rx="8" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      // eyes
+      s += `<circle cx="86" cy="96" r="6" fill="${WHITE}"/>`;
+      s += `<circle cx="114" cy="96" r="6" fill="${WHITE}"/>`;
+      s += `<circle cx="86" cy="96" r="3" fill="${BRAND.magenta}"/>`;
+      s += `<circle cx="114" cy="96" r="3" fill="${BRAND.magenta}"/>`;
       // smile
-      s += `<path d="M 88 100 Q 100 108 112 100" fill="none" stroke="${BRAND.cyan}" stroke-width="1.6" stroke-linecap="round"/>`;
-      // antenna curve
-      s += `<path d="M 100 44 Q 108 34 116 40" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="116" cy="40" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
+      // antenna
+      s += `<line x1="100" y1="54" x2="100" y2="34" stroke="${INK}" stroke-width="1.8"/>`;
+      s += `<circle cx="100" cy="30" r="5" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>`;
+      // side ears
+      s += `<rect x="48" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<rect x="146" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      return s;
+    },
+  },
+  magenbot: {
+    name: "Magenta-Bot", tag: "Anecdotes Mascot",
+    render: () => {
+      let s = avatarBackground(ctxId());
+      s += drawTorso(BRAND.magenta);
+      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.cyan}"/>`;
+      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
+      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.magenta}"/>`;
+      // neck
+      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.4"/>`;
+      // round head
+      s += `<circle cx="100" cy="92" r="44" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.8"/>`;
+      // screen face (round)
+      s += `<circle cx="100" cy="96" r="30" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+      // heart eyes
+      s += `<path d="M 82 88 L 86 84 L 90 88 L 86 96 Z" fill="${BRAND.cyan}"/>`;
+      s += `<path d="M 110 88 L 114 84 L 118 88 L 114 96 Z" fill="${BRAND.cyan}"/>`;
+      // smile
+      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
+      // antenna
+      s += `<path d="M 100 48 Q 108 38 116 44" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
+      s += `<circle cx="116" cy="44" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.2"/>`;
       // ears
-      s += `<rect x="54" y="80" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="140" y="80" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<rect x="52" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
+      s += `<rect x="142" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
       return s;
     },
   },
 };
 
-/* Present each preset in the gallery card + poster */
 function renderPresetCards() {
   const gallery = document.getElementById("presetGallery");
   gallery.innerHTML = "";
@@ -905,7 +1307,6 @@ function renderPresetCards() {
     card.innerHTML = `
       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">${p.render()}</svg>
       <div class="name">${p.name}</div>
-      <div class="tag">${p.tag}</div>
     `;
     card.addEventListener("click", () => {
       state.presetKey = key;
@@ -917,180 +1318,39 @@ function renderPresetCards() {
 }
 
 /* =========================================================
-   CUSTOM DESIGNER — simplified, brand-aligned
+   CUSTOM designer — uses same drawHuman
    ========================================================= */
 const CUSTOM_PAL = {
-  skin: { peach: "#f6d3b0", tan: "#c99168", brown: "#8a5230", deep: "#4a2a18", olive: "#bfaa78", zombie: "#8ec86a" },
-  hair: { black: "#1a1024", brown: "#4a2a18", blond: "#e8c860", cyan: BRAND.cyan, magenta: BRAND.magenta, orange: BRAND.orange, purple: "#8a2be2", silver: "#e0e0f0" },
-  outfit: { cyan: BRAND.cyan, magenta: BRAND.magenta, orange: BRAND.orange, black: "#1a1024", navy: BRAND.navy3, cream: "#f5e8d0" },
+  skin: { peach: "#f6d3b0", tan: "#c99168", brown: "#8a5230", deep: "#4a2a18", olive: "#bfaa78" },
+  hair: { black: "#141026", brown: "#4a2a18", blond: "#e8c860", cyan: BRAND.cyan, magenta: BRAND.magenta, orange: BRAND.orange, purple: "#8a2be2", silver: "#e0e0f0" },
+  outfit: { cyan: BRAND.cyan, magenta: BRAND.magenta, orange: BRAND.orange, black: "#1a1024", navy: BRAND.navy4, cream: "#f5e8d0" },
 };
+const CUSTOM_FACE_SHAPES = ["round","oval","long","heart","square"];
 const CUSTOM_HAIR = ["short","long","bob","curly","bun","pigtails","mohawk","bald"];
-const CUSTOM_EYES = ["normal","sparkle","wink","closed"];
-const CUSTOM_MOUTH = ["smile","openSmile","smirk","dot","cat","fangs"];
-const CUSTOM_OUTFIT = ["tee","hoodie","tank","turtleneck","cape"];
-const CUSTOM_HAT = ["none","cap","witchHat","beanie","crown","halo"];
-const CUSTOM_ACC = ["none","glasses","hoops","choker","freckles"];
+const CUSTOM_EYES = ["normal","sparkle","wink","sleepy","closed"];
+const CUSTOM_BROWS = ["natural","arched","thin","bold"];
+const CUSTOM_NOSE = ["small","button","long","wide"];
+const CUSTOM_MOUTH = ["smile","openSmile","smirk","cat","dot"];
+const CUSTOM_HAT = ["none","cap","beanie","cowboyHat","detective","hoodUp","crown","halo"];
+const CUSTOM_ACC = ["none","glasses","hoops","studs","choker","freckles"];
 
 function drawCustom() {
   const c = state.custom;
-  const skin = CUSTOM_PAL.skin[c.skin];
-  const skinDark = shade(skin, 0.8);
-  const hairColor = CUSTOM_PAL.hair[c.hairColor];
-  const outfitColor = CUSTOM_PAL.outfit[c.outfitColor];
-  const outfitDark = shade(outfitColor, 0.75);
-  let s = "";
-  // background — Anecdotes navy gradient
-  s += `<defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="${BRAND.navy}"/>
-      <stop offset="0.5" stop-color="${BRAND.navy2}"/>
-      <stop offset="1" stop-color="${BRAND.navy3}"/>
-    </linearGradient>
-  </defs>`;
-  s += `<rect width="200" height="200" fill="url(#bg)"/>`;
-  // subtle stars
-  const stars = [[24,30],[170,26],[42,60],[160,80],[20,110],[180,140]];
-  for (const [x,y] of stars) s += `<circle cx="${x}" cy="${y}" r="1.6" fill="${BRAND.cyan}" opacity="0.7"/>`;
-  // body
-  s += renderCustomOutfit(c.outfit, outfitColor, outfitDark, skin);
-  // head
-  s += chibiEars(100, 96, 38, 42, skin);
-  s += chibiHead(100, 90, 38, 42, skin);
-  // hair
-  s += renderCustomHair(c.hair, hairColor);
-  // face
-  s += eyes(100, 96, "#4a2a18", c.eyes);
-  s += blush(100, 110);
-  s += mouth(100, 118, c.mouth);
-  // hat
-  s += renderCustomHat(c.hat);
-  // accessory
-  s += renderCustomAcc(c.accessory);
-  return s;
-}
-function shade(hex, amt) {
-  const c = hex.replace("#","");
-  const r = Math.round(parseInt(c.substr(0,2),16) * amt);
-  const g = Math.round(parseInt(c.substr(2,2),16) * amt);
-  const b = Math.round(parseInt(c.substr(4,2),16) * amt);
-  return "#" + [r,g,b].map(v => Math.max(0,Math.min(255,v)).toString(16).padStart(2,"0")).join("");
-}
-function renderCustomOutfit(style, c, cd, skin) {
-  let s = "";
-  if (style === "tee") {
-    s += chibiBody(100, 148, 62, 46, c, cd);
-    s += chibiArms(100, 148, 62, skin);
-    s += `<path d="M 92 148 Q 100 156 108 148" fill="none" stroke="${cd}" stroke-width="1.6"/>`;
-  } else if (style === "hoodie") {
-    // hood back
-    s += `<path d="M 66 138 Q 60 130 74 128 L 126 128 Q 140 130 134 138 Z" fill="${cd}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += chibiBody(100, 148, 62, 46, c, cd);
-    s += chibiArms(100, 148, 62, c);
-    // pocket
-    s += `<path d="M 80 168 Q 100 166 120 168 Q 116 182 100 182 Q 84 182 80 168 Z" fill="${cd}"/>`;
-  } else if (style === "tank") {
-    s += chibiBody(100, 148, 46, 46, c, cd);
-    // shoulders exposed
-    s += `<path d="M 74 148 Q 68 158 68 172 Q 74 172 78 156 Z" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 126 148 Q 132 158 132 172 Q 126 172 122 156 Z" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += chibiArms(100, 148, 62, skin);
-  } else if (style === "turtleneck") {
-    // high collar
-    s += `<path d="M 84 128 Q 82 138 86 144 Q 100 148 114 144 Q 118 138 116 128 Z" fill="${cd}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += chibiBody(100, 148, 62, 46, c, cd);
-    s += chibiArms(100, 148, 62, c);
-  } else if (style === "cape") {
-    s += `<path d="M 60 138 Q 100 132 140 138 Q 170 194 130 194 L 70 194 Q 30 194 60 138 Z" fill="${c}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += chibiBody(100, 148, 50, 46, shade(c, 0.5), cd);
-    s += chibiArms(100, 148, 62, skin);
-    s += `<circle cx="100" cy="140" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1"/>`;
-  }
-  return s;
-}
-function renderCustomHair(style, color) {
-  const cd = shade(color, 0.65);
-  if (style === "bald") return "";
-  let s = "";
-  if (style === "short") {
-    s += `<path d="M 64 72 Q 62 44 100 40 Q 138 44 136 72 L 134 82 Q 116 66 100 66 Q 84 66 66 82 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-  } else if (style === "long") {
-    s += `<path d="M 62 68 Q 56 108 54 148 L 66 152 L 70 74 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 138 68 Q 144 108 146 148 L 134 152 L 130 74 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 62 68 Q 60 42 100 38 Q 140 42 138 68 L 136 80 Q 100 68 64 80 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-  } else if (style === "bob") {
-    s += `<path d="M 58 68 Q 56 40 100 36 Q 144 40 142 68 L 144 120 Q 132 126 130 118 L 130 76 Q 100 68 70 76 L 70 118 Q 68 126 56 120 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-  } else if (style === "curly") {
-    const puffs = [[70,52,14],[84,36,14],[100,30,15],[116,36,14],[130,52,14],[60,68,12],[140,68,12]];
-    for (const [x,y,r] of puffs) s += `<circle cx="${x}" cy="${y}" r="${r}" fill="${color}" stroke="${INK}" stroke-width="1.2"/>`;
-    s += `<path d="M 60 72 Q 100 68 140 72 L 140 80 Q 100 74 60 80 Z" fill="${color}"/>`;
-  } else if (style === "bun") {
-    s += `<circle cx="100" cy="28" r="12" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 64 72 Q 62 46 100 44 Q 138 46 136 72 L 134 80 Q 100 72 66 80 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-  } else if (style === "pigtails") {
-    s += `<path d="M 64 72 Q 62 42 100 38 Q 138 42 136 72 L 134 82 Q 100 72 66 82 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 58 80 Q 36 100 40 126 Q 50 132 58 122 Q 62 100 66 86 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 142 80 Q 164 100 160 126 Q 150 132 142 122 Q 138 100 134 86 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-  } else if (style === "mohawk") {
-    s += `<path d="M 66 72 Q 66 56 78 52 L 78 82 Z" fill="${cd}" stroke="${INK}" stroke-width="1.2"/>`;
-    s += `<path d="M 134 72 Q 134 56 122 52 L 122 82 Z" fill="${cd}" stroke="${INK}" stroke-width="1.2"/>`;
-    s += `<path d="M 84 68 Q 90 20 98 42 Q 100 12 102 42 Q 110 20 116 68 Z" fill="${color}" stroke="${INK}" stroke-width="1.4"/>`;
-  }
-  return s;
-}
-function renderCustomHat(style) {
-  if (style === "none") return "";
-  let s = "";
-  if (style === "cap") {
-    s += `<path d="M 62 52 Q 62 30 100 28 Q 138 30 138 52 Q 138 60 100 56 Q 62 60 62 52 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 138 54 Q 168 58 168 64 Q 168 66 158 66 Q 138 62 138 60 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<rect x="90" y="36" width="20" height="10" rx="2" fill="${WHITE}" stroke="${INK}" stroke-width="0.8"/>`;
-    s += `<text x="100" y="43" text-anchor="middle" font-family="Mulish" font-weight="800" font-size="6" fill="${INK}">GRC</text>`;
-  } else if (style === "witchHat") {
-    s += `<ellipse cx="100" cy="50" rx="48" ry="6" fill="#141026" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 78 50 Q 100 -6 122 50 Z" fill="#141026" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 82 44 Q 100 46 118 44 L 120 48 Q 100 50 80 48 Z" fill="${BRAND.magenta}"/>`;
-    s += `<rect x="96" y="42" width="8" height="8" rx="1" fill="${BRAND.orange}" stroke="${INK}" stroke-width="0.8"/>`;
-  } else if (style === "beanie") {
-    s += `<path d="M 62 66 Q 62 34 100 32 Q 138 34 138 66 Q 100 62 62 66 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 62 66 Q 100 70 138 66 L 138 74 Q 100 78 62 74 Z" fill="${shade(BRAND.magenta, 0.7)}" stroke="${INK}" stroke-width="1.2"/>`;
-    s += `<circle cx="100" cy="24" r="6" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.2"/>`;
-  } else if (style === "crown") {
-    s += `<path d="M 62 46 Q 62 36 100 34 Q 138 36 138 46 L 138 50 Q 100 44 62 50 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<path d="M 62 36 Q 68 18 74 34 Q 82 8 90 34 Q 100 2 110 34 Q 118 8 126 34 Q 132 18 138 36 Z" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>`;
-    s += `<circle cx="100" cy="20" r="3" fill="${BRAND.magenta}"/>`;
-    s += `<circle cx="78" cy="24" r="2.5" fill="${BRAND.cyan}"/>`;
-    s += `<circle cx="122" cy="24" r="2.5" fill="${BRAND.cyan}"/>`;
-  } else if (style === "halo") {
-    s += `<ellipse cx="100" cy="26" rx="30" ry="5" fill="none" stroke="${BRAND.cyan}" stroke-width="3"/>`;
-    s += `<ellipse cx="100" cy="26" rx="30" ry="5" fill="none" stroke="${WHITE}" stroke-width="1"/>`;
-  }
-  return s;
-}
-function renderCustomAcc(style) {
-  let s = "";
-  if (style === "glasses") {
-    s += `<circle cx="84" cy="96" r="12" fill="none" stroke="${INK}" stroke-width="1.6"/>`;
-    s += `<circle cx="116" cy="96" r="12" fill="none" stroke="${INK}" stroke-width="1.6"/>`;
-    s += `<line x1="96" y1="96" x2="104" y2="96" stroke="${INK}" stroke-width="1.6"/>`;
-  } else if (style === "hoops") {
-    s += `<circle cx="60" cy="104" r="5" fill="none" stroke="${BRAND.orange}" stroke-width="1.6"/>`;
-    s += `<circle cx="140" cy="104" r="5" fill="none" stroke="${BRAND.orange}" stroke-width="1.6"/>`;
-  } else if (style === "choker") {
-    s += `<path d="M 82 130 Q 100 134 118 130 L 118 134 Q 100 138 82 134 Z" fill="${INK}"/>`;
-    s += `<circle cx="100" cy="134" r="2" fill="${BRAND.magenta}"/>`;
-  } else if (style === "freckles") {
-    const dots = [[88,104],[94,106],[100,103],[106,106],[112,104],[90,110],[110,110]];
-    for (const [x,y] of dots) s += `<circle cx="${x}" cy="${y}" r="0.9" fill="#8a5a3a"/>`;
-  }
-  return s;
+  return avatarBackground(ctxId()) + drawHuman({
+    skin: CUSTOM_PAL.skin[c.skin],
+    faceShape: c.faceShape,
+    hair: c.hair, hairColor: CUSTOM_PAL.hair[c.hairColor],
+    iris: CUSTOM_PAL.hair[c.hairColor] === CUSTOM_PAL.hair.blond ? "#4a7ac4" : "#4a2a18",
+    eyes: c.eyes, brows: c.brows, nose: c.nose, mouth: c.mouth,
+    outfitColor: CUSTOM_PAL.outfit[c.outfitColor],
+    hat: c.hat, accessory: c.accessory,
+  });
 }
 function renderCustomAvatar() {
   document.getElementById("avatarSvg").innerHTML = drawCustom();
 }
 
-/* =========================================================
-   Build swatches
-   ========================================================= */
+/* Build swatches */
 function labelize(s) { return s.replace(/([A-Z])/g, ' $1').replace(/^./, m => m.toUpperCase()); }
 function makeSwatches(group, entries, isColor) {
   const container = document.querySelector(`.grid[data-group="${group}"]`);
@@ -1101,7 +1361,7 @@ function makeSwatches(group, entries, isColor) {
     btn.className = "swatch";
     if (isColor) btn.innerHTML = `<div class="chip" style="background:${color}"></div><div>${label}</div>`;
     else btn.innerHTML = `<div>${label}</div>`;
-    if (state.custom[group] === key) btn.classList.add("active");
+    if (state.custom[group] === key || (group === "outfitColor" && state.custom.outfitColor === key)) btn.classList.add("active");
     btn.addEventListener("click", () => {
       state.custom[group] = key;
       container.querySelectorAll(".swatch").forEach(s => s.classList.remove("active"));
@@ -1112,18 +1372,18 @@ function makeSwatches(group, entries, isColor) {
   });
 }
 function initCustomControls() {
+  makeSwatches("faceShape", CUSTOM_FACE_SHAPES.map(k => [k, labelize(k)]));
   makeSwatches("skin", Object.entries(CUSTOM_PAL.skin).map(([k,v]) => [k, labelize(k), v]), true);
   makeSwatches("hairColor", Object.entries(CUSTOM_PAL.hair).map(([k,v]) => [k, labelize(k), v]), true);
   makeSwatches("outfitColor", Object.entries(CUSTOM_PAL.outfit).map(([k,v]) => [k, labelize(k), v]), true);
   makeSwatches("hair", CUSTOM_HAIR.map(k => [k, labelize(k)]));
   makeSwatches("eyes", CUSTOM_EYES.map(k => [k, labelize(k)]));
+  makeSwatches("brows", CUSTOM_BROWS.map(k => [k, labelize(k)]));
+  makeSwatches("nose", CUSTOM_NOSE.map(k => [k, labelize(k)]));
   makeSwatches("mouth", CUSTOM_MOUTH.map(k => [k, labelize(k)]));
-  makeSwatches("outfit", CUSTOM_OUTFIT.map(k => [k, labelize(k)]));
   makeSwatches("hat", CUSTOM_HAT.map(k => [k, labelize(k)]));
   makeSwatches("accessory", CUSTOM_ACC.map(k => [k, labelize(k)]));
 }
-
-/* Custom tabs */
 document.getElementById("tabs").addEventListener("click", (e) => {
   const btn = e.target.closest(".tab");
   if (!btn) return;
@@ -1132,8 +1392,6 @@ document.getElementById("tabs").addEventListener("click", (e) => {
   btn.classList.add("active");
   document.querySelector(`.section[data-section="${btn.dataset.tab}"]`).classList.add("active");
 });
-
-/* Mode picker */
 document.getElementById("modePicker").addEventListener("click", (e) => {
   const card = e.target.closest(".mode-card");
   if (!card) return;
@@ -1142,18 +1400,14 @@ document.getElementById("modePicker").addEventListener("click", (e) => {
   state.mode = card.dataset.mode;
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   document.getElementById(`view-${state.mode}`).classList.add("active");
-  // hide result if visible
   document.getElementById("result").classList.remove("show");
 });
-
-/* Event picker */
 document.getElementById("eventPicker").addEventListener("click", (e) => {
   const btn = e.target.closest(".event-btn");
   if (!btn) return;
   document.querySelectorAll(".event-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   state.event = btn.dataset.event;
-  // if poster visible, rebuild
   if (document.getElementById("result").classList.contains("show")) {
     document.getElementById("poster").innerHTML = buildPoster();
   }
@@ -1177,57 +1431,47 @@ function handleFile(file) {
 photoInput.addEventListener("change", (e) => handleFile(e.target.files[0]));
 dropZone.addEventListener("dragover", (e) => { e.preventDefault(); dropZone.classList.add("dragover"); });
 dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
-dropZone.addEventListener("drop", (e) => {
-  e.preventDefault();
-  dropZone.classList.remove("dragover");
-  handleFile(e.dataTransfer.files[0]);
-});
+dropZone.addEventListener("drop", (e) => { e.preventDefault(); dropZone.classList.remove("dragover"); handleFile(e.dataTransfer.files[0]); });
 
-/* =========================================================
-   Poster — works with any mode
-   ========================================================= */
+/* Poster */
 function getAvatarInner() {
-  if (state.mode === "preset") {
-    return PRESETS[state.presetKey].render();
-  } else if (state.mode === "photo") {
-    if (!state.photoDataUrl) return "";
-    return `<image href="${state.photoDataUrl}" x="0" y="0" width="200" height="200" preserveAspectRatio="xMidYMid slice" clip-path="circle(50% at 50% 50%)"/>`;
-  } else {
-    return drawCustom();
-  }
+  if (state.mode === "preset") return PRESETS[state.presetKey].render();
+  if (state.mode === "custom") return drawCustom();
+  return "";
 }
-
 function buildPoster() {
   const W = 800, H = 1000;
   const evt = EVENTS[state.event];
-  const inner = getAvatarInner();
-  const avatarSize = 480;
+  const avatarSize = 500;
   const avatarX = (W - avatarSize) / 2;
-  const avatarY = 310;
+  const avatarY = 300;
 
   return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" id="posterSvg">
     <defs>
       <linearGradient id="pBg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="${BRAND.navy}"/>
-        <stop offset="0.5" stop-color="${BRAND.navy2}"/>
-        <stop offset="1" stop-color="${BRAND.navy3}"/>
+        <stop offset="0" stop-color="#040a18"/>
+        <stop offset="0.3" stop-color="#0a1a34"/>
+        <stop offset="0.6" stop-color="#173a68"/>
+        <stop offset="0.9" stop-color="#2670b0"/>
+        <stop offset="1" stop-color="#3ea0d8"/>
       </linearGradient>
-      <radialGradient id="pGlow" cx="0.5" cy="0.5" r="0.5">
-        <stop offset="0" stop-color="${BRAND.cyan}" stop-opacity="0.4"/>
-        <stop offset="1" stop-color="${BRAND.cyan}" stop-opacity="0"/>
+      <radialGradient id="pVig" cx="0.5" cy="0.5" r="0.6">
+        <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
       </radialGradient>
       <clipPath id="avatarClip">
         <rect x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" rx="24"/>
       </clipPath>
     </defs>
-
     <rect x="0" y="0" width="${W}" height="${H}" fill="url(#pBg)"/>
+    <!-- bokeh depth -->
+    <circle cx="80" cy="220" r="60" fill="${BRAND.cyan}" opacity="0.14"/>
+    <circle cx="720" cy="180" r="80" fill="${BRAND.magenta}" opacity="0.14"/>
+    <circle cx="120" cy="820" r="90" fill="${BRAND.cyan}" opacity="0.12"/>
+    <circle cx="680" cy="880" r="110" fill="${BRAND.magenta}" opacity="0.12"/>
+    <rect x="0" y="0" width="${W}" height="${H}" fill="url(#pVig)"/>
 
-    <!-- Decorative brand shapes -->
-    <circle cx="120" cy="140" r="80" fill="url(#pGlow)"/>
-    <circle cx="680" cy="880" r="120" fill="url(#pGlow)" opacity="0.7"/>
-
-    <!-- corner brand bars -->
+    <!-- brand color bars -->
     <rect x="40" y="40" width="80" height="6" fill="${BRAND.cyan}" rx="3"/>
     <rect x="40" y="52" width="40" height="6" fill="${BRAND.magenta}" rx="3"/>
     <rect x="680" y="954" width="80" height="6" fill="${BRAND.magenta}" rx="3"/>
@@ -1243,26 +1487,19 @@ function buildPoster() {
     <rect x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" rx="22" fill="${BRAND.navy2}"/>
     ${state.mode === "photo"
       ? `<image href="${state.photoDataUrl || ""}" x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip)"/>`
-      : `<svg x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" viewBox="0 0 200 200">${inner}</svg>`
+      : `<svg x="${avatarX}" y="${avatarY}" width="${avatarSize}" height="${avatarSize}" viewBox="0 0 200 200">${getAvatarInner()}</svg>`
     }
 
     <!-- Date -->
     <text x="${W/2}" y="855" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="800" font-size="26" fill="${BRAND.orange}" letter-spacing="4">${evt.date}</text>
-
-    <!-- Call to action -->
+    <!-- CTA -->
     <text x="${W/2}" y="915" text-anchor="middle" font-family="Merriweather, Georgia, serif" font-weight="900" font-size="42" fill="${BRAND.cyan}" style="filter: drop-shadow(0 0 12px rgba(0,220,233,0.7));">Join me.</text>
-
-    <!-- Footer -->
     <text x="${W/2}" y="975" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="700" font-size="12" fill="#a0c0d8" letter-spacing="3">ANECDOTES &middot; GRC BARCADE</text>
   </svg>`;
 }
 
 function showResult() {
-  // Ensure a preset is chosen for photo mode
-  if (state.mode === "photo" && !state.photoDataUrl) {
-    alert("Upload a photo first.");
-    return;
-  }
+  if (state.mode === "photo" && !state.photoDataUrl) { alert("Upload a photo first."); return; }
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   document.getElementById("result").classList.add("show");
   document.getElementById("poster").innerHTML = buildPoster();
@@ -1278,7 +1515,6 @@ document.getElementById("photoGoBtn").addEventListener("click", showResult);
 document.getElementById("customGoBtn").addEventListener("click", showResult);
 document.getElementById("editBtn").addEventListener("click", showEditor);
 
-/* Download PNG */
 function downloadPoster() {
   const posterSvg = document.getElementById("posterSvg");
   if (!posterSvg) return;
@@ -1312,7 +1548,6 @@ function downloadPoster() {
 }
 document.getElementById("downloadBtn").addEventListener("click", downloadPoster);
 
-/* Init */
 renderPresetCards();
 initCustomControls();
 renderCustomAvatar();
