@@ -118,8 +118,16 @@
 
   .preset-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 14px; max-width: 900px; margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 18px; max-width: 1000px; margin: 0 auto;
+  }
+  .preset-card .tag {
+    margin-top: 3px;
+    font-size: 11px;
+    color: var(--ink-dim);
+    font-family: "Mulish", sans-serif;
+    font-weight: 600;
+    line-height: 1.3;
   }
   .preset-card {
     background: var(--navy-panel);
@@ -136,14 +144,20 @@
   }
   .preset-card svg {
     display: block; width: 100%; aspect-ratio: 1;
-    border-radius: 12px;
+    border-radius: 50%;
+    border: 4px solid var(--neon, var(--cyan));
+    box-shadow: 0 0 18px var(--neon-glow, var(--cyan-glow));
+    background: radial-gradient(ellipse at 50% 40%, #12283f 0%, #050c1a 90%);
   }
   .preset-card .name {
-    margin-top: 8px;
+    margin-top: 10px;
     font-family: "Merriweather", Georgia, serif;
-    font-weight: 700; font-size: 14px; color: var(--ink);
+    font-weight: 900; font-size: 13px;
+    color: var(--neon, var(--cyan));
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px var(--neon-glow, var(--cyan-glow));
   }
-  .preset-card .tag { font-size: 11px; color: var(--ink-dim); }
 
   .photo-upload { max-width: 500px; margin: 0 auto; text-align: center; }
   .drop-zone {
@@ -320,7 +334,7 @@
   <div class="mode-card active" data-mode="preset">
     <span class="mode-emoji">🎃</span>
     <div class="mode-title">Pick a Character</div>
-    <div class="mode-sub">Fast &middot; 8 cute avatars</div>
+    <div class="mode-sub">Fast &middot; 10 GRC crew</div>
   </div>
   <div class="mode-card" data-mode="photo">
     <span class="mode-emoji">📸</span>
@@ -433,7 +447,7 @@ const EVENTS = {
 const state = {
   mode: "preset",
   event: "denver",
-  presetKey: "ana",
+  presetKey: "trusty",
   photoDataUrl: null,
   custom: {
     faceShape: "round",
@@ -498,11 +512,8 @@ function avatarBackground(id) {
     </defs>
     <rect width="200" height="200" fill="url(#${oid})"/>
     ${dots}
-    <!-- floor line reflection -->
-    <rect x="0" y="146" width="200" height="1" fill="${BRAND.cyan}" opacity="0.4"/>
     <!-- vignette -->
     <rect width="200" height="200" fill="url(#${oid}_vig)"/>
-    ${neonSign()}
   `;
 }
 function neonSign() {
@@ -551,6 +562,69 @@ const FACE = {
   bottomY: 200,
 };
 
+/* GRC hoodie — black hoodie with GRC text + heart on chest */
+function drawGRCHoodie(hoodDown = true) {
+  const id = `hd_${ctxId()}`;
+  return `
+    <defs>
+      <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2a1a3a"/>
+        <stop offset="0.5" stop-color="#141026"/>
+        <stop offset="1" stop-color="#050014"/>
+      </linearGradient>
+      <radialGradient id="${id}_hl" cx="0.5" cy="0" r="0.6">
+        <stop offset="0" stop-color="#3a2a4a" stop-opacity="0.7"/>
+        <stop offset="1" stop-color="#3a2a4a" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    ${hoodDown ? `
+      <!-- hood collar bunched around neck (rounded fabric folds) -->
+      <path d="M 68 152 Q 56 140 76 136 Q 100 132 124 136 Q 144 140 132 152 Q 116 148 100 148 Q 84 148 68 152 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.4"/>
+      <!-- inner hood shadow -->
+      <path d="M 82 148 Q 100 152 118 148" fill="none" stroke="#050014" stroke-width="1.2"/>
+    ` : ""}
+    <!-- main hoodie torso — curvier silhouette -->
+    <path d="M 30 200
+             L 30 180
+             Q 30 162 46 156
+             Q 62 150 80 150
+             Q 100 148 120 150
+             Q 138 150 154 156
+             Q 170 162 170 180
+             L 170 200 Z"
+      fill="url(#${id})" stroke="${INK}" stroke-width="1.8"/>
+    <!-- shoulder rim highlights -->
+    <path d="M 44 162 Q 62 154 80 154" fill="none" stroke="#3a2a4a" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M 156 162 Q 138 154 120 154" fill="none" stroke="#3a2a4a" stroke-width="1.6" stroke-linecap="round"/>
+    <!-- upper chest highlight (light source top) -->
+    <ellipse cx="100" cy="168" rx="60" ry="12" fill="url(#${id}_hl)"/>
+    <!-- fabric fold lines (subtle curves) -->
+    <path d="M 62 172 Q 70 190 66 200" fill="none" stroke="#050014" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 138 172 Q 130 190 134 200" fill="none" stroke="#050014" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+    <!-- pouch seam curve -->
+    <path d="M 60 186 Q 100 194 140 186" fill="none" stroke="#050014" stroke-width="1.4"/>
+    <path d="M 60 186 L 62 200" stroke="#050014" stroke-width="1.2"/>
+    <path d="M 140 186 L 138 200" stroke="#050014" stroke-width="1.2"/>
+    <!-- drawstrings -->
+    <path d="M 92 148 Q 92 156 90 164" fill="none" stroke="#050014" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M 108 148 Q 108 156 110 164" fill="none" stroke="#050014" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="90" cy="166" r="1.4" fill="#050014"/>
+    <circle cx="110" cy="166" r="1.4" fill="#050014"/>
+    <!-- GRC chest text -->
+    <text x="100" y="182" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="900" font-size="13" fill="${WHITE}" letter-spacing="1">GRC</text>
+    <!-- pink pixel heart -->
+    <g transform="translate(120 174)">
+      <rect x="0" y="2" width="2" height="2" fill="${BRAND.magenta}"/>
+      <rect x="2" y="0" width="2" height="2" fill="${BRAND.magenta}"/>
+      <rect x="4" y="2" width="2" height="2" fill="${BRAND.magenta}"/>
+      <rect x="2" y="2" width="2" height="2" fill="${BRAND.magenta}"/>
+      <rect x="0" y="4" width="6" height="2" fill="${BRAND.magenta}"/>
+      <rect x="1" y="6" width="4" height="2" fill="${BRAND.magenta}"/>
+      <rect x="2" y="8" width="2" height="2" fill="${BRAND.magenta}"/>
+    </g>
+  `;
+}
+
 function drawTorso(outfitColor) {
   const c = outfitColor;
   const cd = shade(c, 0.72);
@@ -596,37 +670,64 @@ function drawNeck(skin) {
 }
 
 function drawHeadAndEars(skin, faceShape = "round") {
-  const sd = shade(skin, 0.78);
-  const sl = tint(skin, 0.15);
+  const sd = shade(skin, 0.75);
+  const sdd = shade(skin, 0.6);
+  const sl = tint(skin, 0.18);
+  const sll = tint(skin, 0.32);
+  const warmCheek = "#ffb4a0";
   const id = `head_${ctxId()}`;
+  const cheekId = `cheek_${ctxId()}`;
+  const forehead = `fh_${ctxId()}`;
   let headShape;
   if (faceShape === "oval") {
-    headShape = `<ellipse cx="100" cy="98" rx="37" ry="48" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+    headShape = `<ellipse cx="100" cy="98" rx="37" ry="48" fill="url(#${id})" stroke="${INK}" stroke-width="1.4"/>`;
   } else if (faceShape === "heart") {
-    headShape = `<path d="M 60 82 Q 58 60 82 54 Q 100 50 118 54 Q 142 60 140 82 Q 140 118 124 134 Q 112 144 100 144 Q 88 144 76 134 Q 60 118 60 82 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+    headShape = `<path d="M 60 82 Q 58 60 82 54 Q 100 50 118 54 Q 142 60 140 82 Q 140 118 124 134 Q 112 144 100 144 Q 88 144 76 134 Q 60 118 60 82 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.4"/>`;
   } else if (faceShape === "square") {
-    headShape = `<path d="M 60 72 Q 60 54 78 54 L 122 54 Q 140 54 140 72 L 140 124 Q 140 144 122 144 L 78 144 Q 60 144 60 124 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+    headShape = `<path d="M 60 72 Q 60 54 78 54 L 122 54 Q 140 54 140 72 L 140 124 Q 140 144 122 144 L 78 144 Q 60 144 60 124 Z" fill="url(#${id})" stroke="${INK}" stroke-width="1.4"/>`;
   } else if (faceShape === "long") {
-    headShape = `<ellipse cx="100" cy="98" rx="34" ry="52" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+    headShape = `<ellipse cx="100" cy="98" rx="34" ry="52" fill="url(#${id})" stroke="${INK}" stroke-width="1.4"/>`;
   } else {
-    headShape = `<ellipse cx="${FACE.cx}" cy="${FACE.cy}" rx="${FACE.rx}" ry="${FACE.ry}" fill="url(#${id})" stroke="${INK}" stroke-width="1.6"/>`;
+    headShape = `<ellipse cx="${FACE.cx}" cy="${FACE.cy}" rx="${FACE.rx}" ry="${FACE.ry}" fill="url(#${id})" stroke="${INK}" stroke-width="1.4"/>`;
   }
   return `
     <defs>
-      <radialGradient id="${id}" cx="0.42" cy="0.35" r="0.75">
-        <stop offset="0" stop-color="${sl}"/>
+      <radialGradient id="${id}" cx="0.42" cy="0.28" r="0.85">
+        <stop offset="0" stop-color="${sll}"/>
+        <stop offset="0.3" stop-color="${sl}"/>
         <stop offset="0.7" stop-color="${skin}"/>
         <stop offset="1" stop-color="${sd}"/>
       </radialGradient>
+      <radialGradient id="${cheekId}" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="${warmCheek}" stop-opacity="0.7"/>
+        <stop offset="1" stop-color="${warmCheek}" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="${forehead}" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="${sll}" stop-opacity="0.85"/>
+        <stop offset="1" stop-color="${sll}" stop-opacity="0"/>
+      </radialGradient>
     </defs>
-    <!-- ears -->
-    <ellipse cx="58" cy="${FACE.earY}" rx="5" ry="9" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
-    <ellipse cx="142" cy="${FACE.earY}" rx="5" ry="9" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
+    <!-- ears with cartilage detail -->
+    <ellipse cx="58" cy="${FACE.earY}" rx="5" ry="9" fill="${skin}" stroke="${INK}" stroke-width="1.3"/>
+    <ellipse cx="142" cy="${FACE.earY}" rx="5" ry="9" fill="${skin}" stroke="${INK}" stroke-width="1.3"/>
     <path d="M 57 ${FACE.earY-3} q 2 6 0 10" fill="none" stroke="${sd}" stroke-width="0.9"/>
     <path d="M 143 ${FACE.earY-3} q -2 6 0 10" fill="none" stroke="${sd}" stroke-width="0.9"/>
+    <ellipse cx="58" cy="${FACE.earY+1}" rx="2.4" ry="4" fill="${warmCheek}" opacity="0.35"/>
+    <ellipse cx="142" cy="${FACE.earY+1}" rx="2.4" ry="4" fill="${warmCheek}" opacity="0.35"/>
     ${headShape}
+    <!-- forehead highlight (subtle T-zone) -->
+    <ellipse cx="100" cy="72" rx="22" ry="10" fill="url(#${forehead})"/>
+    <ellipse cx="100" cy="94" rx="2.4" ry="10" fill="${sll}" opacity="0.35"/>
+    <!-- warm cheek blush base (rich skin depth) -->
+    <ellipse cx="76" cy="114" rx="12" ry="7" fill="url(#${cheekId})"/>
+    <ellipse cx="124" cy="114" rx="12" ry="7" fill="url(#${cheekId})"/>
+    <!-- jawline shadow -->
+    <path d="M 62 108 Q 64 128 82 138" fill="none" stroke="${sd}" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+    <path d="M 138 108 Q 136 128 118 138" fill="none" stroke="${sd}" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+    <!-- chin highlight -->
+    <ellipse cx="100" cy="136" rx="8" ry="3" fill="${sll}" opacity="0.5"/>
     <!-- soft chin shading -->
-    <path d="M 78 134 Q 100 142 122 134" fill="none" stroke="${sd}" stroke-width="1" opacity="0.5"/>
+    <path d="M 78 138 Q 100 144 122 138" fill="none" stroke="${sdd}" stroke-width="1" opacity="0.5"/>
   `;
 }
 
@@ -699,9 +800,13 @@ function drawHairFront(style, hairColor) {
                Q 130 82 100 82
                Q 70 82 62 96 Z"
         fill="${c}" stroke="${INK}" stroke-width="1.6"/>
+      <!-- shadow underneath (adds depth) -->
+      <path d="M 60 92 L 62 96 Q 70 84 100 84 Q 130 84 138 96 L 140 92 Q 130 80 100 80 Q 70 80 60 92 Z" fill="${cd}" opacity="0.7"/>
       <!-- side-sweep bang -->
       <path d="M 68 76 Q 100 92 132 76" fill="none" stroke="${cd}" stroke-width="1.6"/>
-      <path d="M 78 60 Q 100 58 116 62" fill="none" stroke="${cl}" stroke-width="1.4" opacity="0.8"/>
+      <!-- highlight strand -->
+      <path d="M 78 58 Q 90 54 108 56 Q 120 60 128 66" fill="none" stroke="${cl}" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/>
+      <path d="M 82 68 Q 100 62 118 68" fill="none" stroke="${cl}" stroke-width="1" opacity="0.6"/>
     `;
   }
   if (style === "bob") {
@@ -713,8 +818,13 @@ function drawHairFront(style, hairColor) {
                Q 132 90 100 88
                Q 68 90 60 108 Z"
         fill="${c}" stroke="${INK}" stroke-width="1.6"/>
-      <path d="M 68 82 Q 100 96 132 82" fill="none" stroke="${cd}" stroke-width="1.4"/>
-      <path d="M 78 60 Q 100 56 122 60" fill="none" stroke="${cl}" stroke-width="1.4" opacity="0.7"/>
+      <!-- inner shadow at fringe -->
+      <path d="M 60 108 L 62 112 Q 68 94 100 92 Q 132 94 138 112 L 140 108 Q 132 88 100 86 Q 68 88 60 108 Z" fill="${cd}" opacity="0.6"/>
+      <!-- side-swept bang -->
+      <path d="M 68 82 Q 100 100 132 82" fill="none" stroke="${cd}" stroke-width="2" stroke-linecap="round"/>
+      <!-- crown highlight -->
+      <path d="M 78 58 Q 100 52 122 58" fill="none" stroke="${cl}" stroke-width="2.6" stroke-linecap="round" opacity="0.85"/>
+      <path d="M 84 66 Q 100 60 116 66" fill="none" stroke="${cl}" stroke-width="1.2" opacity="0.6"/>
     `;
   }
   if (style === "long") {
@@ -726,10 +836,18 @@ function drawHairFront(style, hairColor) {
                Q 132 88 100 86
                Q 68 88 60 106 Z"
         fill="${c}" stroke="${INK}" stroke-width="1.6"/>
-      <path d="M 70 82 Q 100 96 130 82" fill="none" stroke="${cd}" stroke-width="1.6"/>
+      <!-- underlayer shadow -->
+      <path d="M 60 106 Q 68 94 100 92 Q 132 94 140 106 L 138 110 Q 132 96 100 94 Q 68 96 62 110 Z" fill="${cd}" opacity="0.6"/>
+      <!-- middle-part bang -->
+      <path d="M 100 54 Q 96 76 82 88" fill="none" stroke="${cd}" stroke-width="1.6"/>
+      <path d="M 100 54 Q 104 76 118 88" fill="none" stroke="${cd}" stroke-width="1.6"/>
       <!-- side wisps -->
-      <path d="M 62 86 Q 56 108 62 130" fill="none" stroke="${cd}" stroke-width="1.4"/>
-      <path d="M 138 86 Q 144 108 138 130" fill="none" stroke="${cd}" stroke-width="1.4"/>
+      <path d="M 62 86 Q 56 108 62 130" fill="none" stroke="${cd}" stroke-width="1.6"/>
+      <path d="M 138 86 Q 144 108 138 130" fill="none" stroke="${cd}" stroke-width="1.6"/>
+      <!-- crown highlight streaks -->
+      <path d="M 76 56 Q 100 50 124 56" fill="none" stroke="${cl}" stroke-width="2.6" stroke-linecap="round" opacity="0.85"/>
+      <path d="M 68 76 Q 68 110 74 128" fill="none" stroke="${cl}" stroke-width="1.6" opacity="0.5"/>
+      <path d="M 132 76 Q 132 110 126 128" fill="none" stroke="${cl}" stroke-width="1.6" opacity="0.5"/>
     `;
   }
   if (style === "curly") {
@@ -851,28 +969,45 @@ function drawEyes(style, iris = "#4a2a18") {
   return `${drawSingleEye(L, y, iris)}${drawSingleEye(R, y, iris)}`;
 }
 function drawSingleEye(cx, cy, iris, big = false) {
-  const rx = big ? 10 : 8.5;
-  const ry = big ? 12 : 11;
-  const ir = big ? 6 : 5.5;
-  const pr = big ? 3 : 2.6;
-  const irisD = shade(iris, 0.6);
-  const irisL = tint(iris, 0.35);
+  const rx = big ? 11 : 9.5;
+  const ry = big ? 13 : 12;
+  const ir = big ? 6.5 : 6;
+  const pr = big ? 3.2 : 2.8;
+  const irisD = shade(iris, 0.55);
+  const irisM = shade(iris, 0.8);
+  const irisL = tint(iris, 0.4);
   const id = `iris_${ctxId()}`;
+  const scId = `sclera_${ctxId()}`;
   return `
     <defs>
-      <radialGradient id="${id}" cx="0.5" cy="0.5" r="0.5">
+      <radialGradient id="${scId}" cx="0.5" cy="0.6" r="0.6">
+        <stop offset="0" stop-color="${WHITE}"/>
+        <stop offset="1" stop-color="#e0e4ec"/>
+      </radialGradient>
+      <radialGradient id="${id}" cx="0.5" cy="0.35" r="0.7">
         <stop offset="0" stop-color="${irisL}"/>
-        <stop offset="0.7" stop-color="${iris}"/>
+        <stop offset="0.55" stop-color="${iris}"/>
         <stop offset="1" stop-color="${irisD}"/>
       </radialGradient>
     </defs>
-    <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${WHITE}" stroke="${INK}" stroke-width="1.6"/>
+    <!-- sclera with subtle top shadow (like cast lid shadow) -->
+    <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#${scId})" stroke="${INK}" stroke-width="1.6"/>
+    <path d="M ${cx-rx} ${cy-ry*0.6} Q ${cx} ${cy-ry*0.3} ${cx+rx} ${cy-ry*0.6} L ${cx+rx} ${cy-ry+1} L ${cx-rx} ${cy-ry+1} Z" fill="${irisM}" opacity="0.18"/>
+    <!-- iris with radial gradient + limbal ring -->
     <ellipse cx="${cx}" cy="${cy+1}" rx="${ir}" ry="${ir+0.5}" fill="url(#${id})"/>
-    <ellipse cx="${cx}" cy="${cy+1}" rx="${pr}" ry="${pr+0.4}" fill="#0a0018"/>
-    <circle cx="${cx-2.6}" cy="${cy-3}" r="${big?3:2.4}" fill="${WHITE}"/>
-    <circle cx="${cx+3}" cy="${cy+4}" r="${big?1.4:1.1}" fill="${WHITE}"/>
-    <!-- upper lash -->
-    <path d="M ${cx-rx-0.5} ${cy-ry+2} Q ${cx} ${cy-ry-1.5} ${cx+rx+0.5} ${cy-ry+2}" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/>
+    <ellipse cx="${cx}" cy="${cy+1}" rx="${ir}" ry="${ir+0.5}" fill="none" stroke="${irisD}" stroke-width="0.7"/>
+    <!-- pupil -->
+    <ellipse cx="${cx}" cy="${cy+1}" rx="${pr*0.55}" ry="${pr*0.7}" fill="#0a0018"/>
+    <!-- primary highlight (top-left) -->
+    <ellipse cx="${cx-2.8}" cy="${cy-3}" rx="${big?3.4:2.8}" ry="${big?4:3.4}" fill="${WHITE}"/>
+    <!-- secondary highlight (bottom-right) -->
+    <circle cx="${cx+3}" cy="${cy+5}" r="${big?1.6:1.3}" fill="${WHITE}"/>
+    <!-- upper lash (thick, with 3 spikes) -->
+    <path d="M ${cx-rx-0.5} ${cy-ry+2} Q ${cx} ${cy-ry-2} ${cx+rx+0.5} ${cy-ry+2}" fill="${INK}" stroke="${INK}" stroke-width="2" stroke-linecap="round"/>
+    <path d="M ${cx-rx-1} ${cy-ry+1} L ${cx-rx-3} ${cy-ry-3}" stroke="${INK}" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M ${cx+rx+1} ${cy-ry+1} L ${cx+rx+3} ${cy-ry-3}" stroke="${INK}" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- lower lash (subtle) -->
+    <path d="M ${cx-rx+0.5} ${cy+ry-0.5} Q ${cx} ${cy+ry+1} ${cx+rx-0.5} ${cy+ry-0.5}" fill="none" stroke="${INK}" stroke-width="0.8" opacity="0.7"/>
   `;
 }
 
@@ -1063,6 +1198,91 @@ function drawAcc(style) {
   return "";
 }
 
+/* Pixel-style shades — flat 8-bit sunglasses */
+function pixelShades(color = BRAND.cyan) {
+  return `
+    <g>
+      <rect x="66" y="94" width="26" height="12" fill="${INK}"/>
+      <rect x="108" y="94" width="26" height="12" fill="${INK}"/>
+      <rect x="92" y="98" width="16" height="3" fill="${INK}"/>
+      <rect x="70" y="97" width="6" height="3" fill="${color}"/>
+      <rect x="112" y="97" width="6" height="3" fill="${color}"/>
+    </g>
+  `;
+}
+
+/* Headphones around neck */
+function headphonesOnNeck() {
+  return `
+    <path d="M 60 118 Q 60 140 74 148" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 140 118 Q 140 140 126 148" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="60" cy="118" rx="7" ry="9" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>
+    <ellipse cx="140" cy="118" rx="7" ry="9" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>
+    <ellipse cx="60" cy="118" rx="3" ry="5" fill="${BRAND.magentaDeep}"/>
+    <ellipse cx="140" cy="118" rx="3" ry="5" fill="${BRAND.magentaDeep}"/>
+  `;
+}
+
+/* Peace-sign hand at edge of frame */
+function peaceSignHand(x, y, skin) {
+  const sd = shade(skin, 0.75);
+  return `
+    <g transform="translate(${x} ${y})">
+      <path d="M 0 20 Q -4 10 -2 0 L 4 0 L 4 -8 L 10 -8 L 10 0 L 14 0 Q 20 8 16 20 Z" fill="${skin}" stroke="${INK}" stroke-width="1.4"/>
+      <path d="M 0 4 L 16 4" fill="none" stroke="${sd}" stroke-width="0.8"/>
+    </g>
+  `;
+}
+
+/* Coffee/GRC mug */
+function grcMug(x, y) {
+  return `
+    <g transform="translate(${x} ${y})">
+      <path d="M 0 0 L 22 0 L 22 24 Q 22 28 18 28 L 4 28 Q 0 28 0 24 Z" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>
+      <path d="M 22 6 Q 30 8 30 14 Q 30 20 22 22" fill="none" stroke="${INK}" stroke-width="1.4"/>
+      <text x="11" y="16" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="900" font-size="8" fill="${WHITE}">GRC</text>
+      <!-- pixel heart -->
+      <g transform="translate(6 18)">
+        <rect x="0" y="1" width="1.5" height="1.5" fill="${WHITE}"/>
+        <rect x="1.5" y="0" width="1.5" height="1.5" fill="${WHITE}"/>
+        <rect x="3" y="1" width="1.5" height="1.5" fill="${WHITE}"/>
+        <rect x="1.5" y="1" width="1.5" height="1.5" fill="${WHITE}"/>
+        <rect x="0" y="2.5" width="4.5" height="1.5" fill="${WHITE}"/>
+        <rect x="1.5" y="4" width="1.5" height="1.5" fill="${WHITE}"/>
+      </g>
+    </g>
+  `;
+}
+
+/* Game controller in hand */
+function gameController(x, y) {
+  return `
+    <g transform="translate(${x} ${y})">
+      <path d="M 0 0 Q -4 0 -4 6 L -4 12 Q -4 18 2 18 L 20 18 L 30 18 Q 36 18 36 12 L 36 6 Q 36 0 32 0 L 20 0 L 12 0 Z" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>
+      <!-- d-pad -->
+      <rect x="2" y="6" width="8" height="3" fill="${WHITE}"/>
+      <rect x="4.5" y="3.5" width="3" height="8" fill="${WHITE}"/>
+      <!-- buttons -->
+      <circle cx="24" cy="6" r="2" fill="${BRAND.cyan}"/>
+      <circle cx="30" cy="10" r="2" fill="${BRAND.magenta}"/>
+      <circle cx="24" cy="14" r="2" fill="${BRAND.orange}"/>
+    </g>
+  `;
+}
+
+/* Peace fingers behind head */
+function peaceBehindEar(side, skin) {
+  const sd = shade(skin, 0.75);
+  const flip = side === "right" ? -1 : 1;
+  const x = side === "right" ? 152 : 48;
+  return `
+    <g transform="translate(${x} 96) scale(${flip} 1)">
+      <path d="M 0 -8 L 4 -8 L 4 4 L -4 4 Z" fill="${skin}" stroke="${INK}" stroke-width="1.2"/>
+      <path d="M 6 -6 L 10 -6 L 10 4 L 4 4 Z" fill="${skin}" stroke="${INK}" stroke-width="1.2"/>
+    </g>
+  `;
+}
+
 /* =========================================================
    FULL HUMAN CHARACTER — cohesive silhouette
    ========================================================= */
@@ -1071,22 +1291,26 @@ function drawHuman(opts) {
     skin = "#f6d3b0",
     faceShape = "round",
     outfitColor = BRAND.cyan,
+    grcHoodie = true,        // default: black GRC hoodie
     hair = "bob",
     hairColor = "#4a2a18",
     eyes = "normal",
     brows = "natural",
     nose = "small",
     mouth = "smile",
+    beard = "none",
     hat = "none",
     accessory = "none",
     iris = "#4a2a18",
     lipTint = null,
     extras = "",
+    extrasBehind = "",
   } = opts;
 
   let s = "";
+  s += extrasBehind;
   s += drawHairBack(hair, hairColor);
-  s += drawTorso(outfitColor);
+  s += grcHoodie ? drawGRCHoodie() : drawTorso(outfitColor);
   s += drawNeck(skin);
   s += drawHeadAndEars(skin, faceShape);
   s += drawHairFront(hair, hairColor);
@@ -1094,6 +1318,7 @@ function drawHuman(opts) {
   s += drawEyes(eyes, iris);
   s += drawNose(nose, skin);
   s += drawBlush();
+  s += drawBeard(beard, hairColor);
   s += drawMouth(mouth, lipTint);
   s += drawAcc(accessory);
   s += drawHat(hat);
@@ -1101,198 +1326,295 @@ function drawHuman(opts) {
   return s;
 }
 
+/* Beard for characters like Audit Ace */
+function drawBeard(style, hairColor) {
+  if (style === "none") return "";
+  const c = shade(hairColor, 0.85);
+  if (style === "full") {
+    return `<path d="M 62 116 Q 62 138 82 144 Q 100 148 118 144 Q 138 138 138 116 Q 124 128 100 128 Q 76 128 62 116 Z" fill="${c}" stroke="${INK}" stroke-width="1.2"/>`;
+  }
+  if (style === "goatee") {
+    return `<path d="M 90 122 Q 100 118 110 122 Q 108 138 100 140 Q 92 138 90 122 Z" fill="${c}" stroke="${INK}" stroke-width="1.2"/>`;
+  }
+  if (style === "stubble") {
+    let s = "";
+    for (let i = 0; i < 30; i++) {
+      const x = 74 + (i % 8) * 6.4;
+      const y = 120 + Math.floor(i / 8) * 4;
+      if (y > 138) continue;
+      if (x > 88 && x < 112 && y < 128) continue;
+      s += `<circle cx="${x}" cy="${y}" r="0.6" fill="${c}"/>`;
+    }
+    return s;
+  }
+  return "";
+}
+
+/* =========================================================
+   NON-HUMAN CHARACTERS
+   ========================================================= */
+
+function drawFox(bg) {
+  const fur = "#e88a4a";
+  const white = "#fbe8d0";
+  const dark = "#a04a1a";
+  let s = bg;
+  s += drawGRCHoodie();
+  // neck fluff
+  s += `<path d="M 84 138 Q 100 148 116 138 L 118 152 L 82 152 Z" fill="${white}"/>`;
+  // head
+  s += `<ellipse cx="100" cy="96" rx="42" ry="40" fill="${fur}" stroke="${INK}" stroke-width="1.8"/>`;
+  // ear triangles
+  s += `<path d="M 62 70 L 74 46 L 88 66 Z" fill="${fur}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<path d="M 138 70 L 126 46 L 112 66 Z" fill="${fur}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<path d="M 70 60 L 76 52 L 82 62 Z" fill="${dark}"/>`;
+  s += `<path d="M 130 60 L 124 52 L 118 62 Z" fill="${dark}"/>`;
+  // white face mask
+  s += `<path d="M 74 96 Q 74 130 100 132 Q 126 130 126 96 Q 118 106 100 106 Q 82 106 74 96 Z" fill="${white}"/>`;
+  // pixel shades
+  s += pixelShades(BRAND.magenta);
+  // nose + snout
+  s += `<ellipse cx="100" cy="122" rx="4" ry="3" fill="${INK}"/>`;
+  s += `<path d="M 100 125 Q 100 130 96 132" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+  // happy tongue smile
+  s += `<path d="M 92 128 Q 100 138 108 128" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.2"/>`;
+  s += `<path d="M 98 130 Q 100 138 102 130" fill="${BRAND.magentaDeep}"/>`;
+  return s;
+}
+
+function drawCat(bg) {
+  const fur = "#8a94a8";
+  const light = "#c0c8d8";
+  const dark = "#4a5266";
+  let s = bg;
+  s += drawGRCHoodie();
+  // head
+  s += `<ellipse cx="100" cy="96" rx="42" ry="40" fill="${fur}" stroke="${INK}" stroke-width="1.8"/>`;
+  // ear triangles
+  s += `<path d="M 64 72 L 70 42 L 88 66 Z" fill="${fur}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<path d="M 136 72 L 130 42 L 112 66 Z" fill="${fur}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<path d="M 72 62 L 76 50 L 82 62 Z" fill="${BRAND.magenta}" opacity="0.7"/>`;
+  s += `<path d="M 128 62 L 124 50 L 118 62 Z" fill="${BRAND.magenta}" opacity="0.7"/>`;
+  // muzzle
+  s += `<path d="M 82 106 Q 82 128 100 130 Q 118 128 118 106 Q 110 116 100 116 Q 90 116 82 106 Z" fill="${light}"/>`;
+  // pixel shades pink
+  s += pixelShades("#ff8ac4");
+  // triangle nose
+  s += `<path d="M 96 118 L 104 118 L 100 122 Z" fill="${INK}"/>`;
+  // smug smile
+  s += `<path d="M 92 126 Q 100 132 108 126" fill="none" stroke="${INK}" stroke-width="1.4" stroke-linecap="round"/>`;
+  // whiskers
+  s += `<line x1="70" y1="120" x2="84" y2="122" stroke="${INK}" stroke-width="0.8"/>`;
+  s += `<line x1="70" y1="126" x2="84" y2="126" stroke="${INK}" stroke-width="0.8"/>`;
+  s += `<line x1="130" y1="120" x2="116" y2="122" stroke="${INK}" stroke-width="0.8"/>`;
+  s += `<line x1="130" y1="126" x2="116" y2="126" stroke="${INK}" stroke-width="0.8"/>`;
+  return s;
+}
+
+function drawAlien(bg) {
+  const green = "#8ec86a";
+  const greenLight = "#b6e090";
+  const greenDark = "#4a7a2e";
+  let s = bg;
+  s += drawGRCHoodie();
+  s += drawNeck(green);
+  // large alien head
+  s += `<path d="M 62 90 Q 62 44 100 44 Q 138 44 138 90 Q 138 122 118 138 Q 108 144 100 144 Q 92 144 82 138 Q 62 122 62 90 Z" fill="${green}" stroke="${INK}" stroke-width="1.8"/>`;
+  // forehead highlight
+  s += `<ellipse cx="100" cy="66" rx="22" ry="10" fill="${greenLight}" opacity="0.5"/>`;
+  // big black almond eyes
+  s += `<ellipse cx="82" cy="102" rx="10" ry="16" fill="${INK}"/>`;
+  s += `<ellipse cx="118" cy="102" rx="10" ry="16" fill="${INK}"/>`;
+  s += `<ellipse cx="80" cy="96" rx="3" ry="4" fill="${WHITE}"/>`;
+  s += `<ellipse cx="116" cy="96" rx="3" ry="4" fill="${WHITE}"/>`;
+  // tiny mouth
+  s += `<path d="M 94 128 Q 100 132 106 128" fill="none" stroke="${INK}" stroke-width="1.4" stroke-linecap="round"/>`;
+  // backwards cap
+  s += `<path d="M 56 74 Q 56 52 100 50 Q 144 52 144 74 Q 100 66 56 74 Z" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<path d="M 40 76 Q 40 80 46 82 Q 56 80 56 74 Z" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
+  // heart on cap
+  s += `<g transform="translate(94 58)">
+    <rect x="0" y="1" width="2" height="2" fill="${BRAND.magenta}"/>
+    <rect x="2" y="0" width="2" height="2" fill="${BRAND.magenta}"/>
+    <rect x="4" y="1" width="2" height="2" fill="${BRAND.magenta}"/>
+    <rect x="2" y="1" width="2" height="2" fill="${BRAND.magenta}"/>
+    <rect x="0" y="3" width="6" height="2" fill="${BRAND.magenta}"/>
+    <rect x="1" y="5" width="4" height="2" fill="${BRAND.magenta}"/>
+    <rect x="2" y="7" width="2" height="1" fill="${BRAND.magenta}"/>
+  </g>`;
+  // peace hand
+  s += peaceSignHand(160, 120, green);
+  return s;
+}
+
+function drawRobotCompli(bg) {
+  const white = "#f2f4f8";
+  const shadow = "#c0c8d4";
+  let s = bg;
+  // small torso — white robot body
+  s += `<path d="M 60 200 L 60 176 Q 60 158 78 156 L 122 156 Q 140 158 140 176 L 140 200 Z" fill="${white}" stroke="${INK}" stroke-width="1.8"/>`;
+  // chest panel with GRC
+  s += `<rect x="82" y="176" width="36" height="16" rx="3" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.2"/>`;
+  s += `<text x="100" y="187" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="900" font-size="8" fill="${WHITE}">GRC</text>`;
+  // thumbs-up arm
+  s += `<path d="M 150 168 Q 168 156 172 138 Q 172 132 166 132 L 162 138 L 166 130 Q 166 124 160 128 L 156 138 L 156 130 Q 154 126 150 130 L 148 142 L 148 150 Q 148 158 154 160 Z" fill="${white}" stroke="${INK}" stroke-width="1.4"/>`;
+  // neck
+  s += `<rect x="88" y="140" width="24" height="18" fill="${shadow}" stroke="${INK}" stroke-width="1.2"/>`;
+  // head — round capsule
+  s += `<path d="M 56 68 Q 56 42 78 42 L 122 42 Q 144 42 144 68 L 144 122 Q 144 140 122 140 L 78 140 Q 56 140 56 122 Z" fill="${white}" stroke="${INK}" stroke-width="1.8"/>`;
+  // side ear plates
+  s += `<rect x="48" y="80" width="8" height="20" rx="3" fill="${shadow}" stroke="${INK}" stroke-width="1.2"/>`;
+  s += `<rect x="144" y="80" width="8" height="20" rx="3" fill="${shadow}" stroke="${INK}" stroke-width="1.2"/>`;
+  // happy cyan face lights
+  s += `<path d="M 74 90 Q 80 82 86 90" fill="none" stroke="${BRAND.cyan}" stroke-width="3.4" stroke-linecap="round"/>`;
+  s += `<path d="M 114 90 Q 120 82 126 90" fill="none" stroke="${BRAND.cyan}" stroke-width="3.4" stroke-linecap="round"/>`;
+  s += `<path d="M 78 108 Q 100 122 122 108" fill="none" stroke="${BRAND.cyan}" stroke-width="3.4" stroke-linecap="round"/>`;
+  // cheek dots
+  s += `<circle cx="70" cy="104" r="3" fill="${BRAND.magenta}" opacity="0.7"/>`;
+  s += `<circle cx="130" cy="104" r="3" fill="${BRAND.magenta}" opacity="0.7"/>`;
+  // antenna with blue bulb
+  s += `<line x1="100" y1="42" x2="100" y2="22" stroke="${INK}" stroke-width="1.8"/>`;
+  s += `<circle cx="100" cy="18" r="5" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.4"/>`;
+  return s;
+}
+
+function drawArcadeCabinet(bg) {
+  const cab = BRAND.magenta;
+  const cabDark = BRAND.magentaDeep;
+  const screen = BRAND.navy2;
+  let s = bg;
+  // cabinet body
+  s += `<path d="M 44 200 L 44 68 Q 44 54 58 54 L 142 54 Q 156 54 156 68 L 156 200 Z" fill="${cab}" stroke="${INK}" stroke-width="1.8"/>`;
+  // side panels darker
+  s += `<path d="M 44 68 L 44 200 L 54 200 L 54 68 Z" fill="${cabDark}"/>`;
+  s += `<path d="M 156 68 L 156 200 L 146 200 L 146 68 Z" fill="${cabDark}"/>`;
+  // marquee
+  s += `<rect x="52" y="60" width="96" height="16" rx="2" fill="${INK}" stroke="${INK}" stroke-width="1"/>`;
+  s += `<text x="100" y="72" text-anchor="middle" font-family="Mulish, sans-serif" font-weight="900" font-size="10" fill="${WHITE}" letter-spacing="3">GRC</text>`;
+  // screen bezel
+  s += `<rect x="58" y="82" width="84" height="60" rx="4" fill="${INK}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<rect x="62" y="86" width="76" height="52" rx="3" fill="${screen}"/>`;
+  // smiley face on screen
+  s += `<circle cx="82" cy="106" r="4" fill="${BRAND.cyan}"/>`;
+  s += `<circle cx="118" cy="106" r="4" fill="${BRAND.cyan}"/>`;
+  s += `<path d="M 82 122 Q 100 134 118 122" fill="none" stroke="${BRAND.cyan}" stroke-width="3" stroke-linecap="round"/>`;
+  // control panel
+  s += `<rect x="52" y="146" width="96" height="24" rx="2" fill="${cabDark}" stroke="${INK}" stroke-width="1.2"/>`;
+  // joystick
+  s += `<line x1="72" y1="158" x2="72" y2="148" stroke="${INK}" stroke-width="3"/>`;
+  s += `<circle cx="72" cy="146" r="5" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.4"/>`;
+  s += `<ellipse cx="72" cy="162" rx="8" ry="3" fill="${INK}"/>`;
+  // buttons
+  s += `<circle cx="100" cy="158" r="4" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.2"/>`;
+  s += `<circle cx="114" cy="158" r="4" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.2"/>`;
+  s += `<circle cx="128" cy="158" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.2"/>`;
+  // coin slot
+  s += `<rect x="94" y="180" width="12" height="4" rx="1" fill="${INK}"/>`;
+  return s;
+}
+
+
 /* =========================================================
    PRESET AVATARS
    ========================================================= */
+/* Neon accent color per preset for its circular border */
+const PRESET_NEON = {
+  trusty:      { c: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
+  risky:       { c: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
+  compli:      { c: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
+  auditace:    { c: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
+  controlfreak:{ c: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
+  peoplechamp: { c: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
+  builder:     { c: BRAND.cyan,    glow: "rgba(0,220,233,0.6)" },
+  strategist:  { c: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
+  futureproof: { c: BRAND.orange,  glow: "rgba(255,168,79,0.6)" },
+  arcadebot:   { c: BRAND.magenta, glow: "rgba(255,52,153,0.6)" },
+};
+
 const PRESETS = {
-  ana: {
-    name: "The Auditor", tag: "",
-    render: () => avatarBackground(ctxId()) + drawHuman({
-      skin: "#f6d3b0",
-      hair: "bob", hairColor: BRAND.cyan,
-      iris: "#1e4a70", brows: "natural",
-      mouth: "smile",
-      outfitColor: BRAND.orange,
-      accessory: "glasses",
-      extras: extraClipboard(),
-    }),
+  trusty: {
+    name: "Trusty",
+    tagline: "Keeps things on track",
+    render: () => drawFox(avatarBackground(ctxId())),
   },
-  cassie: {
-    name: "The Compliance Champ", tag: "",
+  risky: {
+    name: "Risky",
+    tagline: "Spots issues before they spawn",
     render: () => avatarBackground(ctxId()) + drawHuman({
       skin: "#e9b58c",
-      hair: "long", hairColor: "#e8c860",
-      iris: "#3a7ac4", brows: "arched",
-      mouth: "openSmile",
-      outfitColor: BRAND.cyan,
-      accessory: "hoops",
-      extras: extraCape(BRAND.magenta) + extraShield(),
+      hair: "mohawk", hairColor: BRAND.magenta,
+      iris: "#4a2a18", brows: "arched",
+      mouth: "smirk", eyes: "wink",
+      extras: peaceSignHand(150, 130, "#e9b58c"),
     }),
   },
-  ryan: {
-    name: "The Risk Ranger", tag: "",
+  compli: {
+    name: "Compli",
+    tagline: "Always up for a high score",
+    render: () => drawRobotCompli(avatarBackground(ctxId())),
+  },
+  auditace: {
+    name: "Audit Ace",
+    tagline: "Checks. Levels. Clears.",
     render: () => avatarBackground(ctxId()) + drawHuman({
-      skin: "#c99168",
-      hair: "short", hairColor: "#4a2a18",
+      skin: "#e9b58c",
+      hair: "short", hairColor: "#6a3a20",
       iris: "#4a2a18", brows: "bold",
-      mouth: "smirk",
-      outfitColor: BRAND.orange,
-      hat: "cowboyHat",
-      accessory: "none",
-      extras: extraDice(),
+      mouth: "smile",
+      beard: "full",
+      accessory: "glasses",
+      extras: headphonesOnNeck(),
     }),
   },
-  sam: {
-    name: "The SOC 2 Ninja", tag: "",
-    render: () => avatarBackground(ctxId()) + drawHuman({
-      skin: "#efd8c1",
-      hair: "bald", hairColor: "#141026",
-      iris: BRAND.cyan, brows: "bold",
-      mouth: "smirk",
-      outfitColor: BRAND.navy2,
-      hat: "ninjaBand",
-      accessory: "none",
-      extras: extraNinjaMask(),
-    }),
+  controlfreak: {
+    name: "Control Freak",
+    tagline: "Process protects progress",
+    render: () => drawCat(avatarBackground(ctxId())),
   },
-  devon: {
-    name: "The Pentester", tag: "",
+  peoplechamp: {
+    name: "People Champ",
+    tagline: "Stronger together",
     render: () => avatarBackground(ctxId()) + drawHuman({
       skin: "#8a5230",
-      hair: "bald", hairColor: "#141026",
-      iris: BRAND.cyan, brows: "natural",
-      mouth: "smirk",
-      outfitColor: BRAND.navy2,
-      hat: "hoodUp",
-      accessory: "glasses",
-      extras: extraCodeBrackets(),
+      hair: "curly", hairColor: "#3a1a10",
+      iris: "#4a2a18", brows: "arched",
+      mouth: "smirk", eyes: "wink",
+      accessory: "hoops",
+      extras: gameController(56, 158),
     }),
   },
-  poppy: {
-    name: "The Policy Wizard", tag: "",
+  builder: {
+    name: "Builder",
+    tagline: "Turns ideas into impact",
     render: () => avatarBackground(ctxId()) + drawHuman({
-      skin: "#f0d8b8",
-      hair: "long", hairColor: "#8a2be2",
-      iris: "#4a8a5a", brows: "arched",
-      mouth: "smirk",
-      outfitColor: BRAND.magenta,
-      hat: "witchHat",
-      accessory: "none",
-      extras: extraScroll(),
+      skin: "#c99168",
+      hair: "short", hairColor: "#3a2418",
+      iris: "#4a2a18", brows: "natural",
+      mouth: "openSmile", eyes: "sparkle",
+      hat: "cap",
     }),
   },
-  cyanbot: {
-    name: "The AI Auditor", tag: "",
-    render: () => {
-      let s = avatarBackground(ctxId());
-      s += drawTorso(BRAND.cyan);
-      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
-      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.cyan}"/>`;
-      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<path d="M 62 54 Q 54 54 54 66 L 54 122 Q 54 134 62 134 L 138 134 Q 146 134 146 122 L 146 66 Q 146 54 138 54 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<rect x="70" y="76" width="60" height="42" rx="8" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="86" cy="96" r="6" fill="${WHITE}"/>`;
-      s += `<circle cx="114" cy="96" r="6" fill="${WHITE}"/>`;
-      s += `<circle cx="86" cy="96" r="3" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="114" cy="96" r="3" fill="${BRAND.magenta}"/>`;
-      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
-      s += `<line x1="100" y1="54" x2="100" y2="34" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="100" cy="30" r="5" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<rect x="48" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="146" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      // audit checkmark badge
-      s += `<circle cx="130" cy="112" r="6" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1"/>`;
-      s += `<path d="M 127 112 L 129 114 L 133 110" fill="none" stroke="${INK}" stroke-width="1.4" stroke-linecap="round"/>`;
-      return s;
-    },
+  strategist: {
+    name: "Strategist",
+    tagline: "Big picture. Bigger possibilities.",
+    render: () => avatarBackground(ctxId()) + drawHuman({
+      skin: "#f6d3b0",
+      hair: "long", hairColor: "#141026",
+      iris: BRAND.cyan, brows: "arched",
+      mouth: "smile",
+      accessory: "glasses",
+      extras: grcMug(38, 156) + `<path d="M 70 90 Q 65 130 60 168" fill="none" stroke="${BRAND.cyan}" stroke-width="3.4" stroke-linecap="round"/>`,
+    }),
   },
-  magenbot: {
-    name: "The Trust Bot", tag: "",
-    render: () => {
-      let s = avatarBackground(ctxId());
-      s += drawTorso(BRAND.magenta);
-      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.cyan}"/>`;
-      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
-      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.magenta}"/>`;
-      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="100" cy="92" r="44" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="100" cy="96" r="30" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<path d="M 82 88 L 86 84 L 90 88 L 86 96 Z" fill="${BRAND.cyan}"/>`;
-      s += `<path d="M 110 88 L 114 84 L 118 88 L 114 96 Z" fill="${BRAND.cyan}"/>`;
-      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
-      s += `<path d="M 100 48 Q 108 38 116 44" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="116" cy="44" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="52" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="142" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      // lock badge for trust
-      s += extraLock();
-      return s;
-    },
+  futureproof: {
+    name: "Future Proof",
+    tagline: "Explores what's next",
+    render: () => drawAlien(avatarBackground(ctxId())),
   },
-  cyanbot: {
-    name: "Cyan-Bot", tag: "Anecdotes Mascot",
-    render: () => {
-      let s = avatarBackground(ctxId());
-      // torso as cyan panel
-      s += drawTorso(BRAND.cyan);
-      // chest badge
-      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
-      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.cyan}"/>`;
-      // neck (small cyan strip)
-      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.4"/>`;
-      // head (rounded rect)
-      s += `<path d="M 62 54 Q 54 54 54 66 L 54 122 Q 54 134 62 134 L 138 134 Q 146 134 146 122 L 146 66 Q 146 54 138 54 Z" fill="${BRAND.cyan}" stroke="${INK}" stroke-width="1.8"/>`;
-      // screen face
-      s += `<rect x="70" y="76" width="60" height="42" rx="8" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      // eyes
-      s += `<circle cx="86" cy="96" r="6" fill="${WHITE}"/>`;
-      s += `<circle cx="114" cy="96" r="6" fill="${WHITE}"/>`;
-      s += `<circle cx="86" cy="96" r="3" fill="${BRAND.magenta}"/>`;
-      s += `<circle cx="114" cy="96" r="3" fill="${BRAND.magenta}"/>`;
-      // smile
-      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
-      // antenna
-      s += `<line x1="100" y1="54" x2="100" y2="34" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="100" cy="30" r="5" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.4"/>`;
-      // side ears
-      s += `<rect x="48" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="146" y="86" width="6" height="16" rx="2" fill="${BRAND.cyanDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      return s;
-    },
-  },
-  magenbot: {
-    name: "Magenta-Bot", tag: "Anecdotes Mascot",
-    render: () => {
-      let s = avatarBackground(ctxId());
-      s += drawTorso(BRAND.magenta);
-      s += `<rect x="82" y="168" width="36" height="20" rx="4" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      s += `<circle cx="92" cy="178" r="2" fill="${BRAND.cyan}"/>`;
-      s += `<circle cx="100" cy="178" r="2" fill="${BRAND.orange}"/>`;
-      s += `<circle cx="108" cy="178" r="2" fill="${BRAND.magenta}"/>`;
-      // neck
-      s += `<rect x="92" y="132" width="16" height="20" rx="3" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.4"/>`;
-      // round head
-      s += `<circle cx="100" cy="92" r="44" fill="${BRAND.magenta}" stroke="${INK}" stroke-width="1.8"/>`;
-      // screen face (round)
-      s += `<circle cx="100" cy="96" r="30" fill="${BRAND.navy2}" stroke="${INK}" stroke-width="1.4"/>`;
-      // heart eyes
-      s += `<path d="M 82 88 L 86 84 L 90 88 L 86 96 Z" fill="${BRAND.cyan}"/>`;
-      s += `<path d="M 110 88 L 114 84 L 118 88 L 114 96 Z" fill="${BRAND.cyan}"/>`;
-      // smile
-      s += `<path d="M 86 108 Q 100 116 114 108" fill="none" stroke="${BRAND.cyan}" stroke-width="1.8" stroke-linecap="round"/>`;
-      // antenna
-      s += `<path d="M 100 48 Q 108 38 116 44" fill="none" stroke="${INK}" stroke-width="1.8"/>`;
-      s += `<circle cx="116" cy="44" r="4" fill="${BRAND.orange}" stroke="${INK}" stroke-width="1.2"/>`;
-      // ears
-      s += `<rect x="52" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      s += `<rect x="142" y="86" width="6" height="14" rx="2" fill="${BRAND.magentaDeep}" stroke="${INK}" stroke-width="1.2"/>`;
-      return s;
-    },
+  arcadebot: {
+    name: "Arcade Bot",
+    tagline: "Play. Connect. Repeat.",
+    render: () => drawArcadeCabinet(avatarBackground(ctxId())),
   },
 };
 
@@ -1304,9 +1626,13 @@ function renderPresetCards() {
     const card = document.createElement("div");
     card.className = "preset-card" + (state.presetKey === key ? " selected" : "");
     card.dataset.key = key;
+    const accent = PRESET_NEON[key] || {c: "#00dce9", glow: "rgba(0,220,233,0.6)"};
+    card.style.setProperty("--neon", accent.c);
+    card.style.setProperty("--neon-glow", accent.glow);
     card.innerHTML = `
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">${p.render()}</svg>
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">${p.render()}</svg>
       <div class="name">${p.name}</div>
+      ${p.tagline ? `<div class="tag">${p.tagline}</div>` : ""}
     `;
     card.addEventListener("click", () => {
       state.presetKey = key;
