@@ -1,0 +1,10 @@
+{
+  "id": "char-02",
+  "name": "The Risk Whisperer",
+  "tagline": "People. Risk. Progress.",
+  "src": "tools/sheets/src/char-02.svg",
+  "cols": 6,
+  "rows": 4,
+  "labels": false,
+  "default": 20
+}

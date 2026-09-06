@@ -1,0 +1,9 @@
+{
+  "id": "char-06",
+  "name": "The Evidence Retriever",
+  "tagline": "Fetches the artifact, tail wagging",
+  "src": "tools/sheets/src/char-06.svg",
+  "cols": 4,
+  "rows": 1,
+  "default": 1
+}

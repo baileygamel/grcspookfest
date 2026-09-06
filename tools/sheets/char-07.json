@@ -1,0 +1,9 @@
+{
+  "id": "char-07",
+  "name": "The Scope Creeper",
+  "tagline": "Expands the scope, unbothered",
+  "src": "tools/sheets/src/char-07.svg",
+  "cols": 4,
+  "rows": 1,
+  "default": 1
+}

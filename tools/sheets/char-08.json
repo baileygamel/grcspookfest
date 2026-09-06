@@ -1,0 +1,9 @@
+{
+  "id": "char-08",
+  "name": "The Outlier",
+  "tagline": "Three standard deviations out",
+  "src": "tools/sheets/src/char-08.svg",
+  "cols": 4,
+  "rows": 2,
+  "default": 1
+}

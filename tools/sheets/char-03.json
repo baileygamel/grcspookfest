@@ -1,0 +1,24 @@
+{
+  "id": "char-03",
+  "name": "The Policy Wonk",
+  "tagline": "Reads control language for fun",
+  "src": "tools/sheets/src/char-03.svg",
+  "cols": 6,
+  "rows": 4,
+  "labels": false,
+  "default": 3,
+  "grid": {
+    "x0": 0,
+    "y0": 60,
+    "cellW": 256,
+    "cellH": 256
+  },
+  "erase": [
+    [
+      0,
+      0,
+      445,
+      75
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "char-04",
+  "name": "The Framework Nerd",
+  "tagline": "Knows every framework by number",
+  "src": "tools/sheets/src/char-04.svg",
+  "cols": 6,
+  "rows": 4,
+  "default": 19
+}
