@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRC Barcade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Mulish:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brandmark"><span class="pill"><span class="pill-text">GRC Barcade</span></span></div>
+    <button class="icon-btn" id="theme-toggle" type="button">Light mode</button>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Progress">
+    <button class="rail-step" type="button" data-goto="1"><span class="dot">1</span><span class="lbl">Character</span></button>
+    <span class="rail-line"></span>
+    <button class="rail-step" type="button" data-goto="2"><span class="dot">2</span><span class="lbl">Look</span></button>
+    <span class="rail-line"></span>
+    <button class="rail-step" type="button" data-goto="3"><span class="dot">3</span><span class="lbl">Name</span></button>
+    <span class="rail-line"></span>
+    <button class="rail-step" type="button" data-goto="4"><span class="dot">4</span><span class="lbl">City</span></button>
+    <span class="rail-line"></span>
+    <button class="rail-step" type="button" data-goto="5"><span class="dot">5</span><span class="lbl">Share</span></button>
+  </nav>
+
+  <!-- step 1 ------------------------------------------------------------- -->
+  <section class="step" id="step-1">
+    <h1>Pick your <em>character</em>.</h1>
+    <p class="sub">Choose the one that feels like you. You'll fine-tune the look next.</p>
+    <div class="grid" id="character-grid"></div>
+  </section>
+
+  <!-- step 2 ------------------------------------------------------------- -->
+  <section class="step" id="step-2" hidden>
+    <h1>Make them <em>yours</em>.</h1>
+    <p class="sub" id="variant-sub"></p>
+    <div class="actions" style="margin: 0 0 20px">
+      <button class="btn ghost" type="button" id="back-1">← Back</button>
+      <button class="btn ghost" type="button" id="surprise">Surprise me</button>
+    </div>
+    <div class="grid variants" id="variant-grid"></div>
+  </section>
+
+  <!-- step 3 ------------------------------------------------------------- -->
+  <section class="step" id="step-3" hidden>
+    <h1>What should we <em>call you</em>?</h1>
+    <p class="sub">This is the name other people will see next to your avatar.</p>
+    <div class="finish">
+      <div class="preview">
+        <img class="art" id="preview-art" alt="">
+        <div class="who" id="preview-name"></div>
+        <div class="meta" id="preview-meta"></div>
+      </div>
+      <div>
+        <label class="field" for="username">Username</label>
+        <input type="text" id="username" maxlength="20" autocomplete="off" spellcheck="false"
+               placeholder="e.g. audit_ace" aria-describedby="username-hint">
+        <div class="hint" id="username-hint">
+          <span id="username-error" class="err" role="alert"></span>
+          <span id="username-count">0 / 20</span>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" type="button" id="back-2">← Back</button>
+          <button class="btn primary" type="button" id="confirm" disabled>Next: pick your city</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- step 4 ------------------------------------------------------------- -->
+  <section class="step" id="step-4" hidden>
+    <h1>Which stop are you <em>hitting</em>?</h1>
+    <p class="sub">Three cities on the GRC Barcade tour. Pick yours and we'll make you something to post.</p>
+    <div class="actions" style="margin: 0 0 22px">
+      <button class="btn ghost" type="button" id="back-3">&larr; Back</button>
+    </div>
+    <div class="cities" id="city-grid"></div>
+  </section>
+
+  <!-- step 5 ------------------------------------------------------------- -->
+  <section class="step" id="step-5" hidden>
+    <h1>Tell everyone you're <em>going</em>.</h1>
+    <p class="sub" id="share-sub"></p>
+    <div class="share">
+      <figure class="share-card">
+        <canvas id="share-canvas" width="1080" height="1080" aria-label="Your share card"></canvas>
+      </figure>
+      <div>
+        <label class="field" for="caption">Caption</label>
+        <textarea id="caption" rows="5" spellcheck="false"></textarea>
+        <div class="hint"><span id="share-status" role="status"></span></div>
+
+        <div class="actions share-actions">
+          <button class="btn primary" type="button" id="share-native" hidden>Share&hellip;</button>
+          <button class="btn primary" type="button" id="share-download">Download image</button>
+          <button class="btn ghost" type="button" id="share-copy">Copy caption</button>
+        </div>
+        <div class="actions share-actions">
+          <button class="btn social linkedin" type="button" id="share-linkedin">Post on LinkedIn</button>
+          <button class="btn social instagram" type="button" id="share-instagram">Post on Instagram</button>
+        </div>
+
+        <p class="fineprint" id="share-note"></p>
+
+        <div class="actions">
+          <button class="btn ghost" type="button" id="back-4">&larr; Change city</button>
+          <button class="btn ghost" type="button" id="restart">Start over</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="characters.js"></script>
+<script src="events.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
