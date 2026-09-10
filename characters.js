@@ -14,162 +14,162 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-01/01.png",
-        "file2x": "assets/char-01/01@2x.png",
+        "file2x": "assets/char-01/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-01/02.png",
-        "file2x": "assets/char-01/02@2x.png",
+        "file2x": "assets/char-01/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-01/03.png",
-        "file2x": "assets/char-01/03@2x.png",
+        "file2x": "assets/char-01/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-01/04.png",
-        "file2x": "assets/char-01/04@2x.png",
+        "file2x": "assets/char-01/04-2x.png",
         "name": "Look 4"
       },
       {
         "file": "assets/char-01/05.png",
-        "file2x": "assets/char-01/05@2x.png",
+        "file2x": "assets/char-01/05-2x.png",
         "name": "Look 5"
       },
       {
         "file": "assets/char-01/06.png",
-        "file2x": "assets/char-01/06@2x.png",
+        "file2x": "assets/char-01/06-2x.png",
         "name": "Look 6"
       },
       {
         "file": "assets/char-01/07.png",
-        "file2x": "assets/char-01/07@2x.png",
+        "file2x": "assets/char-01/07-2x.png",
         "name": "Look 7"
       },
       {
         "file": "assets/char-01/08.png",
-        "file2x": "assets/char-01/08@2x.png",
+        "file2x": "assets/char-01/08-2x.png",
         "name": "Look 8"
       },
       {
         "file": "assets/char-01/09.png",
-        "file2x": "assets/char-01/09@2x.png",
+        "file2x": "assets/char-01/09-2x.png",
         "name": "Look 9"
       },
       {
         "file": "assets/char-01/10.png",
-        "file2x": "assets/char-01/10@2x.png",
+        "file2x": "assets/char-01/10-2x.png",
         "name": "Look 10"
       },
       {
         "file": "assets/char-01/11.png",
-        "file2x": "assets/char-01/11@2x.png",
+        "file2x": "assets/char-01/11-2x.png",
         "name": "Look 11"
       },
       {
         "file": "assets/char-01/12.png",
-        "file2x": "assets/char-01/12@2x.png",
+        "file2x": "assets/char-01/12-2x.png",
         "name": "Look 12"
       },
       {
         "file": "assets/char-01/13.png",
-        "file2x": "assets/char-01/13@2x.png",
+        "file2x": "assets/char-01/13-2x.png",
         "name": "Look 13"
       },
       {
         "file": "assets/char-01/14.png",
-        "file2x": "assets/char-01/14@2x.png",
+        "file2x": "assets/char-01/14-2x.png",
         "name": "Look 14"
       },
       {
         "file": "assets/char-01/15.png",
-        "file2x": "assets/char-01/15@2x.png",
+        "file2x": "assets/char-01/15-2x.png",
         "name": "Look 15"
       },
       {
         "file": "assets/char-01/16.png",
-        "file2x": "assets/char-01/16@2x.png",
+        "file2x": "assets/char-01/16-2x.png",
         "name": "Look 16"
       },
       {
         "file": "assets/char-01/17.png",
-        "file2x": "assets/char-01/17@2x.png",
+        "file2x": "assets/char-01/17-2x.png",
         "name": "Look 17"
       },
       {
         "file": "assets/char-01/18.png",
-        "file2x": "assets/char-01/18@2x.png",
+        "file2x": "assets/char-01/18-2x.png",
         "name": "Look 18"
       },
       {
         "file": "assets/char-01/19.png",
-        "file2x": "assets/char-01/19@2x.png",
+        "file2x": "assets/char-01/19-2x.png",
         "name": "Look 19"
       },
       {
         "file": "assets/char-01/20.png",
-        "file2x": "assets/char-01/20@2x.png",
+        "file2x": "assets/char-01/20-2x.png",
         "name": "Look 20"
       },
       {
         "file": "assets/char-01/21.png",
-        "file2x": "assets/char-01/21@2x.png",
+        "file2x": "assets/char-01/21-2x.png",
         "name": "Look 21"
       },
       {
         "file": "assets/char-01/22.png",
-        "file2x": "assets/char-01/22@2x.png",
+        "file2x": "assets/char-01/22-2x.png",
         "name": "Look 22"
       },
       {
         "file": "assets/char-01/23.png",
-        "file2x": "assets/char-01/23@2x.png",
+        "file2x": "assets/char-01/23-2x.png",
         "name": "Look 23"
       },
       {
         "file": "assets/char-01/24.png",
-        "file2x": "assets/char-01/24@2x.png",
+        "file2x": "assets/char-01/24-2x.png",
         "name": "Look 24"
       },
       {
         "file": "assets/char-01/25.png",
-        "file2x": "assets/char-01/25@2x.png",
+        "file2x": "assets/char-01/25-2x.png",
         "name": "Look 25"
       },
       {
         "file": "assets/char-01/26.png",
-        "file2x": "assets/char-01/26@2x.png",
+        "file2x": "assets/char-01/26-2x.png",
         "name": "Look 26"
       },
       {
         "file": "assets/char-01/27.png",
-        "file2x": "assets/char-01/27@2x.png",
+        "file2x": "assets/char-01/27-2x.png",
         "name": "Look 27"
       },
       {
         "file": "assets/char-01/28.png",
-        "file2x": "assets/char-01/28@2x.png",
+        "file2x": "assets/char-01/28-2x.png",
         "name": "Look 28"
       },
       {
         "file": "assets/char-01/29.png",
-        "file2x": "assets/char-01/29@2x.png",
+        "file2x": "assets/char-01/29-2x.png",
         "name": "Look 29"
       },
       {
         "file": "assets/char-01/30.png",
-        "file2x": "assets/char-01/30@2x.png",
+        "file2x": "assets/char-01/30-2x.png",
         "name": "Look 30"
       },
       {
         "file": "assets/char-01/31.png",
-        "file2x": "assets/char-01/31@2x.png",
+        "file2x": "assets/char-01/31-2x.png",
         "name": "Look 31"
       },
       {
         "file": "assets/char-01/32.png",
-        "file2x": "assets/char-01/32@2x.png",
+        "file2x": "assets/char-01/32-2x.png",
         "name": "Look 32"
       }
     ]
@@ -188,122 +188,122 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-02/01.png",
-        "file2x": "assets/char-02/01@2x.png",
+        "file2x": "assets/char-02/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-02/02.png",
-        "file2x": "assets/char-02/02@2x.png",
+        "file2x": "assets/char-02/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-02/03.png",
-        "file2x": "assets/char-02/03@2x.png",
+        "file2x": "assets/char-02/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-02/04.png",
-        "file2x": "assets/char-02/04@2x.png",
+        "file2x": "assets/char-02/04-2x.png",
         "name": "Look 4"
       },
       {
         "file": "assets/char-02/05.png",
-        "file2x": "assets/char-02/05@2x.png",
+        "file2x": "assets/char-02/05-2x.png",
         "name": "Look 5"
       },
       {
         "file": "assets/char-02/06.png",
-        "file2x": "assets/char-02/06@2x.png",
+        "file2x": "assets/char-02/06-2x.png",
         "name": "Look 6"
       },
       {
         "file": "assets/char-02/07.png",
-        "file2x": "assets/char-02/07@2x.png",
+        "file2x": "assets/char-02/07-2x.png",
         "name": "Look 7"
       },
       {
         "file": "assets/char-02/08.png",
-        "file2x": "assets/char-02/08@2x.png",
+        "file2x": "assets/char-02/08-2x.png",
         "name": "Look 8"
       },
       {
         "file": "assets/char-02/09.png",
-        "file2x": "assets/char-02/09@2x.png",
+        "file2x": "assets/char-02/09-2x.png",
         "name": "Look 9"
       },
       {
         "file": "assets/char-02/10.png",
-        "file2x": "assets/char-02/10@2x.png",
+        "file2x": "assets/char-02/10-2x.png",
         "name": "Look 10"
       },
       {
         "file": "assets/char-02/11.png",
-        "file2x": "assets/char-02/11@2x.png",
+        "file2x": "assets/char-02/11-2x.png",
         "name": "Look 11"
       },
       {
         "file": "assets/char-02/12.png",
-        "file2x": "assets/char-02/12@2x.png",
+        "file2x": "assets/char-02/12-2x.png",
         "name": "Look 12"
       },
       {
         "file": "assets/char-02/13.png",
-        "file2x": "assets/char-02/13@2x.png",
+        "file2x": "assets/char-02/13-2x.png",
         "name": "Look 13"
       },
       {
         "file": "assets/char-02/14.png",
-        "file2x": "assets/char-02/14@2x.png",
+        "file2x": "assets/char-02/14-2x.png",
         "name": "Look 14"
       },
       {
         "file": "assets/char-02/15.png",
-        "file2x": "assets/char-02/15@2x.png",
+        "file2x": "assets/char-02/15-2x.png",
         "name": "Look 15"
       },
       {
         "file": "assets/char-02/16.png",
-        "file2x": "assets/char-02/16@2x.png",
+        "file2x": "assets/char-02/16-2x.png",
         "name": "Look 16"
       },
       {
         "file": "assets/char-02/17.png",
-        "file2x": "assets/char-02/17@2x.png",
+        "file2x": "assets/char-02/17-2x.png",
         "name": "Look 17"
       },
       {
         "file": "assets/char-02/18.png",
-        "file2x": "assets/char-02/18@2x.png",
+        "file2x": "assets/char-02/18-2x.png",
         "name": "Look 18"
       },
       {
         "file": "assets/char-02/19.png",
-        "file2x": "assets/char-02/19@2x.png",
+        "file2x": "assets/char-02/19-2x.png",
         "name": "Look 19"
       },
       {
         "file": "assets/char-02/20.png",
-        "file2x": "assets/char-02/20@2x.png",
+        "file2x": "assets/char-02/20-2x.png",
         "name": "Look 20"
       },
       {
         "file": "assets/char-02/21.png",
-        "file2x": "assets/char-02/21@2x.png",
+        "file2x": "assets/char-02/21-2x.png",
         "name": "Look 21"
       },
       {
         "file": "assets/char-02/22.png",
-        "file2x": "assets/char-02/22@2x.png",
+        "file2x": "assets/char-02/22-2x.png",
         "name": "Look 22"
       },
       {
         "file": "assets/char-02/23.png",
-        "file2x": "assets/char-02/23@2x.png",
+        "file2x": "assets/char-02/23-2x.png",
         "name": "Look 23"
       },
       {
         "file": "assets/char-02/24.png",
-        "file2x": "assets/char-02/24@2x.png",
+        "file2x": "assets/char-02/24-2x.png",
         "name": "Look 24"
       }
     ]
@@ -322,122 +322,122 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-03/01.png",
-        "file2x": "assets/char-03/01@2x.png",
+        "file2x": "assets/char-03/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-03/02.png",
-        "file2x": "assets/char-03/02@2x.png",
+        "file2x": "assets/char-03/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-03/03.png",
-        "file2x": "assets/char-03/03@2x.png",
+        "file2x": "assets/char-03/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-03/04.png",
-        "file2x": "assets/char-03/04@2x.png",
+        "file2x": "assets/char-03/04-2x.png",
         "name": "Look 4"
       },
       {
         "file": "assets/char-03/05.png",
-        "file2x": "assets/char-03/05@2x.png",
+        "file2x": "assets/char-03/05-2x.png",
         "name": "Look 5"
       },
       {
         "file": "assets/char-03/06.png",
-        "file2x": "assets/char-03/06@2x.png",
+        "file2x": "assets/char-03/06-2x.png",
         "name": "Look 6"
       },
       {
         "file": "assets/char-03/07.png",
-        "file2x": "assets/char-03/07@2x.png",
+        "file2x": "assets/char-03/07-2x.png",
         "name": "Look 7"
       },
       {
         "file": "assets/char-03/08.png",
-        "file2x": "assets/char-03/08@2x.png",
+        "file2x": "assets/char-03/08-2x.png",
         "name": "Look 8"
       },
       {
         "file": "assets/char-03/09.png",
-        "file2x": "assets/char-03/09@2x.png",
+        "file2x": "assets/char-03/09-2x.png",
         "name": "Look 9"
       },
       {
         "file": "assets/char-03/10.png",
-        "file2x": "assets/char-03/10@2x.png",
+        "file2x": "assets/char-03/10-2x.png",
         "name": "Look 10"
       },
       {
         "file": "assets/char-03/11.png",
-        "file2x": "assets/char-03/11@2x.png",
+        "file2x": "assets/char-03/11-2x.png",
         "name": "Look 11"
       },
       {
         "file": "assets/char-03/12.png",
-        "file2x": "assets/char-03/12@2x.png",
+        "file2x": "assets/char-03/12-2x.png",
         "name": "Look 12"
       },
       {
         "file": "assets/char-03/13.png",
-        "file2x": "assets/char-03/13@2x.png",
+        "file2x": "assets/char-03/13-2x.png",
         "name": "Look 13"
       },
       {
         "file": "assets/char-03/14.png",
-        "file2x": "assets/char-03/14@2x.png",
+        "file2x": "assets/char-03/14-2x.png",
         "name": "Look 14"
       },
       {
         "file": "assets/char-03/15.png",
-        "file2x": "assets/char-03/15@2x.png",
+        "file2x": "assets/char-03/15-2x.png",
         "name": "Look 15"
       },
       {
         "file": "assets/char-03/16.png",
-        "file2x": "assets/char-03/16@2x.png",
+        "file2x": "assets/char-03/16-2x.png",
         "name": "Look 16"
       },
       {
         "file": "assets/char-03/17.png",
-        "file2x": "assets/char-03/17@2x.png",
+        "file2x": "assets/char-03/17-2x.png",
         "name": "Look 17"
       },
       {
         "file": "assets/char-03/18.png",
-        "file2x": "assets/char-03/18@2x.png",
+        "file2x": "assets/char-03/18-2x.png",
         "name": "Look 18"
       },
       {
         "file": "assets/char-03/19.png",
-        "file2x": "assets/char-03/19@2x.png",
+        "file2x": "assets/char-03/19-2x.png",
         "name": "Look 19"
       },
       {
         "file": "assets/char-03/20.png",
-        "file2x": "assets/char-03/20@2x.png",
+        "file2x": "assets/char-03/20-2x.png",
         "name": "Look 20"
       },
       {
         "file": "assets/char-03/21.png",
-        "file2x": "assets/char-03/21@2x.png",
+        "file2x": "assets/char-03/21-2x.png",
         "name": "Look 21"
       },
       {
         "file": "assets/char-03/22.png",
-        "file2x": "assets/char-03/22@2x.png",
+        "file2x": "assets/char-03/22-2x.png",
         "name": "Look 22"
       },
       {
         "file": "assets/char-03/23.png",
-        "file2x": "assets/char-03/23@2x.png",
+        "file2x": "assets/char-03/23-2x.png",
         "name": "Look 23"
       },
       {
         "file": "assets/char-03/24.png",
-        "file2x": "assets/char-03/24@2x.png",
+        "file2x": "assets/char-03/24-2x.png",
         "name": "Look 24"
       }
     ]
@@ -456,122 +456,122 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-04/01.png",
-        "file2x": "assets/char-04/01@2x.png",
+        "file2x": "assets/char-04/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-04/02.png",
-        "file2x": "assets/char-04/02@2x.png",
+        "file2x": "assets/char-04/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-04/03.png",
-        "file2x": "assets/char-04/03@2x.png",
+        "file2x": "assets/char-04/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-04/04.png",
-        "file2x": "assets/char-04/04@2x.png",
+        "file2x": "assets/char-04/04-2x.png",
         "name": "Look 4"
       },
       {
         "file": "assets/char-04/05.png",
-        "file2x": "assets/char-04/05@2x.png",
+        "file2x": "assets/char-04/05-2x.png",
         "name": "Look 5"
       },
       {
         "file": "assets/char-04/06.png",
-        "file2x": "assets/char-04/06@2x.png",
+        "file2x": "assets/char-04/06-2x.png",
         "name": "Look 6"
       },
       {
         "file": "assets/char-04/07.png",
-        "file2x": "assets/char-04/07@2x.png",
+        "file2x": "assets/char-04/07-2x.png",
         "name": "Look 7"
       },
       {
         "file": "assets/char-04/08.png",
-        "file2x": "assets/char-04/08@2x.png",
+        "file2x": "assets/char-04/08-2x.png",
         "name": "Look 8"
       },
       {
         "file": "assets/char-04/09.png",
-        "file2x": "assets/char-04/09@2x.png",
+        "file2x": "assets/char-04/09-2x.png",
         "name": "Look 9"
       },
       {
         "file": "assets/char-04/10.png",
-        "file2x": "assets/char-04/10@2x.png",
+        "file2x": "assets/char-04/10-2x.png",
         "name": "Look 10"
       },
       {
         "file": "assets/char-04/11.png",
-        "file2x": "assets/char-04/11@2x.png",
+        "file2x": "assets/char-04/11-2x.png",
         "name": "Look 11"
       },
       {
         "file": "assets/char-04/12.png",
-        "file2x": "assets/char-04/12@2x.png",
+        "file2x": "assets/char-04/12-2x.png",
         "name": "Look 12"
       },
       {
         "file": "assets/char-04/13.png",
-        "file2x": "assets/char-04/13@2x.png",
+        "file2x": "assets/char-04/13-2x.png",
         "name": "Look 13"
       },
       {
         "file": "assets/char-04/14.png",
-        "file2x": "assets/char-04/14@2x.png",
+        "file2x": "assets/char-04/14-2x.png",
         "name": "Look 14"
       },
       {
         "file": "assets/char-04/15.png",
-        "file2x": "assets/char-04/15@2x.png",
+        "file2x": "assets/char-04/15-2x.png",
         "name": "Look 15"
       },
       {
         "file": "assets/char-04/16.png",
-        "file2x": "assets/char-04/16@2x.png",
+        "file2x": "assets/char-04/16-2x.png",
         "name": "Look 16"
       },
       {
         "file": "assets/char-04/17.png",
-        "file2x": "assets/char-04/17@2x.png",
+        "file2x": "assets/char-04/17-2x.png",
         "name": "Look 17"
       },
       {
         "file": "assets/char-04/18.png",
-        "file2x": "assets/char-04/18@2x.png",
+        "file2x": "assets/char-04/18-2x.png",
         "name": "Look 18"
       },
       {
         "file": "assets/char-04/19.png",
-        "file2x": "assets/char-04/19@2x.png",
+        "file2x": "assets/char-04/19-2x.png",
         "name": "Look 19"
       },
       {
         "file": "assets/char-04/20.png",
-        "file2x": "assets/char-04/20@2x.png",
+        "file2x": "assets/char-04/20-2x.png",
         "name": "Look 20"
       },
       {
         "file": "assets/char-04/21.png",
-        "file2x": "assets/char-04/21@2x.png",
+        "file2x": "assets/char-04/21-2x.png",
         "name": "Look 21"
       },
       {
         "file": "assets/char-04/22.png",
-        "file2x": "assets/char-04/22@2x.png",
+        "file2x": "assets/char-04/22-2x.png",
         "name": "Look 22"
       },
       {
         "file": "assets/char-04/23.png",
-        "file2x": "assets/char-04/23@2x.png",
+        "file2x": "assets/char-04/23-2x.png",
         "name": "Look 23"
       },
       {
         "file": "assets/char-04/24.png",
-        "file2x": "assets/char-04/24@2x.png",
+        "file2x": "assets/char-04/24-2x.png",
         "name": "Look 24"
       }
     ]
@@ -590,92 +590,92 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-05/01.png",
-        "file2x": "assets/char-05/01@2x.png",
+        "file2x": "assets/char-05/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-05/02.png",
-        "file2x": "assets/char-05/02@2x.png",
+        "file2x": "assets/char-05/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-05/03.png",
-        "file2x": "assets/char-05/03@2x.png",
+        "file2x": "assets/char-05/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-05/04.png",
-        "file2x": "assets/char-05/04@2x.png",
+        "file2x": "assets/char-05/04-2x.png",
         "name": "Look 4"
       },
       {
         "file": "assets/char-05/05.png",
-        "file2x": "assets/char-05/05@2x.png",
+        "file2x": "assets/char-05/05-2x.png",
         "name": "Look 5"
       },
       {
         "file": "assets/char-05/06.png",
-        "file2x": "assets/char-05/06@2x.png",
+        "file2x": "assets/char-05/06-2x.png",
         "name": "Look 6"
       },
       {
         "file": "assets/char-05/07.png",
-        "file2x": "assets/char-05/07@2x.png",
+        "file2x": "assets/char-05/07-2x.png",
         "name": "Look 7"
       },
       {
         "file": "assets/char-05/08.png",
-        "file2x": "assets/char-05/08@2x.png",
+        "file2x": "assets/char-05/08-2x.png",
         "name": "Look 8"
       },
       {
         "file": "assets/char-05/09.png",
-        "file2x": "assets/char-05/09@2x.png",
+        "file2x": "assets/char-05/09-2x.png",
         "name": "Look 9"
       },
       {
         "file": "assets/char-05/10.png",
-        "file2x": "assets/char-05/10@2x.png",
+        "file2x": "assets/char-05/10-2x.png",
         "name": "Look 10"
       },
       {
         "file": "assets/char-05/11.png",
-        "file2x": "assets/char-05/11@2x.png",
+        "file2x": "assets/char-05/11-2x.png",
         "name": "Look 11"
       },
       {
         "file": "assets/char-05/12.png",
-        "file2x": "assets/char-05/12@2x.png",
+        "file2x": "assets/char-05/12-2x.png",
         "name": "Look 12"
       },
       {
         "file": "assets/char-05/13.png",
-        "file2x": "assets/char-05/13@2x.png",
+        "file2x": "assets/char-05/13-2x.png",
         "name": "Look 13"
       },
       {
         "file": "assets/char-05/14.png",
-        "file2x": "assets/char-05/14@2x.png",
+        "file2x": "assets/char-05/14-2x.png",
         "name": "Look 14"
       },
       {
         "file": "assets/char-05/15.png",
-        "file2x": "assets/char-05/15@2x.png",
+        "file2x": "assets/char-05/15-2x.png",
         "name": "Look 15"
       },
       {
         "file": "assets/char-05/16.png",
-        "file2x": "assets/char-05/16@2x.png",
+        "file2x": "assets/char-05/16-2x.png",
         "name": "Look 16"
       },
       {
         "file": "assets/char-05/17.png",
-        "file2x": "assets/char-05/17@2x.png",
+        "file2x": "assets/char-05/17-2x.png",
         "name": "Look 17"
       },
       {
         "file": "assets/char-05/18.png",
-        "file2x": "assets/char-05/18@2x.png",
+        "file2x": "assets/char-05/18-2x.png",
         "name": "Look 18"
       }
     ]
@@ -694,22 +694,22 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-06/01.png",
-        "file2x": "assets/char-06/01@2x.png",
+        "file2x": "assets/char-06/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-06/02.png",
-        "file2x": "assets/char-06/02@2x.png",
+        "file2x": "assets/char-06/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-06/03.png",
-        "file2x": "assets/char-06/03@2x.png",
+        "file2x": "assets/char-06/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-06/04.png",
-        "file2x": "assets/char-06/04@2x.png",
+        "file2x": "assets/char-06/04-2x.png",
         "name": "Look 4"
       }
     ]
@@ -728,22 +728,22 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-07/01.png",
-        "file2x": "assets/char-07/01@2x.png",
+        "file2x": "assets/char-07/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-07/02.png",
-        "file2x": "assets/char-07/02@2x.png",
+        "file2x": "assets/char-07/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-07/03.png",
-        "file2x": "assets/char-07/03@2x.png",
+        "file2x": "assets/char-07/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-07/04.png",
-        "file2x": "assets/char-07/04@2x.png",
+        "file2x": "assets/char-07/04-2x.png",
         "name": "Look 4"
       }
     ]
@@ -762,42 +762,42 @@ window.CHARACTERS = [
     "variants": [
       {
         "file": "assets/char-08/01.png",
-        "file2x": "assets/char-08/01@2x.png",
+        "file2x": "assets/char-08/01-2x.png",
         "name": "Look 1"
       },
       {
         "file": "assets/char-08/02.png",
-        "file2x": "assets/char-08/02@2x.png",
+        "file2x": "assets/char-08/02-2x.png",
         "name": "Look 2"
       },
       {
         "file": "assets/char-08/03.png",
-        "file2x": "assets/char-08/03@2x.png",
+        "file2x": "assets/char-08/03-2x.png",
         "name": "Look 3"
       },
       {
         "file": "assets/char-08/04.png",
-        "file2x": "assets/char-08/04@2x.png",
+        "file2x": "assets/char-08/04-2x.png",
         "name": "Look 4"
       },
       {
         "file": "assets/char-08/05.png",
-        "file2x": "assets/char-08/05@2x.png",
+        "file2x": "assets/char-08/05-2x.png",
         "name": "Look 5"
       },
       {
         "file": "assets/char-08/06.png",
-        "file2x": "assets/char-08/06@2x.png",
+        "file2x": "assets/char-08/06-2x.png",
         "name": "Look 6"
       },
       {
         "file": "assets/char-08/07.png",
-        "file2x": "assets/char-08/07@2x.png",
+        "file2x": "assets/char-08/07-2x.png",
         "name": "Look 7"
       },
       {
         "file": "assets/char-08/08.png",
-        "file2x": "assets/char-08/08@2x.png",
+        "file2x": "assets/char-08/08-2x.png",
         "name": "Look 8"
       }
     ]

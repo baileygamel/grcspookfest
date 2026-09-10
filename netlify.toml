@@ -1,0 +1,11 @@
+# Static site — no build step. Everything is committed, so Netlify just serves it.
+[build]
+  publish = "."
+  command = ""
+
+# The avatar PNGs are content-addressed by name and only change when a sheet is
+# re-sliced, so let the CDN hold onto them.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"

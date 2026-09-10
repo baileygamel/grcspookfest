@@ -249,63 +249,76 @@
     roundRect(ctx, 34, 34, S - 68, S - 68, 44);
     ctx.stroke();
 
-    return loadImage(v.file2x || v.file).then(function (art) {
-      // No logo up top: the card says GRC BARCADE in the headline already, and
-      // repeating it just steals room from the avatar.
+    return Promise.all([
+      loadImage("assets/brand/grc-barcade-lockup.png"),
+      loadImage(v.file2x || v.file)
+    ]).then(function (imgs) {
+      var mark = imgs[0], art = imgs[1];
+
+      // Marketing requires both brands on every shared post. The event lockup
+      // already carries "By anecdotes.ai", so one asset covers both.
+      var mw = 430, mh = mark.height * (mw / mark.width);
+      ctx.drawImage(mark, (S - mw) / 2, 58, mw, mh);
+
       // Avatar aspect-fits a fixed box, so every character lands the same.
-      var boxT = 128, boxH = 432, boxW = 640;
+      var boxT = 248, boxH = 336, boxW = 600;
       var k = Math.min(boxW / art.width, boxH / art.height);
       var aw = art.width * k, ah = art.height * k;
       ctx.drawImage(art, (S - aw) / 2, boxT + (boxH - ah) / 2, aw, ah);
 
       ctx.textAlign = "center";
 
-      var size = fitText(ctx, state.username, 760, 900, 60, title);
       ctx.fillStyle = PALETTE.ink;
-      ctx.font = "900 " + size + "px " + title;
-      ctx.fillText(state.username, S / 2, 640);
+      ctx.font = "900 " + fitText(ctx, state.username, 760, 900, 56, title) + "px " + title;
+      ctx.fillText(state.username, S / 2, 646);
 
       // character badge — reads as a class, so it never competes with the name
       var tag = byline(c);
-      ctx.font = "700 " + fitText(ctx, tag, 620, 700, 28, body) + "px " + body;
+      ctx.font = "700 " + fitText(ctx, tag, 620, 700, 27, body) + "px " + body;
       var tw = ctx.measureText(tag).width;
       ctx.strokeStyle = "rgba(0,220,233,.55)";
       ctx.fillStyle = "rgba(0,220,233,.10)";
       ctx.lineWidth = 2;
-      roundRect(ctx, (S - tw) / 2 - 26, 662, tw + 52, 50, 25);
+      roundRect(ctx, (S - tw) / 2 - 26, 666, tw + 52, 48, 24);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = PALETTE.cyan;
-      ctx.fillText(tag, S / 2, 695);
+      ctx.fillText(tag, S / 2, 697);
 
-      if (ctx.letterSpacing !== undefined) ctx.letterSpacing = "6px";
+      if (ctx.letterSpacing !== undefined) ctx.letterSpacing = "7px";
       ctx.fillStyle = PALETTE.cyan;
       ctx.font = "800 25px " + body;
-      ctx.fillText("I'M GOING TO THE", S / 2, 764);
+      ctx.fillText("I'M GOING TO", S / 2, 772);
       if (ctx.letterSpacing !== undefined) ctx.letterSpacing = "0px";
 
-      var head = ctx.createLinearGradient(180, 0, 900, 0);
+      // The logo says GRC BARCADE already, so the city gets the headline slot —
+      // it's the part of the post that's actually news.
+      var city = cityLine(e).toUpperCase();
+      ctx.font = "900 " + fitText(ctx, city, 840, 900, 86, title) + "px " + title;
+      // Span the gradient across the word itself — anchored to the canvas, a
+      // short city like "DENVER" never reaches the orange end.
+      var cw = ctx.measureText(city).width;
+      var head = ctx.createLinearGradient((S - cw) / 2, 0, (S + cw) / 2, 0);
       head.addColorStop(0, PALETTE.cyan);
       head.addColorStop(.55, PALETTE.magenta);
       head.addColorStop(1, PALETTE.orange);
       ctx.fillStyle = head;
-      ctx.font = "900 " + fitText(ctx, EVENT_NAME.toUpperCase(), 860, 900, 82, title) + "px " + title;
-      ctx.fillText(EVENT_NAME.toUpperCase(), S / 2, 850);
+      ctx.fillText(city, S / 2, 862);
 
       ctx.strokeStyle = "rgba(147,168,200,.35)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(330, 895);
-      ctx.lineTo(750, 895);
+      ctx.moveTo(360, 906);
+      ctx.lineTo(720, 906);
       ctx.stroke();
 
       ctx.fillStyle = PALETTE.ink;
-      ctx.font = "800 " + fitText(ctx, cityLine(e) + "  ·  " + e.dateLabel, 800, 800, 40, body) + "px " + body;
-      ctx.fillText(cityLine(e) + "  ·  " + e.dateLabel, S / 2, 952);
+      ctx.font = "800 " + fitText(ctx, e.dateLabel, 800, 800, 38, body) + "px " + body;
+      ctx.fillText(e.dateLabel, S / 2, 958);
 
       ctx.fillStyle = PALETTE.dim;
-      ctx.font = "600 " + fitText(ctx, e.venue, 800, 600, 29, body) + "px " + body;
-      ctx.fillText(e.venue, S / 2, 996);
+      ctx.font = "600 " + fitText(ctx, e.venue, 820, 600, 28, body) + "px " + body;
+      ctx.fillText(e.venue, S / 2, 1002);
 
       cardBlob = null;                                       // invalidate the cached export
     });
