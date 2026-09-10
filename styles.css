@@ -51,28 +51,41 @@ body {
 
 .brandmark { display: flex; align-items: center; }
 
-/* Arcade-sign lockup: gradient hairline on the outside, gradient type on the
-   inside. Two elements, because background-clip can only do one per box. */
-.brandmark .pill {
-  display: inline-block;
-  padding: 9px 20px;
-  border: 2px solid transparent;
+/* Both logos are white type built for a dark ground — on the light theme they
+   vanish. So they sit on a navy marquee plate, which is on-brand anyway.
+   Sized so the "By anecdotes.ai" byline in the lockup stays readable; below
+   about 90px tall it turns to mush. */
+.brandmark img {
+  display: block;
+  height: 96px;
+  width: auto;
+  padding: 12px 22px;
+  border-radius: 18px;
+  background: #0a1526;
+}
+@media (max-width: 620px) {
+  .brandmark img { height: 74px; padding: 10px 16px; }
+}
+:root[data-theme="light"] .brandmark img { box-shadow: 0 6px 18px -8px rgba(10, 21, 38, .55); }
+
+.colophon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 74px auto 0;
+  padding: 14px 22px;
   border-radius: 999px;
-  background:
-    linear-gradient(var(--bg-deep), var(--bg-deep)) padding-box,
-    linear-gradient(96deg, var(--cyan), var(--magenta) 55%, var(--orange)) border-box;
-}
-.brandmark .pill-text {
-  font-family: var(--font-title);
-  font-weight: 900;
-  font-size: 15px;
-  letter-spacing: .1em;
+  background: #0a1526;
+  width: max-content;
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  background: linear-gradient(96deg, var(--cyan), var(--magenta) 55%, var(--orange));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #93a8c8;
 }
+.colophon img { height: 22px; width: auto; display: block; }
 
 .icon-btn {
   border: 1px solid var(--line);
